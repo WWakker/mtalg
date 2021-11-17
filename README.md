@@ -1,2 +1,1 @@
-# Multithreaded Algebra
-
+# ![](/res/_MTA.png) Multithreaded Algebra 

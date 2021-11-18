@@ -34,11 +34,11 @@ following conditions are met:
                 must be recorded performing the full Chicken Dance,
                 in an original video at the entity's own expense,
                 and a video encoded in OGG Theora format or a format
-                and codec specified by Luca Mingarelli, at least three (3)
-                minutes in length, must be submitted to Luca Mingarelli,
-                provided Luca Mingarelli's contact information. Any and all
+                and codec specified by Wouter Wakker and Luca Mingarelli, at least three (3)
+                minutes in length, must be submitted to Wouter Wakker and Luca Mingarelli,
+                provided Wouter Wakker and Luca Mingarelli's contact information. Any and all
                 copyrights to this video must be transfered to
-                Luca Mingarelli. The dance featured in the video
+                Wouter Wakker and Luca Mingarelli. The dance featured in the video
                 must be based upon the instructions on how to perform
                 the Chicken Dance that you should have received with
                 this software.
@@ -58,7 +58,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE. THE ECB AND LUCA MINGARELLI
+POSSIBILITY OF SUCH DAMAGE. THE ECB, WOUTER WAKKER, AND LUCA MINGARELLI
 ACCEPTS NO LIABILITY FOR ANY INJURIES OR EXPENSES SUSTAINED
 IN THE ACT OF FULFILLING ANY OF THE ABOVE TERMS AND CONDITIONS,
 ACCIDENTAL OR OTHERWISE.

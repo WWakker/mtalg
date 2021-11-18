@@ -94,12 +94,23 @@ if __name__=='__main__':
     plt.loglog()
     plt.xlim(TIME.index.min(), TIME.index.max())
     if save:
+      plt.tight_layout()
       plt.savefig(f"{path or '__RES'}/benchmark_add.png", dpi=400)
       plt.savefig(f"{path or '__RES'}/benchmark_add.svg")
+        
+  plot(save=True, path='mtalg/__res/benchmark')
     
-
-  plot(save=True, path='mtalg/res/benchmark')
-    
+  def barplot(save=False, path=None):
+    prop_cycle = plt.rcParams['axes.prop_cycle']
+    colors = prop_cycle.by_key()['color']
+    TIME.iloc[-1, :].plot.bar(color=colors, ylabel='Execution time [sec]',
+                             title='1bn operations')
+    if save:
+      plt.tight_layout()
+      plt.savefig(f"{path or '__RES'}/benchmark_add_BARS.png", dpi=400)
+      plt.savefig(f"{path or '__RES'}/benchmark_add_BARS.svg")
+      
+  barplot(save=True, path='mtalg/__res/benchmark')
 
 
 

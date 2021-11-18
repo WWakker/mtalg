@@ -27,7 +27,7 @@ xxx
 
 # Benchmarks
 
-xxx
+![](mtalg/__res/benchmark/benchmark_add.svg)
 
 # Authors
 [Wouter Wakker](https://gitlab.sofa.dev/Wouter.Wakker) 

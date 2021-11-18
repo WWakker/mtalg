@@ -1,6 +1,5 @@
 image: "python:3.7"
 
-
 stages:
   - build
   - test_rng
@@ -12,7 +11,7 @@ before_script:
   - apt-get update -y
   - apt-get install libsasl2-dev
   - apt-get install -y jq curl
-  - pip install -r mtalg/requirements.txt
+  - pip3 install -r mtalg/requirements.txt
 
 
 test_rng:
@@ -24,18 +23,18 @@ test_em_algebra:
   stage: test_em_algebra
   script:
     - echo "Testing element-wise algebra..."
-    - python mtalg/testing/em_algebra_tests.py
+    - python3 mtalg/testing/em_algebra_tests.py
 
 build:
   stage: build
   script:
     - echo "Building on UNIX..."
-    - python setup.py install
+    - python3 setup.py install
 
 make-badge:
   stage: deploy
   script:
-    - python mtalg/res/update_badges.py
+    - python3 mtalg/res/update_badges.py
 
 
 deploy:

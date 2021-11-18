@@ -26,10 +26,16 @@ You can simply install from the ECB artifactory via pip as:
 xxx
 
 # Benchmarks
+
+### Elementwise algebra
 ![](mtalg/__res/benchmark/benchmark_add_BARS.svg)
 
 
 ![](mtalg/__res/benchmark/benchmark_add.svg)
+
+### Random number generation
+
+xxx
 
 # Authors
 [Wouter Wakker](https://gitlab.sofa.dev/Wouter.Wakker) 

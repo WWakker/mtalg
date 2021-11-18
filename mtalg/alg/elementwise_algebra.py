@@ -2,7 +2,12 @@ import multiprocessing
 import concurrent.futures
 NUM_THREADS = multiprocessing.cpu_count()
 
+
+
 # TODO: doc string to be updated for all of them (ad hoc for each + one inherited from the function below?)
+# TODO: check why nans in pow
+
+
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 

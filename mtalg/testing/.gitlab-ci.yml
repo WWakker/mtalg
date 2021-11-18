@@ -23,7 +23,9 @@ test_em_algebra:
   stage: test_em_algebra
   script:
     - echo "Testing element-wise algebra..."
+    - python setup.py sdist
     - python3 mtalg/testing/em_algebra_tests.py
+    - echo "All tests passed."
 
 build:
   stage: build

@@ -1,0 +1,46 @@
+image: "python:3.7"
+
+
+stages:
+  - build
+  - test_rng
+  - test_em_algebra
+  - deploy
+
+before_script:
+  - python --version
+  - apt-get update -y
+  - apt-get install libsasl2-dev
+  - apt-get install -y jq curl
+  - pip install -r mtalg/requirements.txt
+
+
+test_rng:
+  stage: test_rng
+  script:
+    - echo "Testing random number generation..."
+
+test_em_algebra:
+  stage: test_em_algebra
+  script:
+    - echo "Testing element-wise algebra..."
+
+build:
+  stage: build
+  script:
+    - echo "Building on UNIX..."
+    - python setup.py install
+
+make-badge:
+  stage: deploy
+  script:
+    - python mtalg/testing/update_badges.py
+
+
+deploy:
+  stage: deploy
+  script:
+    - pip install twine
+#    - python3 setup.py sdist bdist_wheel
+#    - TWINE_PASSWORD=${ARTIFACTORY_PASS} TWINE_USERNAME=${ARTIFACTORY_USER} python -m twine upload --repository-url https://artifactory.sofa.dev/artifactory/api/pypi/pypi-local dist/*
+

@@ -8,7 +8,6 @@ with open("README.md", "r") as f:
 about = {}
 with open("mtalg/__about__.py") as f:
     exec(f.read(), about)
-
 requirements = []
 with open("mtalg/requirements.txt") as f:
     for line in f:

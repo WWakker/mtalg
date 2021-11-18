@@ -1,6 +1,6 @@
 import numpy as np, timeit, pandas as pd, seaborn as sns, matplotlib.pyplot as plt
 from tqdm import tqdm
-from numba import njit, prange
+from numba import njit
 from numpy.random import default_rng
 sns.set()
 from mtalg.alg import (add_MultiThreaded,
@@ -79,7 +79,7 @@ if __name__=='__main__':
     for lab, func in ADD_FUNCS.items():
       func_name = func.__name__
       ts = timeit.repeat(f"{func_name}(a, b)", 
-                         f"from mtalg.testing.benchmarks import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
+                         f"from mtalg.testing.benchmarks_em_algebra import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
                           number=1, repeat=3)
       TIME[lab].append(np.min(ts))
       

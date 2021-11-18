@@ -15,6 +15,11 @@ def get_a_b(shape=SHAPE):
     a = a.clip(min=1e-5)
     b = a * 3.14
     return a, b
+def get_a(shape=SHAPE):
+    rng = default_rng(1)
+    a = rng.standard_normal(shape)
+    a = a.clip(min=1e-5)
+    return a
   
 def _add(x,y): return x + y
 def _sub(x,y): return x - y
@@ -50,7 +55,10 @@ def numba_pow(a, b):
   a = a ** b
   return a
 
-#a, b = get_a_b(shape=int(1e9))
+#a, b = get_a_b(shape=int(1e10))
+#a = get_a(shape=int(1e9))
+#import dask.array as da
+#x = da.random.random((10_000, 100_000), chunks=(1000, 1000))
 #%timeit add_MultiThreaded(a,b)
 ###################################################
 ###################################################
@@ -63,9 +71,8 @@ if __name__=='__main__':
   
   
   TIME = {k:[] for k in ADD_FUNCS.keys()}
-  STD_TIME = {k:[] for k in ADD_FUNCS.keys()}
   
-  LOG_LW, LOG_UP, N = 5, 9, 10
+  LOG_LW, LOG_UP, N = 4.5, 9, 500
   COMPLEXITY = np.logspace(LOG_LW, LOG_UP, N).astype(int)[::-1]
   
   for s in tqdm(COMPLEXITY):
@@ -73,30 +80,25 @@ if __name__=='__main__':
       func_name = func.__name__
       ts = timeit.repeat(f"{func_name}(a, b)", 
                          f"from mtalg.testing.benchmarks import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
-                          number=100, repeat=3)
-      TIME[lab].append(np.mean(ts))
-      STD_TIME[lab].append(np.std(ts))
+                          number=1, repeat=3)
+      TIME[lab].append(np.min(ts))
       
 
-      
-  from scipy import interpolate
-  x = COMPLEXITY[::-1]
-  xnew = np.logspace(LOG_LW, LOG_UP, 300).astype(int)
-  def plot(save=False):
-    for mtd, times in TIME.items():
-      y = np.array(times)[::-1]
-      ynew = interpolate.interp1d(x, y, kind='cubic')(xnew)
-      plt.plot(x, y, label=mtd)
+  
+  TIME = pd.DataFrame(TIME, index=COMPLEXITY).sort_index()
+  TIME.to_csv('__RES/TIME.csv')
+  
+  def plot(save=False, path=None):
+    TIME.rolling(5).mean().plot(xlabel='Number of operations (size of the array)',
+                               ylabel='Execution time [sec]') 
     plt.loglog()
-    plt.xlabel('Number of operations (size of the array)')
-    plt.ylabel('Execution time [sec]')
-    plt.legend()
+    plt.xlim(TIME.index.min(), TIME.index.max())
     if save:
-      plt.savefig('__RES/benchmark_add.png', dpi=400)
-      plt.savefig('__RES/benchmark_add.svg')
+      plt.savefig(f"{path or '__RES'}/benchmark_add.png", dpi=400)
+      plt.savefig(f"{path or '__RES'}/benchmark_add.svg")
+    
 
-      
-  plot(save=False)
+  plot(save=True, path='mtalg/res/benchmark')
     
 
 

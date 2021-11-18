@@ -1,1 +1,4 @@
 MY_GITLAB_KEY
+.*
+{{*
+!.gitignore

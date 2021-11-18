@@ -17,7 +17,7 @@ with open("mtalg/requirements.txt") as f:
 setuptools.setup(
     name="ecb-mtalg",
     version=about['__version__'],
-    author=about['__author__'],
+    author=about['__authors__'],
     author_email=about['__email__'],
     description=about['__about__'],
     url=about['__url__'],

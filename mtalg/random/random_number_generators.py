@@ -10,7 +10,7 @@ import numpy as np
 
 
 class MultithreadedRNG2D:
-    """Generate random numbers from a standard normal distibution in a parallelized way for 2D arrays
+    """Generate random numbers from a standard normal distribution in a parallelized way for 2D arrays
     Currently only optimized for 2D arrays with more rows than columns
 
     Args
@@ -50,3 +50,6 @@ class MultithreadedRNG2D:
 
     def __del__(self):
         self.executor.shutdown(False)
+
+if __name__=='__main__':
+    pass

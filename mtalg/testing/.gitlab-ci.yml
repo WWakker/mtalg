@@ -24,6 +24,7 @@ test_em_algebra:
   stage: test_em_algebra
   script:
     - echo "Testing element-wise algebra..."
+    - python mtalg/testing/em_algebra_tests.py
 
 build:
   stage: build
@@ -34,7 +35,7 @@ build:
 make-badge:
   stage: deploy
   script:
-    - python mtalg/testing/update_badges.py
+    - python mtalg/res/update_badges.py
 
 
 deploy:

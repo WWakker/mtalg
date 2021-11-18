@@ -35,7 +35,7 @@ build:
 make-badge:
   stage: deploy
   script:
-    - python3 mtalg/res/update_badges.py
+    - python3 mtalg/res/update_badge.py
 
 
 deploy:

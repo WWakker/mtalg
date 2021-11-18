@@ -15,7 +15,7 @@ with open("mtalg/requirements.txt") as f:
         requirements.append(line.replace('\n',''))
 
 setuptools.setup(
-    name="ecb_connectors",
+    name="ecb-mtalg",
     version=about['__version__'],
     author=about['__author__'],
     author_email=about['__email__'],

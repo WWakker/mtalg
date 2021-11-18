@@ -37,6 +37,10 @@ xxx
 
 xxx
 
+# Aknowledgments
+
+The module for multithreaded generation of random numbers is inspired from [here](https://numpy.org/doc/stable/reference/random/multithreading.html).  
+
 # Authors
 [Wouter Wakker](https://gitlab.sofa.dev/Wouter.Wakker) 
 and [Luca Mingarelli](https://gitlab.sofa.dev/Luca.Mingarelli), 

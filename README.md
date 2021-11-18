@@ -26,7 +26,7 @@ You can simply install from the ECB artifactory via pip as:
 xxx
 
 # Benchmarks
-
+![](mtalg/__res/benchmark/benchmark_add_BAR.svg)
 ![](mtalg/__res/benchmark/benchmark_add.svg)
 
 # Authors

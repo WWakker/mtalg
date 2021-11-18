@@ -2,8 +2,7 @@ image: "python:3.7"
 
 stages:
   - build
-  - test_rng
-  - test_em_algebra
+  - testing
   - deploy
 
 before_script:
@@ -15,15 +14,15 @@ before_script:
 
 
 test_rng:
-  stage: test_rng
+  stage: testing
   script:
     - echo "Testing random number generation..."
 
 test_em_algebra:
-  stage: test_em_algebra
+  stage: testing
   script:
     - echo "Testing element-wise algebra..."
-    - python setup.py sdist
+    - python3 setup.py install
     - python3 mtalg/testing/em_algebra_tests.py
     - echo "All tests passed."
 

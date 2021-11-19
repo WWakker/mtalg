@@ -11,6 +11,13 @@ NUM_THREADS = MAX_NUM_THREADS
 
 class MultithreadedRNG:
 
+    """Multithreaded random number generator
+
+    Args
+        seed        (int): Random seed
+        num_threads (int): Number of threads to be used
+    """
+
     def __init__(self, seed=None, num_threads=None):
         if num_threads is None and 'MAKE_CORES_DANCE_LIKE_CHICKENS' in os.environ:
             self.num_threads = multiprocessing.cpu_count()
@@ -25,6 +32,12 @@ class MultithreadedRNG:
         self.executor = concurrent.futures.ThreadPoolExecutor(num_threads)
 
     def standard_normal(self, size, dtype=np.float64):
+        """Draw from the standard normal distribution
+
+        Args
+            size (int or tuple): Output shape
+            dtype       (dtype): Dtype of output array
+        """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
         if self.values.dtype != dtype:
@@ -37,6 +50,13 @@ class MultithreadedRNG:
         self._fill(__fill, **kw_args)
 
     def normal(self, size, loc=0.0, scale=1.0):
+        """Draw from the normal distribution
+
+        Args
+            size (int or tuple): Output shape
+            loc         (float): Mean of the distriution
+            scale       (float): Standard deviation of the distriution
+        """
         self._check_shape(size)
         kw_args = {'loc': loc,
                    'scale': scale}
@@ -48,6 +68,13 @@ class MultithreadedRNG:
         self._fill(__fill, **kw_args)
 
     def uniform(self, size, low=0.0, high=1.0):
+        """Draw from the uniform distribution
+
+        Args
+            size (int or tuple): Output shape
+            low         (float): Lower bound
+            high        (float): Upper bound
+        """
         self._check_shape(size)
         kw_args = {'low': low,
                    'high': high}
@@ -59,6 +86,7 @@ class MultithreadedRNG:
         self._fill(__fill, **kw_args)
 
     def _fill(self, func, **kwargs):
+        """Send jobs to the threads"""
         futures = {}
         for i in range(self.num_threads):
             args = (func,
@@ -70,6 +98,7 @@ class MultithreadedRNG:
         concurrent.futures.wait(futures)
 
     def _check_shape(self, size):
+        """Standard size checks to be done before execution of any distribution sampling"""
         if size != self.shape:
             if isinstance(size, (int, float, complex)):
                 size = size,
@@ -83,6 +112,7 @@ class MultithreadedRNG:
                           for t in range(self.num_threads)]
 
     def _get_slice_size(self, fst, lst):
+        """Get the shape of the slice to be filled"""
         return tuple(x if i != self.shp_max else lst - fst for i, x in enumerate(self.shape))
 
     def __del__(self):

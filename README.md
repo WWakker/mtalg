@@ -40,7 +40,7 @@ from mtalg.alg import (add_MultiThreaded as addMT,
 ```python
 mrng = MultithreadedRNG(seed=1, num_threads=4)
 ```
-###### Create two arrays (results are stored in mrng.values)
+###### Create two arrays (results are stored in `mrng.values`)
 ```python
 mrng.standard_normal(size=(100, 50))
 A = mrng.values

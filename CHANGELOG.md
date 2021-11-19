@@ -6,12 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ## [Unreleased] - yyyy-mm-dd
  
-Here we write upgrading notes for brands. It's a team effort to make them as
-straightforward as possible.
  
 ### Added
-- xxx
-- xxx
+- Multithreaded algebra with scalars missing
+- Input arbitrary function in multithreaded algebra.
+- Extend support past standard normal distribution
+- Add different distributions for random sampling
  
 ### Changed
  

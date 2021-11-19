@@ -5,34 +5,6 @@ import concurrent.futures
 from numba import njit, prange, jit
 import time
 
-def add_threaded2D(a, b, threads=None):
-    """Modifies a inplace; beats numpy from around 1e7 operations onwards.
-    Args:
-        a (numpy.array): Left array to be summed. Modified in place.
-        b (numpy.array): Right array to be summed.
-        threads (int or None): Number of threads.
-    """
-    assert a.shape == b.shape
-
-    threads = threads or multiprocessing.cpu_count()
-    executor = concurrent.futures.ThreadPoolExecutor(threads)
-    steps = [(t * (a.shape[0] // threads), (t + 1) * (a.shape[0] // threads))
-             if t < (threads - 1)
-             else (t * (a.shape[0] // threads), a.shape[0])
-             for t in range(threads)]
-
-    def _fill(firstrow, lastrow):
-        a[firstrow:lastrow] += b[firstrow:lastrow]
-
-    futures = {}
-    for i in range(threads):
-        args = (_fill,
-                steps[i][0],
-                steps[i][1])
-        futures[executor.submit(*args)] = i
-    concurrent.futures.wait(futures)
-    executor.shutdown(False)
-
 
 rng = default_rng(1)
 a = rng.standard_normal((int(1e6), 100))

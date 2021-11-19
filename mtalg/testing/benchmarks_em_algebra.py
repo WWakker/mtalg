@@ -73,32 +73,35 @@ if __name__=='__main__':
   TIME = {k:[] for k in ADD_FUNCS.keys()}
   
   LOG_LW, LOG_UP, N = 4.5, 9, 500
+  LOG_LW, LOG_UP, N = 4.5, 7, 280
   COMPLEXITY = np.logspace(LOG_LW, LOG_UP, N).astype(int)[::-1]
   
   for s in tqdm(COMPLEXITY):
     for lab, func in ADD_FUNCS.items():
       func_name = func.__name__
       ts = timeit.repeat(f"{func_name}(a, b)", 
-                         f"from mtalg.testing.benchmarks_em_algebra import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
-                          number=1, repeat=3)
-      TIME[lab].append(np.min(ts))
-      
+                         f"from mtalg.testing.benchmarks import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
+                          number=50, repeat=10)
+      TIME[lab].append(np.min(ts)/50)
 
   
   TIME = pd.DataFrame(TIME, index=COMPLEXITY).sort_index()
-  TIME.to_csv('__RES/TIME.csv')
+  # TIME.to_csv('__RES/TIME.csv')
+  # TIME = pd.read_csv('__RES/TIME.csv', index_col=0)
   
   def plot(save=False, path=None):
-    TIME.rolling(5).mean().plot(xlabel='Number of operations (size of the array)',
-                               ylabel='Execution time [sec]') 
+    DF = TIME.rolling(56).mean()
+#    DF = TIME.rolling(25).min().rolling(20).mean()
+    DF.plot(xlabel='Number of operations (size of the array)',
+            ylabel='Execution time [sec]') 
     plt.loglog()
-    plt.xlim(TIME.index.min(), TIME.index.max())
+    plt.xlim(1e5, TIME.index.max())
     if save:
       plt.tight_layout()
       plt.savefig(f"{path or '__RES'}/benchmark_add.png", dpi=400)
       plt.savefig(f"{path or '__RES'}/benchmark_add.svg")
         
-  plot(save=True, path='mtalg/__res/benchmark')
+  plot(path='mtalg/__res/benchmark', save=False)
     
   def barplot(save=False, path=None):
     prop_cycle = plt.rcParams['axes.prop_cycle']
@@ -110,7 +113,7 @@ if __name__=='__main__':
       plt.savefig(f"{path or '__RES'}/benchmark_add_BARS.png", dpi=400)
       plt.savefig(f"{path or '__RES'}/benchmark_add_BARS.svg")
       
-  barplot(save=True, path='mtalg/__res/benchmark')
+  barplot(path='mtalg/__res/benchmark', save=True)
 
 
 

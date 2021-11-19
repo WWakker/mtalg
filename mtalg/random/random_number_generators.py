@@ -19,10 +19,7 @@ class MultithreadedRNG:
     """
 
     def __init__(self, seed=None, num_threads=None):
-        if num_threads is None and 'MAKE_CORES_DANCE_LIKE_CHICKENS' in os.environ:
-            self.num_threads = multiprocessing.cpu_count()
-        else:
-            self.num_threads = min(num_threads or multiprocessing.cpu_count(), 16)
+        self.num_threads = min(num_threads, NUM_THREADS) if num_threads is not None else NUM_THREADS
         seq = SeedSequence(seed)
         self._random_generators = [default_rng(s) for s in seq.spawn(self.num_threads)]
         self.shape = 0,

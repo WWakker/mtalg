@@ -1,6 +1,6 @@
 import numpy as np, timeit, pandas as pd, seaborn as sns, matplotlib.pyplot as plt
 from tqdm import tqdm
-from numba import njit, prange
+from numba import njit
 from numpy.random import default_rng
 sns.set()
 from mtalg.alg import (add_MultiThreaded,
@@ -83,7 +83,6 @@ if __name__=='__main__':
                          f"from mtalg.testing.benchmarks import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
                           number=50, repeat=10)
       TIME[lab].append(np.min(ts)/50)
-      
 
   
   TIME = pd.DataFrame(TIME, index=COMPLEXITY).sort_index()

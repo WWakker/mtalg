@@ -1,6 +1,8 @@
 import multiprocessing
 import concurrent.futures
-NUM_THREADS = multiprocessing.cpu_count()
+from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
+
+NUM_THREADS = MAX_NUM_THREADS
 
 
 

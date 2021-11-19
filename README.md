@@ -27,7 +27,19 @@ xxx
 
 # Benchmarks
 
+### Elementwise algebra
+![](mtalg/__res/benchmark/benchmark_add_BARS.svg)
+
+
 ![](mtalg/__res/benchmark/benchmark_add.svg)
+
+### Random number generation
+
+xxx
+
+# Aknowledgments
+
+The module for multithreaded generation of random numbers is inspired from [here](https://numpy.org/doc/stable/reference/random/multithreading.html).  
 
 # Authors
 [Wouter Wakker](https://gitlab.sofa.dev/Wouter.Wakker) 

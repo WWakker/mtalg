@@ -25,7 +25,6 @@ class MultithreadedRNG:
         self.shp_max = 0
         self.values = np.empty(self.shape)
         self.steps = []
-        self.executor = concurrent.futures.ThreadPoolExecutor(num_threads)
 
     def beta(self, size, a, b):
         """Draw from the beta distribution
@@ -167,6 +166,7 @@ class MultithreadedRNG:
 
     def _fill(self, func, **kwargs):
         """Send jobs to the threads"""
+        executor = concurrent.futures.ThreadPoolExecutor(self.num_threads)
         futures = {}
         for i in range(self.num_threads):
             args = (func,
@@ -174,8 +174,9 @@ class MultithreadedRNG:
                     self.values,
                     self.steps[i][0],
                     self.steps[i][1])
-            futures[self.executor.submit(*args, **kwargs)] = i
+            futures[executor.submit(*args, **kwargs)] = i
         concurrent.futures.wait(futures)
+        executor.shutdown(wait=False)
 
     def _check_shape(self, size):
         """Standard size checks to be done before execution of any distribution sampling"""
@@ -195,9 +196,7 @@ class MultithreadedRNG:
         """Get the shape of the slice to be filled"""
         return tuple(x if i != self.shp_max else lst - fst for i, x in enumerate(self.shape))
 
-    def __del__(self):
-        self.executor.shutdown(False)
-
 
 if __name__ == '__main__':
-    pass
+    mrng = MultithreadedRNG(seed=1, num_threads=24)
+    %timeit mrng.standard_normal((int(4e6), 100))

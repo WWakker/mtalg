@@ -10,7 +10,6 @@ NUM_THREADS = MAX_NUM_THREADS
 
 
 class MultithreadedRNG:
-
     """Multithreaded random number generator
 
     Args
@@ -28,21 +27,71 @@ class MultithreadedRNG:
         self.steps = []
         self.executor = concurrent.futures.ThreadPoolExecutor(num_threads)
 
-    def standard_normal(self, size, dtype=np.float64):
-        """Draw from the standard normal distribution
+    def beta(self, size, a, b):
+        """Draw from the beta distribution
 
         Args
             size (int or tuple): Output shape
-            dtype       (dtype): Dtype of output array
+            a           (float): alpha
+            b           (float): beta
         """
         self._check_shape(size)
-        kw_args = {'dtype': dtype}
-        if self.values.dtype != dtype:
-            self.values = self.values.astype(dtype)
+        kw_args = {'a': a,
+                   'b': b}
 
         def __fill(random_state, out, first, last, **kwargs):
-            random_state.standard_normal(out=out[(slice(None),) * self.shp_max + (slice(first, last),)],
-                                         **kwargs)
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.beta(size=self._get_slice_size(first, last), **kwargs)
+
+        self._fill(__fill, **kw_args)
+
+    def binomial(self, size, n, p):
+        """Draw from the binomial distribution
+
+        Args
+            size (int or tuple): Output shape
+            n           (float): n
+            p           (float): p
+        """
+        self._check_shape(size)
+        kw_args = {'n': n,
+                   'p': p}
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.binomial(size=self._get_slice_size(first, last), **kwargs)
+
+        self._fill(__fill, **kw_args)
+
+    def chisquare(self, size, df):
+        """Draw from the chisquare distribution
+
+        Args
+            size (int or tuple): Output shape
+            df          (float): Number of degrees of freedom, must be > 0
+        """
+        self._check_shape(size)
+        kw_args = {'df': df}
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.chisquare(size=self._get_slice_size(first, last), **kwargs)
+
+        self._fill(__fill, **kw_args)
+
+    def exponential(self, size, scale):
+        """Draw from the exponential distribution
+
+        Args
+            size (int or tuple): Output shape
+            scale       (float): The scale parameter, β = 1/λ Must be non-negative
+        """
+        self._check_shape(size)
+        kw_args = {'scale': scale}
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.exponential(size=self._get_slice_size(first, last), **kwargs)
 
         self._fill(__fill, **kw_args)
 
@@ -64,6 +113,22 @@ class MultithreadedRNG:
 
         self._fill(__fill, **kw_args)
 
+    def poisson(self, size, lam=1.0):
+        """Draw from the poisson distribution
+
+        Args
+            size (int or tuple): Output shape
+            lam         (float): Expected number of events occurring in a fixed-time interval, must be >= 0
+        """
+        self._check_shape(size)
+        kw_args = {'lam': lam}
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.poisson(size=self._get_slice_size(first, last), **kwargs)
+
+        self._fill(__fill, **kw_args)
+
     def uniform(self, size, low=0.0, high=1.0):
         """Draw from the uniform distribution
 
@@ -79,6 +144,24 @@ class MultithreadedRNG:
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self.shp_max +
                 (slice(first, last),)] = random_state.uniform(size=self._get_slice_size(first, last), **kwargs)
+
+        self._fill(__fill, **kw_args)
+
+    def standard_normal(self, size, dtype=np.float64):
+        """Draw from the standard normal distribution
+
+        Args
+            size (int or tuple): Output shape
+            dtype       (dtype): Dtype of output array
+        """
+        self._check_shape(size)
+        kw_args = {'dtype': dtype}
+        if self.values.dtype != dtype:
+            self.values = self.values.astype(dtype)
+
+        def __fill(random_state, out, first, last, **kwargs):
+            random_state.standard_normal(out=out[(slice(None),) * self.shp_max + (slice(first, last),)],
+                                         **kwargs)
 
         self._fill(__fill, **kw_args)
 

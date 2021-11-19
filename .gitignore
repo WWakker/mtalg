@@ -1,5 +1,7 @@
 MY_GITLAB_KEY
 .*
+__*
+!__res/
 {{*
 __RES/
 *.csv

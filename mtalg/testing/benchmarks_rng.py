@@ -34,7 +34,6 @@ def plot_line(save=False, path=None):
     ax.set_ylabel('Execution time [sec]')
     plt.xscale('log')
     plt.yscale('log')
-    plt.show()
     
     if save:
         plt.tight_layout()
@@ -56,7 +55,6 @@ def plot_bar(save=False, path=None):
     ax.set_ylabel('Execution time [sec]')
     ax.set_title('1bn operations')
     ax.legend()
-    plt.show()
     
     if save:
         plt.tight_layout()

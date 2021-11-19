@@ -13,8 +13,11 @@ and related functions, which are building on libraries such as BLAS and LAPACK,
 the same does not hold true for simpler algebraic element-wise operations. 
 Similarly can be said for the generation of random variates.
 
-***mtalg*** is the fastest library known to us for element-wise algebraic operations 
-and random number generation. For more info on benchmarks you can see the dedicated section below.
+***mtalg*** is the fastest library known to us for large scale element-wise algebraic operations 
+and random number generation. For more info on benchmarks you can see the dedicated section below. 
+
+Major benefits become apparent past $`10^7`$ operations for the element-wise algebra module, 
+and for more than XX operations for the random number generator module.
 
 # Installation
 

@@ -1,182 +1,66 @@
 import numpy as np
 from numpy.random import default_rng
-import multiprocessing
-import concurrent.futures
-from numba import njit, prange, jit
-import time
+from timeit import timeit
+from mtalg.random import MultithreadedRNG
+import seaborn as sns
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+import pandas as pd
+sns.set()
+
+mrng = MultithreadedRNG(seed=1)
+rng = default_rng(seed=1)
+result = {'x': [], 'MT_std_norm':[], 'np_std_norm': [],
+         'MT_uniform': [], 'np_uniform': []}
+for x in tqdm(np.geomspace(1, 1e9, num=300)):
+    result['x'].append(x) 
+    result['MT_std_norm'].append(timeit(lambda: mrng.standard_normal(size=int(x)), number=10) / 10)
+    result['np_std_norm'].append(timeit(lambda: rng.standard_normal(size=int(x)), number=10) / 10)
+    result['MT_uniform'].append(timeit(lambda: mrng.uniform(size=int(x)), number=10) / 10)
+    result['np_uniform'].append(timeit(lambda: rng.uniform(size=int(x)), number=10) / 10)
+
+df = pd.DataFrame(result).set_index('x')
+df_plot = df.rolling(40).mean()
+
+def plot_line(save=False, path=None):
+    fig, ax = plt.subplots()
+    for key, label, color, lstyle in zip(['MT_std_norm', 'np_std_norm', 'MT_uniform', 'np_uniform'], 
+                          ['MT std normal', 'Numpy std normal', 'MT uniform', 'Numpy uniform'],
+                                        ['b', 'r', 'b', 'r'],
+                                        ['-', '-', '--', '--']):
+        ax.plot(df_plot.index, df_plot[key], label=label, color=color, linestyle=lstyle)
+    ax.legend()
+    ax.set_xlabel('Number of operations (size of the array)')
+    ax.set_ylabel('Execution time [sec]')
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.show()
+    
+    if save:
+        plt.tight_layout()
+        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng.png", dpi=400)
+        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng.svg")
+    
+plot_line(save=True)
 
 
-rng = default_rng(1)
-a = rng.standard_normal((int(1e6), 100))
-b = rng.standard_normal((int(1e6), 100))
-
-c = a + b
-add_threaded2D(a, b, threads=24)
-(c == a).all()
-
-% timeit
-a + b
-% timeit
-add_threaded2D(a, b, threads=24)
-
-
-# Check against numba
-@njit(parallel=True)
-def f_add(a, b, inplace=True):
-    if not inplace:
-        return a + b
-    a += b
-
-
-c = a + b
-f_add(a, b, inplace=True)
-(c == a).all()
-
-% timeit
-a + b  # 2.67 s per loop
-% timeit
-add_threaded2D(a, b, threads=24)  # 131 ms per loop
-% timeit
-f_add(a, b, inplace=True)  # 778 ms per loop
-% timeit
-f_add(a, b, inplace=False)  # 638 ms per loop
-
-c = a + b
-d = f_add(a, b, inplace=False)
-(c == d).all()
-
-
-# Standard deviation
-@njit(parallel=True)
-def f_par_std(x):
-    return np.std(x)
-
-
-@njit
-def f_std(x):
-    return np.std(x)
-
-
-np.isclose(a.std(), f_std(a))
-np.isclose(a.std(), f_par_std(a))
-
-% timeit
-a.std()  # 3.61 s per loop
-% timeit
-f_std(a)  # 1.19 s per loop
-% timeit
-f_par_std(a)  # %timeit a.std()  # 95.6 ms per loop
-
-### Errors
-
-a = np.arange(4).reshape((2, 2))
-print(a.dtype)  # int
-b = np.ones((2, 2))
-print(b.dtype)  # float
-
-a[0] += b[
-    0]  # UFuncTypeError: Cannot cast ufunc 'add' output from dtype('float64') to dtype('int64') with casting rule 'same_kind'
-add_threaded2D(a, b, threads=2)  # No error
-
-
-@njit(parallel=True)
-def numba_add(a, b):
-    n = a.shape[0]
-    for i in prange(n):
-        a[i] += b[i]
-
-
-c = a + b
-numba_add(a, b)
-
-
-@njit(parallel=True, fastmath=True)
-def numba_add(a, b):
-    for i in prange(a.shape[0]):
-        a[i] += b[i]
-
-
-c = a + b
-numba_add(a, b)
-(c == a).all()
-
-% time
-add_threaded2D(a, b, threads=24)
-% time
-numba_add(a, b)
-
-
-def naive_add(x, y):
-    """
-    add two arrays using a Python for-loop
-    """
-    z = np.empty_like(x)
-    for i in range(len(x)):
-        z[i] = x[i] + y[i]
-
-    return z
-
-
-@np.vectorize
-def numpy_add_vectorize(x, y):
-    return x + y
-
-
-@jit  # this is the only thing we do different
-def numba_add(x, y):
-    """
-    add two arrays using a Python for-loop
-    """
-    z = np.empty_like(x)
-    for i in range(len(x)):
-        z[i] = x[i] + y[i]
-
-    return z
-
-
-@jit(nopython=True, parallel=True)
-def numba_add_parallel(x, y):
-    """
-    add two arrays using a Python for-loop
-    """
-    z = np.empty_like(x)
-    for i in prange(len(x)):
-        z[i] = x[i] + y[i]
-
-    return z
-
-
-# set up two vectors
-n = 1_000_000
-x = np.random.randn(n)
-y = np.random.randn(n)
-
-start = time.time()
-z = naive_add(x, y)
-end = time.time()
-print("time for naive add: {:0.3e} sec".format(end - start))
-
-start = time.time()
-z = np.add(x, y)
-end = time.time()
-print("time for numpy add: {:0.3e} sec".format(end - start))
-
-start = time.time()
-z = numba_add(x, y)
-end = time.time()
-print("time for numba add: {:0.3e} sec".format(end - start))
-
-start = time.time()
-add_threaded2D(x, y)
-end = time.time()
-print("time for add threaded: {:0.3e} sec".format(end - start))
-
-start = time.time()
-z = numba_add_parallel(x, y)
-end = time.time()
-print("time for numba parallel add: {:0.3e} sec".format(end - start))
-
-start = time.time()
-z = np.add(x, y)
-end = time.time()
-print("time for numpy add: {:0.3e} sec".format(end - start))
+def plot_bar(save=False, path=None):
+    x = np.array([0, 1])
+    width = .35
+    
+    fig, ax = plt.subplots()
+    ax.bar(x - width/2, [df_plot['MT_std_norm'].values[-1], df_plot['MT_uniform'].values[-1]], color='b', width=width, label='MT')
+    ax.bar(x + width/2, [df_plot['np_std_norm'].values[-1], df_plot['np_uniform'].values[-1]], color='r', width=width, label='Numpy')
+    ax.set_xticks(x)
+    ax.set_xticklabels(['Standard normal', 'Uniform'])
+    ax.set_ylabel('Execution time [sec]')
+    ax.set_title('1bn operations')
+    ax.legend()
+    plt.show()
+    
+    if save:
+        plt.tight_layout()
+        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng_BAR.png", dpi=400)
+        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng_BAR.svg")
+    
+plot_bar(save=True)

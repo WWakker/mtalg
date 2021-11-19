@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
  
 ### Added
+- Multithreaded algebra with scalars missing
 - Input arbitrary function in multithreaded algebra.
 - Extend support past standard normal distribution
 - Add different distributions for random sampling

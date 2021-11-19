@@ -80,7 +80,7 @@ if __name__=='__main__':
     for lab, func in ADD_FUNCS.items():
       func_name = func.__name__
       ts = timeit.repeat(f"{func_name}(a, b)", 
-                         f"from mtalg.testing.benchmarks import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
+                         f"from mtalg.testing.benchmarks_em_algebra import {func_name}, get_a_b;a, b = get_a_b(shape={s})",
                           number=50, repeat=10)
       TIME[lab].append(np.min(ts)/50)
 
@@ -93,15 +93,14 @@ if __name__=='__main__':
     DF = TIME.rolling(56).mean()
 #    DF = TIME.rolling(25).min().rolling(20).mean()
     DF.plot(xlabel='Number of operations (size of the array)',
-            ylabel='Execution time [sec]') 
-    plt.loglog()
+            ylabel='Execution time [sec]', loglog=True) 
     plt.xlim(1e5, TIME.index.max())
     if save:
       plt.tight_layout()
       plt.savefig(f"{path or '__RES'}/benchmark_add.png", dpi=400)
       plt.savefig(f"{path or '__RES'}/benchmark_add.svg")
         
-  plot(path='mtalg/__res/benchmark', save=False)
+  plot(path='mtalg/__res/benchmark', save=True)
     
   def barplot(save=False, path=None):
     prop_cycle = plt.rcParams['axes.prop_cycle']

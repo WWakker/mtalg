@@ -63,20 +63,27 @@ def __MultiThreaded_opr(a, b, opr, threads=None):
       b (numpy.array): Right array to be summed.
       threads (int or None): Number of threads.
     """
-    assert a.shape == b.shape
+    scalar = True if isinstance(b, (int, float, complex)) and not isinstance(b, bool) else False
+    if not scalar:
+        assert a.shape == b.shape
 
     shape = a.shape
     shp_max = argmax(shape)
 
     threads = threads or NUM_THREADS
     executor = concurrent.futures.ThreadPoolExecutor(threads)
-    steps = [(t * (a.shape[shp_max] // threads), (t + 1) * (a.shape[shp_max] // threads))
+    steps = [(t * (shape[shp_max] // threads), (t + 1) * (shape[shp_max] // threads))
              if t < (threads - 1) else
-             (t * (a.shape[shp_max] // threads), a.shape[shp_max])
+             (t * (shape[shp_max] // threads), shape[shp_max])
              for t in range(threads)]
 
-    def _fill(first, last):
-        opr(a[(slice(None),) * shp_max + (slice(first, last),)], b[(slice(None),) * shp_max + (slice(first, last),)])
+    if scalar:
+        def _fill(first, last):
+            opr(a[(slice(None),) * shp_max + (slice(first, last),)], b)
+    else:
+        def _fill(first, last):
+            opr(a[(slice(None),) * shp_max + (slice(first, last),)],
+                b[(slice(None),) * shp_max + (slice(first, last),)])
 
     futures = {}
     for i in range(threads):

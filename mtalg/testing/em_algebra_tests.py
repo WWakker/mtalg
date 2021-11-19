@@ -33,12 +33,14 @@ FAILED = {}
 for op, opMT in zip((_add, _sub, _mul, _div, _pow),
                     (addMT, subMT, mulMT, divMT, powMT)):
     for shape in all_unique_combinations(SHAPE):
-        a, b = get_a_b()
-        c = op(a, b)
-        opMT(a, b, direction='left')
-        if not (c[c==c] == a[a==a]).all():
-            FAILED[(opMT.__name__, shape)] = 'FAILED'
-            raise Warning(f'Failed with operation {opMT}; shape arrays: {shape}.')
+        for scalar in [False, True]:
+            if scalar: b = 2
+            a, b = get_a_b()
+            c = op(a, b)
+            opMT(a, b, direction='left')
+            if not (c[c==c] == a[a==a]).all():
+                FAILED[(opMT.__name__, shape, scalar)] = 'FAILED'
+                raise Warning(f'Failed with operation {opMT}; shape arrays: {shape}.')
 
 
 if FAILED:

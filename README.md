@@ -26,7 +26,7 @@ You can simply install from the ECB artifactory via pip as:
 `pip install ecb-mtalg`
 
 # How to use
-
+###### Import random number generator and algebra functions
 ```python
 from mtalg.random import MultithreadedRNG
 from mtalg.alg import (add_MultiThreaded as addMT,
@@ -35,22 +35,28 @@ from mtalg.alg import (add_MultiThreaded as addMT,
                        div_MultiThreaded as divMT,
                        pow_MultiThreaded as powMT)
 
-# Create an instance of the multithreaded random number generator with seed for reproducability and number of threads to be used
+```
+###### Create an instance of the multithreaded random number generator with seed for reproducability and number of threads to be used
+```python
 mrng = MultithreadedRNG(seed=1, num_threads=4)
-
-# Create two arrays (results are stored in mrng.values)
+```
+###### Create two arrays (results are stored in mrng.values)
+```python
 mrng.standard_normal(size=(100, 50))
 A = mrng.values
 mrng.uniform(size=(100, 50), low=0, high=10)
 B = mrng.values
-
-# Add B to A (A is modified inplace)
+```
+###### Add B to A (A is modified inplace)
+```python
 addMT(A, B)
-
-# Subtract A from B (B is modified inplace)
+```
+###### Subtract A from B (B is modified inplace)
+```python
 subMT(A, B, direction='right')
-
-# Multiply, divide and raise to power (A is modified inplace)
+```
+###### Multiply, divide and raise to power (A is modified inplace)
+```python
 mulMT(A, B)
 divMT(A, B)
 powMT(A, B)

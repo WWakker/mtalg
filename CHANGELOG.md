@@ -3,14 +3,24 @@ All notable changes to this project will be documented in this file.
  
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
- 
+
 ## [Unreleased] - yyyy-mm-dd
  
  
 ### Added
-- Input arbitrary function in multithreaded algebra.
-- Extend support past standard normal distribution
-- Add different distributions for random sampling
+- Input arbitrary function in multithreaded algebra
+- Test speed of executor closing after each execution of RNG
+ 
+### Changed
+ 
+### Fixed
+
+## [0.0.3] - 2021-11-19
+
+### Added
+- Multithreaded algebra with scalars
+- Support past standard normal distribution
+- Different distributions for random sampling
  
 ### Changed
  

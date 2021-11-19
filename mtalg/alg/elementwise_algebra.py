@@ -26,42 +26,42 @@ def _div_inplace(x, y): x /= y
 def _pow_inplace(x, y): x **= y
 
 
-def add_MultiThreaded(a, b, threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _add_inplace, threads, direction=direction)
+def add_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+    __MultiThreaded_opr_direction(a, b, _add_inplace, num_threads, direction=direction)
 
 
-def sub_MultiThreaded(a, b, threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _sub_inplace, threads, direction=direction)
+def sub_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+    __MultiThreaded_opr_direction(a, b, _sub_inplace, num_threads, direction=direction)
 
 
-def mul_MultiThreaded(a, b, threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _mul_inplace, threads, direction=direction)
+def mul_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+    __MultiThreaded_opr_direction(a, b, _mul_inplace, num_threads, direction=direction)
 
 
-def div_MultiThreaded(a, b, threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _div_inplace, threads, direction=direction)
+def div_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+    __MultiThreaded_opr_direction(a, b, _div_inplace, num_threads, direction=direction)
 
 
-def pow_MultiThreaded(a, b, threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _pow_inplace, threads, direction=direction)
+def pow_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+    __MultiThreaded_opr_direction(a, b, _pow_inplace, num_threads, direction=direction)
 
 
-def __MultiThreaded_opr_direction(a, b, opr, threads, direction='left'):
+def __MultiThreaded_opr_direction(a, b, opr, num_threads, direction='left'):
     if direction == 'left':
-        __MultiThreaded_opr(a, b, opr, threads=threads)
+        __MultiThreaded_opr(a, b, opr, num_threads=num_threads)
     elif direction == 'right':
-        __MultiThreaded_opr(b, a, opr, threads=threads)
+        __MultiThreaded_opr(b, a, opr, num_threads=num_threads)
     else:
         raise ValueError(f"Invalid direction {direction}. Must take value either 'left' or 'right'. ")
 
 
-def __MultiThreaded_opr(a, b, opr, threads=None):
+def __MultiThreaded_opr(a, b, opr, num_threads=None):
     """Modifies a inplace; beats numpy from around 1e7 operations onwards.
 
     Args:
       a (numpy.array): Left array to be summed. Modified in place.
       b (numpy.array): Right array to be summed.
-      threads (int or None): Number of threads.
+      num_threads (int or None): Number of num_threads.
     """
     scalar = True if isinstance(b, (int, float, complex)) and not isinstance(b, bool) else False
     if not scalar:
@@ -70,12 +70,12 @@ def __MultiThreaded_opr(a, b, opr, threads=None):
     shape = a.shape
     shp_max = argmax(shape)
 
-    threads = threads or NUM_THREADS
-    executor = concurrent.futures.ThreadPoolExecutor(threads)
-    steps = [(t * (shape[shp_max] // threads), (t + 1) * (shape[shp_max] // threads))
-             if t < (threads - 1) else
-             (t * (shape[shp_max] // threads), shape[shp_max])
-             for t in range(threads)]
+    num_threads = min(num_threads or float('inf'), NUM_THREADS)
+    executor = concurrent.futures.ThreadPoolExecutor(num_threads)
+    steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
+             if t < (num_threads - 1) else
+             (t * (shape[shp_max] // num_threads), shape[shp_max])
+             for t in range(num_threads)]
 
     if scalar:
         def _fill(first, last):
@@ -86,7 +86,7 @@ def __MultiThreaded_opr(a, b, opr, threads=None):
                 b[(slice(None),) * shp_max + (slice(first, last),)])
 
     futures = {}
-    for i in range(threads):
+    for i in range(num_threads):
         args = (_fill, steps[i][0], steps[i][1])
         futures[executor.submit(*args)] = i
     concurrent.futures.wait(futures)

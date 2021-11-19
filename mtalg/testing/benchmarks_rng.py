@@ -25,15 +25,13 @@ df_plot = df.rolling(40).mean()
 def plot_line(save=False, path=None):
     fig, ax = plt.subplots()
     for key, label, color, lstyle in zip(['MT_std_norm', 'np_std_norm', 'MT_uniform', 'np_uniform'], 
-                          ['MT std normal', 'Numpy std normal', 'MT uniform', 'Numpy uniform'],
-                                        ['b', 'r', 'b', 'r'],
-                                        ['-', '-', '--', '--']):
+                          ['mtalg - std normal', 'Numpy - std normal', 'mtalg - uniform', 'Numpy - uniform'],
+                          ['b', 'r', 'b', 'r'], ['-', '-', '--', '--']):
         ax.plot(df_plot.index, df_plot[key], label=label, color=color, linestyle=lstyle)
     ax.legend()
     ax.set_xlabel('Number of operations (size of the array)')
     ax.set_ylabel('Execution time [sec]')
-    plt.xscale('log')
-    plt.yscale('log')
+    plt.loglog()
     
     if save:
         plt.tight_layout()
@@ -48,7 +46,7 @@ def plot_bar(save=False, path=None):
     width = .35
     
     fig, ax = plt.subplots()
-    ax.bar(x - width/2, [df_plot['MT_std_norm'].values[-1], df_plot['MT_uniform'].values[-1]], color='b', width=width, label='MT')
+    ax.bar(x - width/2, [df_plot['MT_std_norm'].values[-1], df_plot['MT_uniform'].values[-1]], color='b', width=width, label='mtalg')
     ax.bar(x + width/2, [df_plot['np_std_norm'].values[-1], df_plot['np_uniform'].values[-1]], color='r', width=width, label='Numpy')
     ax.set_xticks(x)
     ax.set_xticklabels(['Standard normal', 'Uniform'])

@@ -18,7 +18,7 @@ class MultithreadedRNG:
     """
 
     def __init__(self, seed=None, num_threads=None):
-        self.num_threads = min(num_threads, NUM_THREADS) if num_threads is not None else NUM_THREADS
+        self.num_threads = min(num_threads or float('inf'), NUM_THREADS)
         seq = SeedSequence(seed)
         self._random_generators = [default_rng(s) for s in seq.spawn(self.num_threads)]
         self.shape = 0,
@@ -199,4 +199,4 @@ class MultithreadedRNG:
 
 if __name__ == '__main__':
     mrng = MultithreadedRNG(seed=1, num_threads=24)
-    %timeit mrng.standard_normal((int(4e6), 100))
+#    %timeit mrng.standard_normal((int(4e6), 100))

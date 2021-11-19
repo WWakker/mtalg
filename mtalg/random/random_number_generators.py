@@ -3,6 +3,7 @@ import multiprocessing
 import concurrent.futures
 import numpy as np
 from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
+import os
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 NUM_THREADS = MAX_NUM_THREADS
@@ -11,10 +12,12 @@ NUM_THREADS = MAX_NUM_THREADS
 class MultithreadedRNG:
 
     def __init__(self, seed=None, num_threads=None):
-
-        self.num_threads = num_threads or max(num_threads, NUM_THREADS)
+        if num_threads is None and 'MAKE_CORES_DANCE_LIKE_CHICKENS' in os.environ:
+            self.num_threads = multiprocessing.cpu_count()
+        else:
+            self.num_threads = min(num_threads or multiprocessing.cpu_count(), 16)
         seq = SeedSequence(seed)
-        self._random_generators = [default_rng(s) for s in seq.spawn(num_threads)]
+        self._random_generators = [default_rng(s) for s in seq.spawn(self.num_threads)]
         self.shape = 0,
         self.shp_max = 0
         self.values = np.empty(self.shape)
@@ -87,4 +90,5 @@ class MultithreadedRNG:
 
 
 if __name__ == '__main__':
-    pass
+    rng = MultithreadedRNG(seed=1, num_threads=8)
+    rng.standard_normal(size=(int(4e6), 100), dtype=np.float32)

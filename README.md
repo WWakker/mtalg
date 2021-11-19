@@ -1,6 +1,6 @@
 # ![](mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
-[![version](https://img.shields.io/badge/version-0.0.2-success.svg)](#)
+[![version](https://img.shields.io/badge/version-0.0.3-success.svg)](#)
 
 # About
 
@@ -34,7 +34,6 @@ from mtalg.alg import (add_MultiThreaded as addMT,
                        mul_MultiThreaded as mulMT,
                        div_MultiThreaded as divMT,
                        pow_MultiThreaded as powMT)
-
 ```
 ###### Create an instance of the multithreaded random number generator with seed for reproducability and number of threads to be used
 ```python

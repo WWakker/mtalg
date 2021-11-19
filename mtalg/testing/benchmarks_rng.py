@@ -20,6 +20,7 @@ for x in tqdm(np.geomspace(1, 1e9, num=300)):
     result['np_uniform'].append(timeit(lambda: rng.uniform(size=int(x)), number=10) / 10)
 
 df = pd.DataFrame(result).set_index('x')
+#df.to_csv('__RES/df_rng.csv')
 df_plot = df.rolling(40).mean()
 
 def plot_line(save=False, path=None):
@@ -32,11 +33,12 @@ def plot_line(save=False, path=None):
     ax.set_xlabel('Number of operations (size of the array)')
     ax.set_ylabel('Execution time [sec]')
     plt.loglog()
+    plt.xlim(1e3, df_plot.index.max())
     
     if save:
         plt.tight_layout()
-        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng.png", dpi=400)
-        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng.svg")
+        plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_rng.png", dpi=400)
+        plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_rng.svg")
     
 plot_line(save=True)
 
@@ -56,7 +58,7 @@ def plot_bar(save=False, path=None):
     
     if save:
         plt.tight_layout()
-        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng_BAR.png", dpi=400)
-        plt.savefig(f"{path or '__res/benchmark'}/benchmark_rng_BAR.svg")
+        plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_rng_BAR.png", dpi=400)
+        plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_rng_BAR.svg")
     
 plot_bar(save=True)

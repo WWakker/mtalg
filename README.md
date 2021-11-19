@@ -71,7 +71,7 @@ powMT(A, B)
 
 ### Random number generation
 
-![](mtalg/__res/benchmark/benchmark_rng_BARS.svg)
+![](mtalg/__res/benchmark/benchmark_rng_BAR.svg)
 
 ![](mtalg/__res/benchmark/benchmark_rng.svg)
 

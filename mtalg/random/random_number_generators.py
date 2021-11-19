@@ -90,5 +90,4 @@ class MultithreadedRNG:
 
 
 if __name__ == '__main__':
-    rng = MultithreadedRNG(seed=1, num_threads=8)
-    rng.standard_normal(size=(int(4e6), 100), dtype=np.float32)
+    pass

@@ -27,9 +27,31 @@ class MultithreadedRNG:
         if self.values.dtype != dtype:
             self.values = self.values.astype(dtype)
 
-        def __fill(random_state, out, first_row, last_row, **kwargs):
-            random_state.standard_normal(out=out[(slice(None),) * self.shp_max + (slice(first_row, last_row),)],
+        def __fill(random_state, out, first, last, **kwargs):
+            random_state.standard_normal(out=out[(slice(None),) * self.shp_max + (slice(first, last),)],
                                          **kwargs)
+
+        self._fill(__fill, **kw_args)
+
+    def normal(self, size, loc=0.0, scale=1.0):
+        self._check_shape(size)
+        kw_args = {'loc': loc,
+                   'scale': scale}
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.normal(size=self._get_slice_size(first, last), **kwargs)
+
+        self._fill(__fill, **kw_args)
+
+    def uniform(self, size, low=0.0, high=1.0):
+        self._check_shape(size)
+        kw_args = {'low': low,
+                   'high': high}
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self.shp_max +
+                (slice(first, last),)] = random_state.uniform(size=self._get_slice_size(first, last), **kwargs)
 
         self._fill(__fill, **kw_args)
 
@@ -56,6 +78,9 @@ class MultithreadedRNG:
                           if t < (self.num_threads - 1) else
                           (t * (self.shape[self.shp_max] // self.num_threads), self.shape[self.shp_max])
                           for t in range(self.num_threads)]
+
+    def _get_slice_size(self, fst, lst):
+        return tuple(x if i != self.shp_max else lst - fst for i, x in enumerate(self.shape))
 
     def __del__(self):
         self.executor.shutdown(False)

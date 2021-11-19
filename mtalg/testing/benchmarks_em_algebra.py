@@ -91,10 +91,11 @@ if __name__=='__main__':
   
   def plot(save=False, path=None):
     DF = TIME.rolling(56).mean()
+#    DF = TIME.rolling(25).min().rolling(20).mean()
     DF.plot(xlabel='Number of operations (size of the array)',
             ylabel='Execution time [sec]') 
     plt.loglog()
-    plt.xlim(TIME.index.min(), TIME.index.max())
+    plt.xlim(1e5, TIME.index.max())
     if save:
       plt.tight_layout()
       plt.savefig(f"{path or '__RES'}/benchmark_add.png", dpi=400)

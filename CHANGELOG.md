@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ### Added
 - Input arbitrary function in multithreaded algebra
+- Test speed of executor closing after each execution of RNG
  
 ### Changed
  

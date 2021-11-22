@@ -89,6 +89,8 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
             args = (_fill, steps[i][0], steps[i][1])
             futures[executor.submit(*args)] = i
         concurrent.futures.wait(futures)
+        for fut in futures.keys():
+            fut.result()
 
 
 if __name__ == '__main__':

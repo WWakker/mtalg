@@ -181,6 +181,8 @@ class MultithreadedRNG:
                         self.steps[i][1])
                 futures[executor.submit(*args, **kwargs)] = i
             concurrent.futures.wait(futures)
+            for fut in futures.keys():
+                fut.result()
 
     def _check_shape(self, size):
         """Standard size checks to be done before execution of any distribution sampling"""
@@ -202,7 +204,4 @@ class MultithreadedRNG:
 
 
 if __name__ == '__main__':
-    mrng = MultithreadedRNG(seed=1, num_threads=24)
-    mrng.standard_normal(size=(2, 4))
-    mrng.values
-    mrng.values.std()
+    pass

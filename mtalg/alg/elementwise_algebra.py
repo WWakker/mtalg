@@ -94,7 +94,7 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
             fut.result()
 
 
-@njit(parallel=True)
+@njit(parallel=True, fastmath=True)
 def std(a):
     return np.std(a)
 

@@ -1,6 +1,7 @@
 import multiprocessing
 import concurrent.futures
 from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
+from numba import njit
 
 NUM_THREADS = MAX_NUM_THREADS
 
@@ -91,6 +92,11 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
         concurrent.futures.wait(futures)
         for fut in futures.keys():
             fut.result()
+
+
+@njit(parallel=True)
+def std(a):
+    return np.std(a)
 
 
 if __name__ == '__main__':

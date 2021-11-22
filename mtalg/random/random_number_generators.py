@@ -159,8 +159,13 @@ class MultithreadedRNG:
             self.values = self.values.astype(dtype)
 
         def __fill(random_state, out, first, last, **kwargs):
-            random_state.standard_normal(out=out[(slice(None),) * self.shp_max + (slice(first, last),)],
-                                         **kwargs)
+            if self.shp_max == 0:
+                random_state.standard_normal(out=out[(slice(None),) * self.shp_max + (slice(first, last),)],
+                                             **kwargs)
+            else:
+                out[(slice(None),) * self.shp_max +
+                    (slice(first, last),)] = random_state.standard_normal(size=self._get_slice_size(first, last),
+                                                                          **kwargs)
 
         self._fill(__fill, **kw_args)
 
@@ -198,4 +203,6 @@ class MultithreadedRNG:
 
 if __name__ == '__main__':
     mrng = MultithreadedRNG(seed=1, num_threads=24)
-#    %timeit mrng.standard_normal((int(4e6), 100))
+    mrng.standard_normal(size=(2, 4))
+    mrng.values
+    mrng.values.std()

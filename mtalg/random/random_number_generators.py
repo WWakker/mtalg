@@ -166,17 +166,16 @@ class MultithreadedRNG:
 
     def _fill(self, func, **kwargs):
         """Send jobs to the threads"""
-        executor = concurrent.futures.ThreadPoolExecutor(self.num_threads)
-        futures = {}
-        for i in range(self.num_threads):
-            args = (func,
-                    self._random_generators[i],
-                    self.values,
-                    self.steps[i][0],
-                    self.steps[i][1])
-            futures[executor.submit(*args, **kwargs)] = i
-        concurrent.futures.wait(futures)
-        executor.shutdown(wait=False)
+        with concurrent.futures.ThreadPoolExecutor(self.num_threads) as executor:
+            futures = {}
+            for i in range(self.num_threads):
+                args = (func,
+                        self._random_generators[i],
+                        self.values,
+                        self.steps[i][0],
+                        self.steps[i][1])
+                futures[executor.submit(*args, **kwargs)] = i
+            concurrent.futures.wait(futures)
 
     def _check_shape(self, size):
         """Standard size checks to be done before execution of any distribution sampling"""

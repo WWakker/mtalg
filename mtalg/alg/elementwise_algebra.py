@@ -69,9 +69,7 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
 
     shape = a.shape
     shp_max = argmax(shape)
-
     num_threads = min(num_threads or float('inf'), NUM_THREADS)
-    executor = concurrent.futures.ThreadPoolExecutor(num_threads)
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
              if t < (num_threads - 1) else
              (t * (shape[shp_max] // num_threads), shape[shp_max])
@@ -85,12 +83,12 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
             opr(a[(slice(None),) * shp_max + (slice(first, last),)],
                 b[(slice(None),) * shp_max + (slice(first, last),)])
 
-    futures = {}
-    for i in range(num_threads):
-        args = (_fill, steps[i][0], steps[i][1])
-        futures[executor.submit(*args)] = i
-    concurrent.futures.wait(futures)
-    executor.shutdown(False)
+    with concurrent.futures.ThreadPoolExecutor(num_threads) as executor:
+        futures = {}
+        for i in range(num_threads):
+            args = (_fill, steps[i][0], steps[i][1])
+            futures[executor.submit(*args)] = i
+        concurrent.futures.wait(futures)
 
 
 if __name__ == '__main__':

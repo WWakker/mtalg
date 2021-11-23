@@ -2,6 +2,7 @@ import multiprocessing
 import concurrent.futures
 from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
 from numba import njit
+import numpy as np
 
 NUM_THREADS = MAX_NUM_THREADS
 

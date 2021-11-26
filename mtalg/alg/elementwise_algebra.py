@@ -28,23 +28,23 @@ def _div_inplace(x, y): x /= y
 def _pow_inplace(x, y): x **= y
 
 
-def add_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+def add(a, b, num_threads=NUM_THREADS, direction='left'):
     __MultiThreaded_opr_direction(a, b, _add_inplace, num_threads, direction=direction)
 
 
-def sub_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+def sub(a, b, num_threads=NUM_THREADS, direction='left'):
     __MultiThreaded_opr_direction(a, b, _sub_inplace, num_threads, direction=direction)
 
 
-def mul_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+def mul(a, b, num_threads=NUM_THREADS, direction='left'):
     __MultiThreaded_opr_direction(a, b, _mul_inplace, num_threads, direction=direction)
 
 
-def div_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+def div(a, b, num_threads=NUM_THREADS, direction='left'):
     __MultiThreaded_opr_direction(a, b, _div_inplace, num_threads, direction=direction)
 
 
-def pow_MultiThreaded(a, b, num_threads=NUM_THREADS, direction='left'):
+def pow(a, b, num_threads=NUM_THREADS, direction='left'):
     __MultiThreaded_opr_direction(a, b, _pow_inplace, num_threads, direction=direction)
 
 

@@ -1,1 +1,1 @@
-from mtalg.random.random_number_generators import *
+from .random_number_generators import MultithreadedRNG

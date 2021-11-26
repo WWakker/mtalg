@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.0.4] - 2021-11-26
+
+### Added
+ 
+### Changed
+- Functions given simpler names
+ 
+### Fixed
+
 ## [0.0.3] - 2021-11-19
 
 ### Added

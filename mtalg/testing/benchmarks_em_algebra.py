@@ -1,13 +1,10 @@
 import numpy as np, timeit, pandas as pd, seaborn as sns, matplotlib.pyplot as plt
 from tqdm import tqdm
-from numba import njit
+from numba import njit, prange
 from numpy.random import default_rng
 sns.set()
-from mtalg.alg import (add_MultiThreaded,
-                       sub_MultiThreaded,
-                       mul_MultiThreaded,
-                       div_MultiThreaded,
-                       pow_MultiThreaded)
+import mtalg
+
 SHAPE = (int(4e4), 1)
 def get_a_b(shape=SHAPE):
     rng = default_rng(1)
@@ -36,8 +33,8 @@ def ne_pow(a, b): return ne.evaluate('a ** b')
 
 @njit(parallel=True, fastmath=True)
 def numba_add(a, b):
-  a = a + b
-  return a 
+  for i in prange(len(a)):
+    a[i] += b[i]
 @njit(parallel=True, fastmath=True)
 def numba_sub(a, b):
   a = a - b
@@ -63,7 +60,7 @@ def numba_pow(a, b):
 ###################################################
 ###################################################
 ###################################################
-ADD_FUNCS = {'mtalg': add_MultiThreaded, 'numexpr': ne_add, 
+ADD_FUNCS = {'mtalg': mtalg.add, 'numexpr': ne_add, 
              'numba': numba_add, 'numpy': _add}
   
 

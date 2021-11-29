@@ -37,20 +37,20 @@ def numba_add(a, b):
     a[i] += b[i]
 @njit(parallel=True, fastmath=True)
 def numba_sub(a, b):
-  a = a - b
-  return a
+  for i in prange(len(a)):
+    a[i] -= b[i]
 @njit(parallel=True, fastmath=True)
 def numba_mul(a, b):
-  a = a * b
-  return a
+  for i in prange(len(a)):
+    a[i] *= b[i]
 @njit(parallel=True, fastmath=True)
 def numba_div(a, b):
-  a = a / b
-  return a
+  for i in prange(len(a)):
+    a[i] /= b[i]
 @njit(parallel=True, fastmath=True)
 def numba_pow(a, b):
-  a = a ** b
-  return a
+  for i in prange(len(a)):
+    a[i] **= b[i]
 
 #a, b = get_a_b(shape=int(1e10))
 #a = get_a(shape=int(1e9))

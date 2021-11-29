@@ -2,8 +2,8 @@ import numpy as np, timeit, pandas as pd, seaborn as sns, matplotlib.pyplot as p
 from tqdm import tqdm
 from numba import njit, prange
 from numpy.random import default_rng
+from mtalg import add, sub, mul, div, pow
 sns.set()
-import mtalg
 
 SHAPE = (int(4e4), 1)
 def get_a_b(shape=SHAPE):
@@ -60,7 +60,7 @@ def numba_pow(a, b):
 ###################################################
 ###################################################
 ###################################################
-ADD_FUNCS = {'mtalg': mtalg.add, 'numexpr': ne_add, 
+ADD_FUNCS = {'mtalg': add, 'numexpr': ne_add, 
              'numba': numba_add, 'numpy': _add}
   
 
@@ -110,21 +110,3 @@ if __name__=='__main__':
       plt.savefig(f"{path or '__RES'}/benchmark_add_BARS.svg")
       
   barplot(path='mtalg/__res/benchmark', save=True)
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

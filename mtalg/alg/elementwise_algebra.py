@@ -86,12 +86,8 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
                 b[(slice(None),) * shp_max + (slice(first, last),)])
 
     with concurrent.futures.ThreadPoolExecutor(num_threads) as executor:
-        futures = {}
-        for i in range(num_threads):
-            args = (_fill, steps[i][0], steps[i][1])
-            futures[executor.submit(*args)] = i
-        concurrent.futures.wait(futures)
-        for fut in futures.keys():
+        futures = [executor.submit(_fill, steps[i][0], steps[i][1]) for i in range(num_threads)]
+        for fut in concurrent.futures.as_completed(futures):
             fut.result()
 
 

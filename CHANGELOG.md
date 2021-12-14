@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.0.5] - 2021-12-14
+
+### Fixed
+- np.integer recognized in _check_shape
+
 ## [0.0.4] - 2021-11-26
 
 ### Added

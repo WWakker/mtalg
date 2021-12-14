@@ -185,7 +185,7 @@ class MultithreadedRNG:
     def _check_shape(self, size):
         """Standard size checks to be done before execution of any distribution sampling"""
         if size != self.shape:
-            if isinstance(size, (int, float, complex)):
+            if isinstance(size, (int, float, complex, np.integer)):
                 size = size,
             self.shape = size
             self.shp_max = argmax(self.shape)

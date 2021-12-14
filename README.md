@@ -45,7 +45,7 @@ mtalg.add(A, B, num_threads=4)
 ```
 Subtract A from B (B is modified inplace)
 ```python
-mtalg.sub(A, B, direction='right', threads=4)
+mtalg.sub(A, B, direction='right', num_threads=4)
 ```
 Multiply, divide and raise to power (A is modified inplace)
 ```python

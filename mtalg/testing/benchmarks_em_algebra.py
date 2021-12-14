@@ -169,4 +169,4 @@ def plot_bar(save=False, path=None):
         plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.png", dpi=400)
         plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.svg")
     
-plot_bar(save=True)
+plot_bar(save=False)

@@ -8,13 +8,12 @@ with open("README.md", "r") as f:
 about = {}
 with open("mtalg/__about__.py") as f:
     exec(f.read(), about)
-requirements = []
+
 with open("mtalg/requirements.txt") as f:
-    for line in f:
-        requirements.append(line.replace('\n',''))
+    requirements = f.read().striplines()
 
 setuptools.setup(
-    name="ecb-mtalg",
+    name="mtalg",
     version=about['__version__'],
     author=about['__authors__'],
     author_email=about['__email__'],
@@ -30,8 +29,5 @@ setuptools.setup(
         "License :: OSI Approved :: Chicken Dance License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.6',
 )
-
-
-

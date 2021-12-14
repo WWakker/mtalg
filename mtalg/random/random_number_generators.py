@@ -176,8 +176,8 @@ class MultithreadedRNG:
                                        self._random_generators[i],
                                        self.values, 
                                        self.steps[i][0],
-                                       self.steps[i][1]
-                                       , **kwargs) 
+                                       self.steps[i][1],
+                                       **kwargs) 
                        for i in range(self.num_threads)]
             for fut in concurrent.futures.as_completed(futures):
                 fut.result()
@@ -185,7 +185,7 @@ class MultithreadedRNG:
     def _check_shape(self, size):
         """Standard size checks to be done before execution of any distribution sampling"""
         if size != self.shape:
-            if isinstance(size, (int, float, complex, np.integer)):
+            if isinstance(size, (int, float, complex, np.integer, np.floating)):
                 size = size,
             self.shape = size
             self.shp_max = argmax(self.shape)

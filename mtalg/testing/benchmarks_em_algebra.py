@@ -123,24 +123,29 @@ result = {'x': [], 'mtalg':[], 'numexpr': [],
 for x in tqdm(np.geomspace(1, 1e9, num=300).astype(int)):
     a, b = get_a_b(shape=x)
     result['x'].append(x) 
-    result['mtalg'].append(timeit.timeit(lambda: add(a, b), number=10) / 10)
-    result['numexpr'].append(timeit.timeit(lambda: ne_add(a, b), number=10) / 10)
-    result['numba'].append(timeit.timeit(lambda: numba_add(a, b), number=10) / 10)
-    result['numpy'].append(timeit.timeit(lambda: _add(a, b), number=10) / 10)
+    result['mtalg'].append(timeit.timeit(lambda: add(a, b, num_threads=80), number=20) / 20)
+    result['numexpr'].append(timeit.timeit(lambda: ne_add(a, b), number=20) / 20)
+    result['numba'].append(timeit.timeit(lambda: numba_add(a, b), number=20) / 20)
+    result['numpy'].append(timeit.timeit(lambda: _add(a, b), number=20) / 20)
 
 df = pd.DataFrame(result).set_index('x')
-df_plot = df.rolling(40).mean()
+df_plot = df.rolling(50).mean()
 
 def plot_line(save=False, path=None):
     fig, ax = plt.subplots()
-    for key, color in zip(['mtalg', 'numexpr', 'numba', 'numpy'], 
-                          ['b', 'r', 'g', 'Y']):
-        ax.plot(df_plot.index, df_plot[key], label=key, color=color)
+    for key, color, lw in zip(['mtalg', 'numba', 'numexpr', 'numpy'], 
+                              ['b', 'r', 'g', 'Y'],
+                              [3, 1.2, 1.2, 1.2]):
+        ax.plot(df_plot.index, 
+                df_plot[key], 
+                label=key, 
+                color=color,
+                linewidth=lw)
     ax.legend()
     ax.set_xlabel('Number of operations (size of the array)')
     ax.set_ylabel('Execution time [sec]')
     plt.loglog()
-    plt.xlim(1e3, df_plot.index.max())
+    plt.xlim(1e5, df_plot.index.max())
     
     if save:
         plt.tight_layout()
@@ -150,7 +155,7 @@ def plot_line(save=False, path=None):
 plot_line(save=False)
 
 def plot_bar(save=False, path=None):
-    width = .35
+    width = .5
     
     fig, ax = plt.subplots()
     ax.bar([0, 1,2,3], [df_plot['mtalg'].values[-1], df_plot['numba'].values[-1], df_plot['numexpr'].values[-1], df_plot['numpy'].values[-1]], color=['b', 'r', 'g', 'y'], width=width)
@@ -164,4 +169,4 @@ def plot_bar(save=False, path=None):
         plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.png", dpi=400)
         plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.svg")
     
-plot_bar(save=False)
+plot_bar(save=True)

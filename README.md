@@ -1,6 +1,6 @@
 # ![](mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
-[![version](https://img.shields.io/badge/version-0.0.3-success.svg)](#)
+[![version](https://img.shields.io/badge/version-0.0.4-success.svg)](#)
 
 # About
 
@@ -20,19 +20,13 @@ Major benefits become apparent past $`10^7`$ operations for both the element-wis
 
 # Installation
 
-You can simply install from the ECB artifactory via pip as:
-
-`pip install ecb-mtalg`
+`pip install mtalg`
 
 # How to use
 Import random number generator and algebra functions
 ```python
+import mtalg
 from mtalg.random import MultithreadedRNG
-from mtalg.alg import (add_MultiThreaded as addMT,
-                       sub_MultiThreaded as subMT,
-                       mul_MultiThreaded as mulMT,
-                       div_MultiThreaded as divMT,
-                       pow_MultiThreaded as powMT)
 ```
 Create an instance of the multithreaded random number generator with seed for reproducability and number of threads to be used
 ```python
@@ -47,17 +41,17 @@ B = mrng.values
 ```
 Add B to A (A is modified inplace)
 ```python
-addMT(A, B)
+mtalg.add(A, B, threads=4)
 ```
 Subtract A from B (B is modified inplace)
 ```python
-subMT(A, B, direction='right')
+mtalg.sub(A, B, direction='right', threads=4)
 ```
 Multiply, divide and raise to power (A is modified inplace)
 ```python
-mulMT(A, B)
-divMT(A, B)
-powMT(A, B)
+mtalg.mul(A, B, threads=4)
+mtalg.div(A, B, threads=4)
+mtalg.pow(A, B, threads=4)
 ```
 
 # Benchmarks
@@ -81,8 +75,8 @@ powMT(A, B)
 The module for multithreaded generation of random numbers is inspired from [here](https://numpy.org/doc/stable/reference/random/multithreading.html).  
 
 # Authors
-[Wouter Wakker](https://gitlab.sofa.dev/Wouter.Wakker) 
-and [Luca Mingarelli](https://gitlab.sofa.dev/Luca.Mingarelli), 
+[Wouter Wakker](https://github.com/WWakker) 
+and [Luca Mingarelli](https://github.com/LucaMingarelli), 
 2021
 
 [![Python](https://img.shields.io/static/v1?label=made%20with&message=Python&color=blue&style=for-the-badge&logo=Python&logoColor=white)](#)

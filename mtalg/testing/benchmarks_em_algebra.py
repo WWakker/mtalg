@@ -31,23 +31,23 @@ def ne_mul(a, b): return ne.evaluate('a * b')
 def ne_div(a, b): return ne.evaluate('a / b')
 def ne_pow(a, b): return ne.evaluate('a ** b')
 
-@njit(parallel=True, fastmath=True)
+@njit(parallel=True)
 def numba_add(a, b):
   for i in prange(len(a)):
     a[i] += b[i]
-@njit(parallel=True, fastmath=True)
+@njit(parallel=True)
 def numba_sub(a, b):
   for i in prange(len(a)):
     a[i] -= b[i]
-@njit(parallel=True, fastmath=True)
+@njit(parallel=True)
 def numba_mul(a, b):
   for i in prange(len(a)):
     a[i] *= b[i]
-@njit(parallel=True, fastmath=True)
+@njit(parallel=True)
 def numba_div(a, b):
   for i in prange(len(a)):
     a[i] /= b[i]
-@njit(parallel=True, fastmath=True)
+@njit(parallel=True)
 def numba_pow(a, b):
   for i in prange(len(a)):
     a[i] **= b[i]

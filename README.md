@@ -41,7 +41,7 @@ B = mrng.values
 ```
 Add B to A (A is modified inplace)
 ```python
-mtalg.add(A, B, threads=4)
+mtalg.add(A, B, num_threads=4)
 ```
 Subtract A from B (B is modified inplace)
 ```python
@@ -49,9 +49,9 @@ mtalg.sub(A, B, direction='right', threads=4)
 ```
 Multiply, divide and raise to power (A is modified inplace)
 ```python
-mtalg.mul(A, B, threads=4)
-mtalg.div(A, B, threads=4)
-mtalg.pow(A, B, threads=4)
+mtalg.mul(A, B, num_threads=4)
+mtalg.div(A, B, num_threads=4)
+mtalg.pow(A, B, num_threads=4)
 ```
 
 # Benchmarks

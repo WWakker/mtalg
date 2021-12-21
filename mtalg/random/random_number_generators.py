@@ -78,7 +78,7 @@ class MultithreadedRNG:
 
         self._fill(__fill, **kw_args)
 
-    def exponential(self, size, scale):
+    def exponential(self, size, scale=1.0):
         """Draw from the exponential distribution
 
         Args

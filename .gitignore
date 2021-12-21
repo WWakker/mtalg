@@ -5,4 +5,5 @@ __*
 {{*
 __RES/
 *.csv
+!.circleci
 !.gitignore

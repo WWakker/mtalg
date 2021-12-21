@@ -1,6 +1,6 @@
 # ![](mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
-[![version](https://img.shields.io/badge/version-0.0.5-success.svg)](#)
+[![version](https://img.shields.io/badge/version-0.0.6-success.svg)](#)
 
 # About
 

@@ -1,7 +1,6 @@
 import multiprocessing
 import concurrent.futures
 from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
-from numba import njit
 import numpy as np
 
 NUM_THREADS = MAX_NUM_THREADS
@@ -91,9 +90,25 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
             fut.result()
 
 
-@njit(parallel=True)
-def std(a):
-    return np.std(a)
+def std(a: np.ndarray):
+    """Numba version of np.std
+
+    Args
+        a: np.ndarray
+
+    Returns
+        np.floating: standard deviation
+    """
+    try:
+        from numba import njit
+    except ImportError:
+        raise ImportError("Optional dependency missing: 'numba'; Use pip or conda to install")
+
+    @njit(parallel=True)
+    def std_numba(x):
+        return np.std(x)
+
+    return std_numba(a)
 
 
 if __name__ == '__main__':

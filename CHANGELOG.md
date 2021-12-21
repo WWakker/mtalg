@@ -6,7 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - yyyy-mm-dd
  
- 
 ### Added
 - Input arbitrary function in multithreaded algebra
 - Test speed of executor closing after each execution of RNG
@@ -14,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
  
 ### Fixed
+
+## [0.0.6] - 2021-12-21
+
+### Changed
+- Removed numba from dependencies, added as optional dependency
 
 ## [0.0.5] - 2021-12-14
 

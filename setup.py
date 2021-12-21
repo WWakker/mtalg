@@ -24,6 +24,7 @@ setuptools.setup(
     long_description_content_type="markdown",
     packages=setuptools.find_packages(),
     install_requires=requirements,
+    extras_require={'full': ['numba']},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Chicken Dance License",

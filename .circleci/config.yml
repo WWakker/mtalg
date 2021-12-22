@@ -30,6 +30,7 @@ jobs:
       - run:
           command:
             pip install twine
+          command:
             python3 setup.py sdist bdist_wheel
 
 workflows:

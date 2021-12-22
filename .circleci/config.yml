@@ -27,8 +27,6 @@ jobs:
     
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
       - run:
           command:
             pip install twine
@@ -36,5 +34,4 @@ jobs:
 workflows:
   sample: 
     jobs:
-      - build-and-test
       - deploy

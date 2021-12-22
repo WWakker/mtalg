@@ -35,7 +35,7 @@ jobs:
             python3 setup.py sdist bdist_wheel
       - run:
           command:
-            twine upload -r testpypi dist/*
+            twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P 
 
 workflows:
   sample: 

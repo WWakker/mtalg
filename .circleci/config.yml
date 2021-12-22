@@ -33,6 +33,9 @@ jobs:
       - run:
           command:
             python3 setup.py sdist bdist_wheel
+      - run:
+          command:
+            twine upload -r testpypi dist/*
 
 workflows:
   sample: 

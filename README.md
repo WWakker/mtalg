@@ -1,8 +1,8 @@
-# ![](mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
+# ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
 
 [![CircleCI](https://circleci.com/gh/LucaMingarelli/CryptPandas.svg?style=svg&circle-token=23ad3dc02a697420107b82330e00b944f9ea53ed)]()
-[![version](https://img.shields.io/badge/version-0.0.6-success.svg)](#)
+[![version](https://img.shields.io/badge/version-0.1.0-success.svg)](#)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
 [![License](https://img.shields.io/pypi/l/CryptPandas.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
@@ -66,16 +66,16 @@ mtalg.pow(A, B, num_threads=4)
 # Benchmarks
 
 ### Elementwise algebra
-![](mtalg/__res/benchmark/benchmark_add_BARS.svg)
+![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_add_BARS.svg)
 
-![](mtalg/__res/benchmark/benchmark_add.svg)
+![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_add.svg)
 
 
 ### Random number generation
 
-![](mtalg/__res/benchmark/benchmark_rng_BAR.svg)
+![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_rng_BAR.svg)
 
-![](mtalg/__res/benchmark/benchmark_rng.svg)
+![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_rng.svg)
 
 
 

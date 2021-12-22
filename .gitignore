@@ -1,14 +1,13 @@
 MY_GITLAB_KEY
-.*
-__*
-!__res/
-{{*
 __RES/
-*.csv
 README_DEVELOPER.md
+{{*
+*.csv
+.*
+*/__pycache__
 !.circleci
 !.gitignore
-
+!.coveragerc
 
 build
 dist

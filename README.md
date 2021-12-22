@@ -2,7 +2,7 @@
 
 
 [![CircleCI](https://circleci.com/gh/LucaMingarelli/CryptPandas.svg?style=svg&circle-token=23ad3dc02a697420107b82330e00b944f9ea53ed)]()
-[![version](https://img.shields.io/badge/version-0.1.0-success.svg)](#)
+[![version](https://img.shields.io/badge/version-0.1.1-success.svg)](#)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
 [![License](https://img.shields.io/pypi/l/CryptPandas.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)

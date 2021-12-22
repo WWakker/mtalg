@@ -1,7 +1,8 @@
 from numpy.random import default_rng, SeedSequence
 import concurrent.futures
 import numpy as np
-from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
+from multiprocessing import cpu_count
+from mtalg.tools.__check_threads import check_threads
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 
@@ -15,7 +16,7 @@ class MultithreadedRNG:
     """
 
     def __init__(self, seed=None, num_threads=None):
-        self.num_threads = min(num_threads or float('inf'), MAX_NUM_THREADS)
+        self.num_threads = check_threads(num_threads or cpu_count())
         seq = SeedSequence(seed)
         self._random_generators = [default_rng(s) for s in seq.spawn(self.num_threads)]
         self.shape = 0,

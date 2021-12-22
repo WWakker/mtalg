@@ -1,9 +1,7 @@
-import multiprocessing
 import concurrent.futures
-from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
+from mtalg.tools.__check_threads import check_threads
 import numpy as np
-
-NUM_THREADS = MAX_NUM_THREADS
+from multiprocessing import cpu_count
 
 # TODO: doc string to be updated for all of them (ad hoc for each + one inherited from the function below?)
 # TODO: check why nans in pow
@@ -27,36 +25,36 @@ def _div_inplace(x, y): x /= y
 def _pow_inplace(x, y): x **= y
 
 
-def add(a, b, num_threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _add_inplace, num_threads, direction=direction)
+def add(a, b, num_threads=None, direction='left'):
+    __multithreaded_opr_direction(a, b, _add_inplace, num_threads, direction=direction)
 
 
-def sub(a, b, num_threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _sub_inplace, num_threads, direction=direction)
+def sub(a, b, num_threads=None, direction='left'):
+    __multithreaded_opr_direction(a, b, _sub_inplace, num_threads, direction=direction)
 
 
-def mul(a, b, num_threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _mul_inplace, num_threads, direction=direction)
+def mul(a, b, num_threads=None, direction='left'):
+    __multithreaded_opr_direction(a, b, _mul_inplace, num_threads, direction=direction)
 
 
-def div(a, b, num_threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _div_inplace, num_threads, direction=direction)
+def div(a, b, num_threads=None, direction='left'):
+    __multithreaded_opr_direction(a, b, _div_inplace, num_threads, direction=direction)
 
 
-def pow(a, b, num_threads=NUM_THREADS, direction='left'):
-    __MultiThreaded_opr_direction(a, b, _pow_inplace, num_threads, direction=direction)
+def pow(a, b, num_threads=None, direction='left'):
+    __multithreaded_opr_direction(a, b, _pow_inplace, num_threads, direction=direction)
 
 
-def __MultiThreaded_opr_direction(a, b, opr, num_threads, direction='left'):
+def __multithreaded_opr_direction(a, b, opr, num_threads, direction='left'):
     if direction == 'left':
-        __MultiThreaded_opr(a, b, opr, num_threads=num_threads)
+        __multithreaded_opr(a, b, opr, num_threads=num_threads)
     elif direction == 'right':
-        __MultiThreaded_opr(b, a, opr, num_threads=num_threads)
+        __multithreaded_opr(b, a, opr, num_threads=num_threads)
     else:
         raise ValueError(f"Invalid direction {direction}. Must take value either 'left' or 'right'. ")
 
 
-def __MultiThreaded_opr(a, b, opr, num_threads=None):
+def __multithreaded_opr(a, b, opr, num_threads=None):
     """Modifies a inplace; beats numpy from around 1e7 operations onwards.
 
     Args:
@@ -64,13 +62,14 @@ def __MultiThreaded_opr(a, b, opr, num_threads=None):
       b (numpy.array): Right array to be summed.
       num_threads (int or None): Number of num_threads.
     """
-    scalar = True if isinstance(b, (int, float, complex)) and not isinstance(b, bool) else False
+    scalar = (True if isinstance(b, (int, float, complex, np.integer, np.floating)) and not isinstance(b, bool)
+              else False)
     if not scalar:
         assert a.shape == b.shape
 
     shape = a.shape
     shp_max = argmax(shape)
-    num_threads = min(num_threads or float('inf'), NUM_THREADS)
+    num_threads = check_threads(num_threads or cpu_count())
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
              if t < (num_threads - 1) else
              (t * (shape[shp_max] // num_threads), shape[shp_max])

@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.1.1] - 2021-12-22
+ 
+### Changed
+- simplified num_threads check, changed alg functions to lowercase as per convention
+
 ## [0.0.7] - 2021-12-22
  
 ### Added

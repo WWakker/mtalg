@@ -1,6 +1,4 @@
-import os, setuptools
-
-IS_WINDOWS = os.name == 'nt'
+import setuptools
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -10,7 +8,7 @@ with open("mtalg/__about__.py") as f:
     exec(f.read(), about)
 
 with open("mtalg/requirements.txt") as f:
-    requirements = f.read()#.striplines()
+    requirements = f.read().splitlines()
 
 setuptools.setup(
     name="mtalg",

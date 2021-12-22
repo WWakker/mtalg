@@ -1,9 +1,12 @@
-import numpy as np, timeit, pandas as pd, seaborn as sns, matplotlib.pyplot as plt
-from tqdm import tqdm
-from numba import njit, prange
-from numpy.random import default_rng
-from mtalg import add
+import matplotlib.pyplot as plt
 import numexpr as ne
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import timeit
+from numba import njit, prange
+from tqdm import tqdm
+from mtalg import add
 
 sns.set()
 

@@ -172,7 +172,7 @@ class MultithreadedRNG:
         with concurrent.futures.ThreadPoolExecutor(self.num_threads) as executor:
             futures = [executor.submit(func,
                                        self._random_generators[i],
-                                       self.values, 
+                                       self.values,
                                        self.steps[i][0],
                                        self.steps[i][1],
                                        **kwargs)

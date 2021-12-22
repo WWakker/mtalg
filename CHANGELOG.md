@@ -63,8 +63,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 - Generalised multithreaded random number generation
 - Benchmarking of multithreaded elementwise algebra
-- Benchmarking of multithreaded random number generation 
- 
+- Benchmarking of multithreaded random number generation
  
 ## \[0.0.1] - 2021-11-18
    

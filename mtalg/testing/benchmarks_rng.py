@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     for x in tqdm(np.geomspace(1e3, 1e9, num=200)[::-1]):
         n = 20
-        result['x'].append(x) 
+        result['x'].append(x)
         result['MT_std_norm'].append(timeit(lambda: mrng.standard_normal(size=int(x)), number=n) / n)
         result['np_std_norm'].append(timeit(lambda: rng.standard_normal(size=int(x)), number=n) / n)
         result['mkl_std_norm'].append(timeit(lambda: mkl_random.standard_normal(size=int(x)), number=n) / n)

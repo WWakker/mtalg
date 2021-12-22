@@ -20,8 +20,21 @@ jobs:
       - run:
           name: Send to Codacy
           command: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r cov.xml
+          
+  deploy:
+    docker:
+      - image: cimg/python:3.8
+    
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          command:
+            pip install twine
 
 workflows:
   sample: 
     jobs:
       - build-and-test
+      - deploy

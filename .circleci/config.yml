@@ -16,7 +16,7 @@ jobs:
           pip-dependency-file: mtalg/dev-requirements.txt
       - run:
           name: Run tests
-          command: pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=unit.xml --cov-report xml=cov.xml
+          command: pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=unit.xml --cov-report xml:cov.xml
       - run:
           name: Send to Codacy
           command: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r cov.xml

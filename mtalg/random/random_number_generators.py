@@ -4,7 +4,6 @@ import numpy as np
 from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
-NUM_THREADS = MAX_NUM_THREADS
 
 
 class MultithreadedRNG:
@@ -16,7 +15,7 @@ class MultithreadedRNG:
     """
 
     def __init__(self, seed=None, num_threads=None):
-        self.num_threads = min(num_threads or float('inf'), NUM_THREADS)
+        self.num_threads = min(num_threads or float('inf'), MAX_NUM_THREADS)
         seq = SeedSequence(seed)
         self._random_generators = [default_rng(s) for s in seq.spawn(self.num_threads)]
         self.shape = 0,

@@ -119,8 +119,8 @@ if __name__ == '__main__':
 
         if save:
             plt.tight_layout()
-            plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add.png", dpi=400)
-            plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add.svg")
+            fig.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add.png", dpi=400)
+            fig.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add.svg")
 
 
     plot_line(save=False)
@@ -142,8 +142,8 @@ if __name__ == '__main__':
 
         if save:
             plt.tight_layout()
-            plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.png", dpi=400)
-            plt.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.svg")
+            fig.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.png", dpi=400)
+            fig.savefig(f"{path or 'mtalg/__res/benchmark'}/benchmark_add_BARS.svg")
 
 
     plot_bar(save=False)

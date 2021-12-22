@@ -62,7 +62,7 @@ mtalg.div(A, B, num_threads=4)
 mtalg.pow(A, B, num_threads=4)
 ```
 
-# Benchmarks
+# Benchmarks *
 
 ### Elementwise algebra
 ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_add_BARS.svg)
@@ -76,7 +76,7 @@ mtalg.pow(A, B, num_threads=4)
 
 ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_rng.svg)
 
-
+\* Benchmarks are carrried out using an Intel(R) Xeon(R) Gold 6142M CPU @ 2.60GHz and 24 threads
 
 # Aknowledgments
 

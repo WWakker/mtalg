@@ -8,8 +8,6 @@
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
 [![Codacy Coverage](https://app.codacy.com/project/badge/Coverage/ede1085018cd4e86ac0063e229286677)](https://www.codacy.com/gh/WWakker/mtalg/dashboard?utm_source=github.com&utm_medium=referral&utm_content=WWakker/mtalg&utm_campaign=Badge_Coverage)
 
-[//]: # ([![Build and test GitHub]&#40;https://github.com/lucamingarelli/CryptPandas/actions/workflows/build-and-test.yml/badge.svg&#41;]&#40;https://github.com/LucaMingarelli/CryptPandas/actions&#41;)
-
 
 
 # About

@@ -5,5 +5,11 @@ __*
 {{*
 __RES/
 *.csv
+README_DEVELOPER.md
 !.circleci
 !.gitignore
+
+
+build
+dist
+mtalg.egg-info

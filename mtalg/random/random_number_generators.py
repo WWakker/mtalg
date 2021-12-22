@@ -1,9 +1,7 @@
 from numpy.random import default_rng, SeedSequence
-import multiprocessing
 import concurrent.futures
 import numpy as np
 from mtalg.tools.__get_num_threads import MAX_NUM_THREADS
-import os
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 NUM_THREADS = MAX_NUM_THREADS
@@ -78,7 +76,7 @@ class MultithreadedRNG:
 
         self._fill(__fill, **kw_args)
 
-    def exponential(self, size, scale):
+    def exponential(self, size, scale=1.0):
         """Draw from the exponential distribution
 
         Args

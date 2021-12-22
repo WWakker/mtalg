@@ -3,7 +3,7 @@ from .random_number_generators import MultithreadedRNG
 
 __RNG = MultithreadedRNG(seed=random.randint(1, 1_000_000))
 
-get_methods = lambda obj: [m for m in dir(obj) if (getattr(obj, m).__class__.__name__=='method') and m[0]!='_']
+get_methods = lambda obj: [m for m in dir(obj) if callable(getattr(obj, m)) and m[0]!='_']
 
 for method in get_methods(__RNG):
     argsspec = inspect.getfullargspec(getattr(__RNG, method))

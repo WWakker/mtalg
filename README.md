@@ -1,10 +1,10 @@
 # ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
 
-[![CircleCI](https://circleci.com/gh/LucaMingarelli/CryptPandas.svg?style=svg&circle-token=23ad3dc02a697420107b82330e00b944f9ea53ed)]()
+[![CircleCI](https://circleci.com/gh/WWakker/mtalg.svg?style=svg&circle-token=cd77680c94fe6fe1427220c7a3dfc787ab873727)]()
 [![version](https://img.shields.io/badge/version-0.1.0-success.svg)](#)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
-[![License](https://img.shields.io/pypi/l/CryptPandas.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/pypi/l/mtalg.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
 
 [//]: # ([![Build and test GitHub]&#40;https://github.com/lucamingarelli/CryptPandas/actions/workflows/build-and-test.yml/badge.svg&#41;]&#40;https://github.com/LucaMingarelli/CryptPandas/actions&#41;)

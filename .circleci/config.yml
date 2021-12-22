@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   build-and-test:
-
+  
     docker:
       - image: cimg/python:3.8
 
@@ -20,16 +20,8 @@ jobs:
       - run:
           name: Send to Codacy
           command: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r cov.xml
- 
-  hold:
-    type: approval
-    filters:
-      branches:
-        only: master
   
   deploy:
-    requires:
-      - hold
     docker:
       - image: cimg/python:3.8
     
@@ -46,6 +38,13 @@ jobs:
             twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P 
 
 workflows:
-  sample: 
+  test_approve_deploy: 
     jobs:
-      - deploy
+      - hold:
+          type: approval
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - hold

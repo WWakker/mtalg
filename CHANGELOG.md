@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## [0.0.7] - 2021-12-22
+ 
+### Added
+- Can call random functions directly from mtalg.random
+ 
+### Fixed
+- Bug in mtalg/tools
+
 ## [0.0.6] - 2021-12-21
 
 ### Changed

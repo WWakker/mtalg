@@ -7,18 +7,19 @@ jobs:
   build-and-test:
 
     docker:
-      - image: cimg/python:3.6
+      - image: cimg/python:3.8
 
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: pip
-          pip-dependency-file: mtalg/requirements.txt
+          pip-dependency-file: mtalg/dev-requirements.txt
       - run:
           name: Run tests
-          command: pip install pytest
-          command: pip install pytest-cov
-          command: pytest mtalg/testing/rng_tests.py
+          command: pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=unit.xml --cov-report xml:cov.xml
+      - run:
+          name: Send to Codacy
+          command: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r cov.xml
 
 workflows:
   sample: 

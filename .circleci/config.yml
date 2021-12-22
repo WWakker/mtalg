@@ -38,6 +38,9 @@ jobs:
             echo $TEST_U
       - run:
           command:
+            echo 'Hello'
+      - run:
+          command:
             twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P 
 
 workflows:

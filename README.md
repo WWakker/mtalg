@@ -7,7 +7,7 @@
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
 [![Codacy Coverage](https://app.codacy.com/project/badge/Coverage/ede1085018cd4e86ac0063e229286677)](https://www.codacy.com/gh/WWakker/mtalg/dashboard?utm_source=github.com&utm_medium=referral&utm_content=WWakker/mtalg&utm_campaign=Badge_Coverage)
 
-# About
+## About
 
 ***mtalg*** is a package for multithreaded algebra and random number generation.
 
@@ -23,11 +23,11 @@ and random number generation. For more info on benchmarks you can see the dedica
 
 Major benefits become apparent past `10^7` operations for both the element-wise algebra and the random number generator modules.
 
-# Installation
+## Installation
 
 `pip install mtalg`
 
-# How to use
+## How to use
 Import random number generator and algebra functions
 ```python
 import mtalg
@@ -59,7 +59,7 @@ mtalg.div(A, B, num_threads=4)
 mtalg.pow(A, B, num_threads=4)
 ```
 
-# Benchmarks *
+## Benchmarks *
 
 ### Elementwise algebra
 ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_add_BARS.svg)
@@ -74,11 +74,11 @@ mtalg.pow(A, B, num_threads=4)
 
 \* Benchmarks are carrried out using an Intel(R) Xeon(R) Gold 6142M CPU @ 2.60GHz and 24 threads
 
-# Aknowledgments
+## Aknowledgments
 
 The module for multithreaded generation of random numbers is inspired from [here](https://numpy.org/doc/stable/reference/random/multithreading.html).  
 
-# Authors
+## Authors
 [Wouter Wakker](https://github.com/WWakker) 
 and [Luca Mingarelli](https://github.com/LucaMingarelli), 
 2021

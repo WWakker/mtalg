@@ -1,4 +1,7 @@
 numpy>=1.17.0
 numba
+numexpr
+mkl_random
+tqdm
 pytest
 pytest-cov

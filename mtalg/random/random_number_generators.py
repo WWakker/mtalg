@@ -170,12 +170,12 @@ class MultithreadedRNG:
     def _fill(self, func, **kwargs):
         """Send jobs to the threads"""
         with concurrent.futures.ThreadPoolExecutor(self.num_threads) as executor:
-            futures = [executor.submit(func, 
+            futures = [executor.submit(func,
                                        self._random_generators[i],
                                        self.values, 
                                        self.steps[i][0],
                                        self.steps[i][1],
-                                       **kwargs) 
+                                       **kwargs)
                        for i in range(self.num_threads)]
             for fut in concurrent.futures.as_completed(futures):
                 fut.result()

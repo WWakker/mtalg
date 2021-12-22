@@ -1,5 +1,6 @@
 # ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2042dc5bd7874d688c58997f0b6ce534)](https://app.codacy.com/gh/WWakker/mtalg?utm_source=github.com&utm_medium=referral&utm_content=WWakker/mtalg&utm_campaign=Badge_Grade_Settings)
 [![CircleCI](https://circleci.com/gh/WWakker/mtalg/tree/master.svg?style=shield)](https://circleci.com/gh/WWakker/mtalg/tree/master)
 [![version](https://img.shields.io/badge/version-0.1.1-success.svg)](https://github.com/WWakker/mtalg)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)

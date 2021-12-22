@@ -20,8 +20,16 @@ jobs:
       - run:
           name: Send to Codacy
           command: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r cov.xml
-          
+ 
+   hold:
+     type: approval
+     filters:
+       branches:
+         only: master
+  
   deploy:
+    requires:
+      - hold
     docker:
       - image: cimg/python:3.8
     
@@ -41,3 +49,13 @@ workflows:
   sample: 
     jobs:
       - deploy
+
+
+
+      - hold:
+          type: approval
+          requires:
+            - dark-deploy
+          filters:
+            branches:
+              only: main

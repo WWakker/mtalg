@@ -49,13 +49,3 @@ workflows:
   sample: 
     jobs:
       - deploy
-
-
-
-      - hold:
-          type: approval
-          requires:
-            - dark-deploy
-          filters:
-            branches:
-              only: main

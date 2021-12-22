@@ -13,12 +13,10 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: pip
-          pip-dependency-file: mtalg/requirements.txt
+          pip-dependency-file: mtalg/dev-requirements.txt
       - run:
           name: Run tests
-          command: pip install pytest
-          command: pip install pytest-cov
-          command: pytest mtalg/testing/rng_tests.py
+          command: pytest mtalg/testing/
 
 workflows:
   sample: 

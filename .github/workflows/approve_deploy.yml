@@ -1,0 +1,13 @@
+on:
+  workflow_run:
+    workflows: "Build and test"
+    branches: master
+    types: completed
+ 
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deployed"

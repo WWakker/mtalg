@@ -28,19 +28,24 @@ jobs:
     steps:
       - checkout
       - run:
-          command:
-            pip install twine
+          name: Install twine
+          command: pip install twine
       - run:
-          command:
-            python3 setup.py sdist bdist_wheel
+          name: Build
+          command: python3 setup.py sdist bdist_wheel
       - run:
-          command:
-            twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P 
+          name: Deploy to Test PyPi
+          command: twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P 
+      - run:
+          name: Deploy to PyPi
+          command: twine upload dist/*
 
 workflows:
   test_approve_deploy: 
     jobs:
+      - build-and_test
       - hold:
+          requires: build-and-test
           type: approval
           filters:
             branches:
@@ -48,3 +53,6 @@ workflows:
       - deploy:
           requires:
             - hold
+          filters:
+            branches:
+              only: master

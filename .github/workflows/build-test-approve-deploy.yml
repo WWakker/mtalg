@@ -31,6 +31,7 @@ jobs:
 
   deploy:
     needs: build-and-test
+    environment: Deploy
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deployed"

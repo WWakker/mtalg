@@ -1,8 +1,8 @@
-name: Approve and deploy
+name: approve and deploy
 
 on:
   workflow_run:
-    workflows: "Build and test"
+    workflows: "build and test"
     branches: master
     types: completed   
 

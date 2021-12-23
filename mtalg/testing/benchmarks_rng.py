@@ -32,9 +32,13 @@ if __name__ == '__main__':
 
     def plot_line(save=False, path=None):
         fig, ax = plt.subplots()
-        for key, label, color, lstyle, lw in zip(['MT_std_norm', 'mkl_std_norm', 'np_std_norm', 'MT_uniform', 'mkl_uniform', 'np_uniform'], 
-                              ['mtalg - standard normal', 'mkl_random - standard_normal', 'numpy - standard normal', 'mtalg - uniform', 'mkl_random - uniform', 'numpy - uniform'],
-                              ['b', 'r', 'Y', 'b', 'r', 'Y'], ['-', '-', '-', '--', '--', '--'], [3, 1.2, 1.2, 3, 1.2, 1.2]):
+        for key, label, color, lstyle, lw in zip(
+                ['MT_std_norm', 'mkl_std_norm', 'np_std_norm', 'MT_uniform', 'mkl_uniform', 'np_uniform'],
+                ['mtalg - standard normal', 'mkl_random - standard_normal', 'numpy - standard normal',
+                 'mtalg - uniform', 'mkl_random - uniform', 'numpy - uniform'],
+                ['b', 'r', 'Y', 'b', 'r', 'Y'],
+                ['-', '-', '-', '--', '--', '--'],
+                [3, 1.2, 1.2, 3, 1.2, 1.2]):
             ax.plot(df_plot.index, df_plot[key], label=label, color=color, linestyle=lstyle, linewidth=lw)
         ax.legend(loc='upper left', frameon=False)
         ax.set_xlabel('Number of operations (size of the array)')
@@ -56,9 +60,12 @@ if __name__ == '__main__':
         width = .25
 
         fig, ax = plt.subplots()
-        ax.bar(x - width, [df_plot[x].values[-1] for x in ['MT_std_norm', 'MT_uniform']], color='b', width=width, label='mtalg')
-        ax.bar(x, [df_plot[x].values[-1] for x in ['mkl_std_norm', 'mkl_uniform']], color='r', width=width, label='mkl_random')
-        ax.bar(x + width, [df_plot[x].values[-1] for x in ['np_std_norm', 'np_uniform']], color='Y', width=width, label='numpy')
+        ax.bar(x - width, [df_plot[x].values[-1] for x in ['MT_std_norm', 'MT_uniform']], color='b', width=width,
+               label='mtalg')
+        ax.bar(x, [df_plot[x].values[-1] for x in ['mkl_std_norm', 'mkl_uniform']], color='r', width=width,
+               label='mkl_random')
+        ax.bar(x + width, [df_plot[x].values[-1] for x in ['np_std_norm', 'np_uniform']], color='Y', width=width,
+               label='numpy')
         ax.set_xticks(x)
         ax.set_xticklabels(['Standard normal', 'Uniform'])
         ax.set_ylabel('Execution time [sec]')

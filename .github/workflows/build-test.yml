@@ -29,7 +29,7 @@ jobs:
       run: |
         pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --cov-report xml:cov.xml
     - name: Override Coverage Source Path for Sonar
-      run: sed -i "s/<source>\/home\/runner\/work\/repo<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/mtalg/mtalg/cov.xml
+      run: sed -i "s/<source>\/home\/runner\/work\/mtalg<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/mtalg/mtalg/cov.xml
     - name: Store coverage
       uses: actions/upload-artifact@v2
       with:

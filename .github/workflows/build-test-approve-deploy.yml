@@ -28,3 +28,9 @@ jobs:
     - name: Test with pytest
       run: |
         pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=unit.xml --cov-report xml:cov.xml
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deployed"

@@ -25,5 +25,5 @@ jobs:
       - name: Build
         run: python3 setup.py sdist bdist_wheel
       - name: Deploy to PyPi
-        run: twine upload dist/*
+        run: twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P
       - run: echo "Sucessfully deployed to PyPi

@@ -10,4 +10,4 @@ jobs:
     environment: Deploy
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deployed"
+      - run: echo "deployed"

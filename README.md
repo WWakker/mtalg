@@ -1,12 +1,12 @@
 # ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2042dc5bd7874d688c58997f0b6ce534)](https://app.codacy.com/gh/WWakker/mtalg?utm_source=github.com&utm_medium=referral&utm_content=WWakker/mtalg&utm_campaign=Badge_Grade_Settings)
-[![CircleCI](https://circleci.com/gh/WWakker/mtalg/tree/master.svg?style=shield)](https://circleci.com/gh/WWakker/mtalg/tree/master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WWakker_mtalg)
+[![build_test](https://github.com/WWakker/actions/workflows/build_test/badge.svg)](https://github.com/WWakker/actions/actions?query=workflow%3Abuild_test)
 [![version](https://img.shields.io/badge/version-0.1.1-success.svg)](https://github.com/WWakker/mtalg)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
 [![License](https://img.shields.io/pypi/l/mtalg.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
-[![Codacy Coverage](https://app.codacy.com/project/badge/Coverage/ede1085018cd4e86ac0063e229286677)](https://www.codacy.com/gh/WWakker/mtalg/dashboard?utm_source=github.com&utm_medium=referral&utm_content=WWakker/mtalg&utm_campaign=Badge_Coverage)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=coverage)](https://sonarcloud.io/summary/new_code?id=WWakker_mtalg)
 
 ## About
 

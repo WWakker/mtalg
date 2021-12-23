@@ -30,6 +30,7 @@ jobs:
         pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=unit.xml --cov-report xml:cov.xml
 
   deploy:
+    if: github.ref == 'refs/heads/master'
     needs: build-and-test
     environment: Deploy
     runs-on: ubuntu-latest

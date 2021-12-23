@@ -27,14 +27,16 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --cov-report xml:cov.xml
-    - name: Override Coverage Source Path for Sonar
+        pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --cov-report xml:cov.xml --junitxml=unit.xml
+    - name: Override coverage source path for Sonar
       run: sed -i "s/<source>\/home\/runner\/work\/mtalg\/mtalg\/mtalg<\/source>/<source>\/github\/workspace\/mtalg<\/source>/g" /home/runner/work/mtalg/mtalg/cov.xml
     - name: Store coverage
       uses: actions/upload-artifact@v2
       with:
-        name: cov
-        path: cov.xml
+        name: pytest_reports
+        path: |
+          cov.xml
+          unit.xml
  
   sonarcloud:
     name: SonarCloud
@@ -44,10 +46,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Get coverage
+      - name: Get Pytest reports
         uses: actions/download-artifact@v2
         with:
-          name: cov
+          name: pytest_reports
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

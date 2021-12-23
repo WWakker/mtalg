@@ -1,7 +1,7 @@
 # ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WWakker_mtalg)
-[![build_test](https://github.com/WWakker/actions/workflows/build_test/badge.svg)](https://github.com/WWakker/actions/actions?query=workflow%3Abuild_test)
+[![build_test](https://github.com/WWakker/mtalg/actions/workflows/build_test.yml/badge.svg)](https://github.com/WWakker/mtalg/actions?query=workflow%3A%22build+and+test%22++)
 [![version](https://img.shields.io/badge/version-0.1.1-success.svg)](https://github.com/WWakker/mtalg)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
 [![License](https://img.shields.io/pypi/l/mtalg.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)

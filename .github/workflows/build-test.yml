@@ -27,15 +27,12 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=unit.xml --cov-report xml:cov.xml
- 
+        pytest mtalg/testing/ --cov-config=.coveragerc --cov=mtalg mtalg/testing/ --junitxml=./reports/unit.xml --cov-report xml:./reports/cov.xml
+  
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

@@ -2,7 +2,7 @@ import os
 os.environ['CDSW_NODE_NAME'] = 'CDSW_NODE_NAME'
 os.environ['DISC_KRB_REALM'] = 'MIT01.ECB.DE'
 os.environ['CDSW_NODE_NAME'] = 'CDSW_NODE_NAME'
-os.environ['CDSW_CPU_MILLICORES'] = 1000
+os.environ['CDSW_CPU_MILLICORES'] = '1000'
 print(os.name)
 
 

@@ -110,5 +110,5 @@ def std(a: np.ndarray):
     return std_numba(a)
 
 
-if __name__ == '__main__':
-    pass
+# if __name__ == '__main__':
+#     pass

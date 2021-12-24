@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ### Fixed
 
+## \[0.1.4] - 2021-12-24
+ 
+### Added
+- Almost all distributions
+
+## \[0.1.2, 0.1.3] - 2021-12-23
+ 
+### Fixed
+- Github pipeline
+
 ## \[0.1.1] - 2021-12-22
  
 ### Changed

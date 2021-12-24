@@ -10,7 +10,7 @@ from mtalg.random import MultithreadedRNG
 import numpy as np
 
 
-class TestMRNG:
+class TestMRNGCDSW:
     def test1(self):
         mrng = MultithreadedRNG(seed=1)
         assert mrng.values.size == 0

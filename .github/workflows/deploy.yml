@@ -25,6 +25,7 @@ jobs:
           TEST_P: ${{ secrets.TEST_P }}
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }} 
-        #run: twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P
-        run: twine upload dist/*
+        run: |
+          twine upload -r testpypi dist/* -u $TEST_U -p $TEST_P
+          twine upload dist/*
       - run: echo "Sucessfully deployed to PyPi"

@@ -199,5 +199,5 @@ class MultithreadedRNG:
         return tuple(x if i != self.shp_max else lst - fst for i, x in enumerate(self.shape))
 
 
-if __name__ == '__main__':
-    pass
+# if __name__ == '__main__':
+#     pass

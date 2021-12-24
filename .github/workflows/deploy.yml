@@ -1,14 +1,9 @@
-name: approve and deploy
+name: deploy
 
-on:
-  workflow_run:
-    workflows: "build and test"
-    branches: master
-    types: completed   
+on: workflow_dispatch
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: Deploy
     runs-on: ubuntu-latest
     steps:

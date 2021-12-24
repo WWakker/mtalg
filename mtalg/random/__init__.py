@@ -1,7 +1,7 @@
-import random, inspect
+import inspect
 from .random_number_generators import MultithreadedRNG
 
-__RNG = MultithreadedRNG(seed=random.randint(1, 1_000_000))
+__RNG = MultithreadedRNG()
 
 get_methods = lambda obj: [m for m in dir(obj) if callable(getattr(obj, m)) and m[0]!='_']
 

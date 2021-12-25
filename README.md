@@ -20,7 +20,7 @@ the same does not hold true for simpler algebraic element-wise operations.
 Similarly can be said for the generation of random variates.
 
 ***mtalg*** is the fastest library known to us for large scale element-wise algebraic operations 
-and random number generation. For more info on benchmarks you can see the dedicated section below. 
+and non-GPU-based random number generation. For more info on benchmarks you can see the dedicated section below. 
 
 Major benefits become apparent past `10^7` operations for both the element-wise algebra and the random number generator modules.
 
@@ -75,7 +75,7 @@ mtalg.pow(A, B, num_threads=4)
 
 \* Benchmarks are carrried out using an Intel(R) Xeon(R) Gold 6142M CPU @ 2.60GHz and 24 threads
 
-## Aknowledgments
+## Acknowledgments
 
 The module for multithreaded generation of random numbers is inspired from [here](https://numpy.org/doc/stable/reference/random/multithreading.html).  
 

@@ -1,4 +1,4 @@
-from numpy.random import default_rng, SeedSequence
+from numpy.random import SeedSequence, PCG64, Generator
 import concurrent.futures
 import numpy as np
 from multiprocessing import cpu_count
@@ -11,14 +11,15 @@ class MultithreadedRNG:
     """Multithreaded random number generator
 
     Args
-        seed        (int): Random seed
-        num_threads (int): Number of threads to be used
+        seed                             (int): Random seed
+        num_threads                      (int): Number of threads to be used
+        bit_generator (np.random.BitGenerator): Bit generator, defaults to PCG64
     """
 
-    def __init__(self, seed=None, num_threads=None):
+    def __init__(self, seed=None, num_threads=None, bit_generator=PCG64):
         self._num_threads = check_threads(num_threads or cpu_count())
         seq = SeedSequence(seed)
-        self._random_generators = [default_rng(s) for s in seq.spawn(self._num_threads)]
+        self._random_generators = [Generator(bit_generator=bit_generator(s)) for s in seq.spawn(self._num_threads)]
         self._shape = 0,
         self._shp_max = 0
         self.values = np.empty(self._shape)
@@ -634,8 +635,8 @@ class MultithreadedRNG:
             self.values = np.empty(self._shape)
             self._steps = [(t * (self._shape[self._shp_max] // self._num_threads),
                             (t + 1) * (self._shape[self._shp_max] // self._num_threads))
-                          if t < (self._num_threads - 1) else
-                          (t * (self._shape[self._shp_max] // self._num_threads), self._shape[self._shp_max])
+                           if t < (self._num_threads - 1) else
+                           (t * (self._shape[self._shp_max] // self._num_threads), self._shape[self._shp_max])
                            for t in range(self._num_threads)]
 
     def _get_slice_size(self, fst, lst):

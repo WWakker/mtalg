@@ -18,11 +18,11 @@ class TestMRNGCDSW:
     def test1(self):
         mrng = MultithreadedRNG(seed=1)
         assert mrng.values.size == 0
-        assert mrng.num_threads == 1
+        assert mrng._num_threads == 1
 
     @cdsw
     def test2(self):
         mrng = MultithreadedRNG(seed=1, num_threads=4)
         mrng.standard_normal(4)
         assert mrng.values.shape == (4,)
-        assert mrng.num_threads == 1
+        assert mrng._num_threads == 1

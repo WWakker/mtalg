@@ -84,6 +84,7 @@ class TestMRNG:
                 mrng.standard_exponential(size=size)
                 mrng.standard_exponential(size=size, dtype=np.float32)
                 mrng.standard_gamma(size=size, shape=1)
+                mrng.standard_gamma(size=size, shape=1, dtype=np.float32)
                 mrng.standard_normal(size=size)
                 mrng.standard_normal(size=size, dtype=np.float32)
                 mrng.standard_t(size=size, df=10)

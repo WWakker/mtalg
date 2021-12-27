@@ -60,6 +60,9 @@ class MultithreadedRNG:
         kw_args = {'n': n,
                    'p': p}
 
+        if size is None:
+            return self._random_generators[0].binomial(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.binomial(size=self._get_slice_size(first, last), **kwargs)
@@ -76,6 +79,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'df': df}
 
+        if size is None:
+            return self._random_generators[0].chisquare(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.chisquare(size=self._get_slice_size(first, last), **kwargs)
@@ -91,6 +97,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
+
+        if size is None:
+            return self._random_generators[0].exponential(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -110,6 +119,9 @@ class MultithreadedRNG:
         kw_args = {'dfnum': dfnum,
                    'dfden': dfden}
 
+        if size is None:
+            return self._random_generators[0].f(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.f(size=self._get_slice_size(first, last), **kwargs)
@@ -128,6 +140,9 @@ class MultithreadedRNG:
         kw_args = {'shape': shape,
                    'scale': scale}
 
+        if size is None:
+            return self._random_generators[0].gamma(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.gamma(size=self._get_slice_size(first, last), **kwargs)
@@ -143,6 +158,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'p': p}
+
+        if size is None:
+            return self._random_generators[0].geometric(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -161,6 +179,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'loc': loc,
                    'scale': scale}
+
+        if size is None:
+            return self._random_generators[0].gumbel(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -182,6 +203,9 @@ class MultithreadedRNG:
                    'nbad': nbad,
                    'nsample': nsample}
 
+        if size is None:
+            return self._random_generators[0].hypergeometric(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.hypergeometric(size=self._get_slice_size(first, last), **kwargs)
@@ -199,6 +223,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'loc': loc,
                    'scale': scale}
+
+        if size is None:
+            return self._random_generators[0].laplace(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -218,6 +245,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'loc': loc,
                    'scale': scale}
+
+        if size is None:
+            return self._random_generators[0].logistic(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -239,6 +269,9 @@ class MultithreadedRNG:
         kw_args = {'mean': mean,
                    'sigma': sigma}
 
+        if size is None:
+            return self._random_generators[0].lognormal(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.lognormal(size=self._get_slice_size(first, last),
@@ -255,6 +288,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'p': p}
+
+        if size is None:
+            return self._random_generators[0].logseries(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -274,6 +310,9 @@ class MultithreadedRNG:
         kw_args = {'n': n,
                    'p': p}
 
+        if size is None:
+            return self._random_generators[0].negative_binomial(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.negative_binomial(size=self._get_slice_size(first, last),
@@ -292,6 +331,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'df': df,
                    'nonc': nonc}
+
+        if size is None:
+            return self._random_generators[0].noncentral_chisquare(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -314,6 +356,9 @@ class MultithreadedRNG:
                    'dfden': dfden,
                    'nonc': nonc}
 
+        if size is None:
+            return self._random_generators[0].noncentral_f(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.noncentral_f(size=self._get_slice_size(first, last), **kwargs)
@@ -332,6 +377,9 @@ class MultithreadedRNG:
         kw_args = {'loc': loc,
                    'scale': scale}
 
+        if size is None:
+            return self._random_generators[0].normal(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.normal(size=self._get_slice_size(first, last), **kwargs)
@@ -347,6 +395,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'a': a}
+
+        if size is None:
+            return self._random_generators[0].pareto(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -364,6 +415,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'lam': lam}
 
+        if size is None:
+            return self._random_generators[0].poisson(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.poisson(size=self._get_slice_size(first, last), **kwargs)
@@ -379,6 +433,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'a': a}
+
+        if size is None:
+            return self._random_generators[0].power(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -396,6 +453,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'scale': scale}
 
+        if size is None:
+            return self._random_generators[0].rayleigh(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.rayleigh(size=self._get_slice_size(first, last), **kwargs)
@@ -410,6 +470,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {}
+
+        if size is None:
+            return self._random_generators[0].standard_cauchy(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -430,6 +493,10 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'dtype': dtype,
                    'method': method}
+
+        if size is None:
+            return self._random_generators[0].standard_exponential(**kw_args)
+
         if self._values.dtype != dtype:
             self._values = self._values.astype(dtype)
 
@@ -455,6 +522,10 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'shape': shape,
                    'dtype': dtype}
+
+        if size is None:
+            return self._random_generators[0].standard_gamma(**kw_args)
+
         if self._values.dtype != dtype:
             self._values = self._values.astype(dtype)
 
@@ -478,6 +549,10 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
+
+        if size is None:
+            return self._random_generators[0].standard_normal(**kw_args)
+
         if self._values.dtype != dtype:
             self._values = self._values.astype(dtype)
 
@@ -502,6 +577,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'df': df}
 
+        if size is None:
+            return self._random_generators[0].standard_t(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.standard_t(size=self._get_slice_size(first, last),
@@ -524,6 +602,9 @@ class MultithreadedRNG:
                    'mode': mode,
                    'right': right}
 
+        if size is None:
+            return self._random_generators[0].triangular(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.triangular(size=self._get_slice_size(first, last), **kwargs)
@@ -541,6 +622,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'low': low,
                    'high': high}
+
+        if size is None:
+            return self._random_generators[0].uniform(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
@@ -560,6 +644,9 @@ class MultithreadedRNG:
         kw_args = {'mu': mu,
                    'kappa': kappa}
 
+        if size is None:
+            return self._random_generators[0].vonmises(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.vonmises(size=self._get_slice_size(first, last), **kwargs)
@@ -578,6 +665,9 @@ class MultithreadedRNG:
         kw_args = {'mean': mean,
                    'scale': scale}
 
+        if size is None:
+            return self._random_generators[0].wald(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.wald(size=self._get_slice_size(first, last), **kwargs)
@@ -594,6 +684,9 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'a': a}
 
+        if size is None:
+            return self._random_generators[0].weibull(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.weibull(size=self._get_slice_size(first, last), **kwargs)
@@ -609,6 +702,9 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'a': a}
+
+        if size is None:
+            return self._random_generators[0].zipf(**kw_args)
 
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +

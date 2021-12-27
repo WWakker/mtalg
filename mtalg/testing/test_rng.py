@@ -53,9 +53,9 @@ class TestMRNG:
     def test9(self):
         mrng = MultithreadedRNG(seed=1, num_threads=4)
         mrng.normal((20, 10, 30, 100, 50), loc=1, scale=2)
-        assert mrng.shp_max == 3
+        assert mrng._shp_max == 3
         assert mrng.values.shape == (20, 10, 30, 100, 50)
-        assert mrng.steps == [(0, 25), (25, 50), (50, 75), (75, 100)]
+        assert mrng._steps == [(0, 25), (25, 50), (50, 75), (75, 100)]
         assert np.isclose(np.std(mrng.values), 2, 1e-2)
         assert np.isclose(np.mean(mrng.values), 1, 1e-2)
 

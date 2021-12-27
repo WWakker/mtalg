@@ -60,11 +60,11 @@ if __name__ == '__main__':
         width = .25
 
         fig, ax = plt.subplots()
-        ax.bar(x - width, [df_plot[x].values[-1] for x in ['MT_std_norm', 'MT_uniform']], color='b', width=width,
+        ax.bar(x - width, [df_plot[x]._values[-1] for x in ['MT_std_norm', 'MT_uniform']], color='b', width=width,
                label='mtalg')
-        ax.bar(x, [df_plot[x].values[-1] for x in ['mkl_std_norm', 'mkl_uniform']], color='r', width=width,
+        ax.bar(x, [df_plot[x]._values[-1] for x in ['mkl_std_norm', 'mkl_uniform']], color='r', width=width,
                label='mkl_random')
-        ax.bar(x + width, [df_plot[x].values[-1] for x in ['np_std_norm', 'np_uniform']], color='Y', width=width,
+        ax.bar(x + width, [df_plot[x]._values[-1] for x in ['np_std_norm', 'np_uniform']], color='Y', width=width,
                label='numpy')
         ax.set_xticks(x)
         ax.set_xticklabels(['Standard normal', 'Uniform'])

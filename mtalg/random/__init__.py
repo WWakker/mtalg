@@ -13,7 +13,7 @@ for method in get_methods(__RNG):
 
     def func(*args, **kwargs):
         getattr(__RNG, method)(*args, **kwargs)
-        return __RNG.values
+        return __RNG._values
 
     exec(f'{method}=func')
 

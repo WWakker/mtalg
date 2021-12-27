@@ -39,11 +39,12 @@ Create an instance of the multithreaded random number generator with seed for re
 mrng = MultithreadedRNG(seed=1, num_threads=4)
 ```
 Create two arrays (results are stored in `mrng.values`)
+
 ```python
 mrng.standard_normal(size=(10_000, 5_000))
-A = mrng.values
+A = mrng._values
 mrng.uniform(size=(10_000, 5_000), low=0, high=10)
-B = mrng.values
+B = mrng._values
 ```
 Add B to A (A is modified inplace)
 ```python

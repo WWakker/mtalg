@@ -18,14 +18,15 @@ class MultithreadedRNG:
 
     def __init__(self, seed=None, num_threads=None, bit_generator=PCG64):
         self._num_threads = check_threads(num_threads or cpu_count())
+        assert self._num_threads > 0, "Number of threads must be > 0"
         seq = SeedSequence(seed)
         self._random_generators = [Generator(bit_generator=bit_generator(s)) for s in seq.spawn(self._num_threads)]
         self._shape = 0,
         self._shp_max = 0
-        self.values = np.empty(self._shape)
+        self._values = None
         self._steps = []
 
-    def beta(self, size, a, b):
+    def beta(self, a, b, size=None):
         """Draw from a beta distribution
 
         Args
@@ -37,13 +38,16 @@ class MultithreadedRNG:
         kw_args = {'a': a,
                    'b': b}
 
+        if size is None:
+            return self._random_generators[0].beta(**kw_args)
+
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.beta(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def binomial(self, size, n, p):
+    def binomial(self, n, p, size=None):
         """Draw from a binomial distribution
 
         Args
@@ -60,9 +64,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.binomial(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def chisquare(self, size, df):
+    def chisquare(self, df, size=None):
         """Draw from a chisquare distribution
 
         Args
@@ -76,9 +80,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.chisquare(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def exponential(self, size, scale=1.0):
+    def exponential(self, scale=1.0, size=None):
         """Draw from a exponential distribution
 
         Args
@@ -92,9 +96,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.exponential(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def f(self, size, dfnum, dfden):
+    def f(self, dfnum, dfden, size=None):
         """Draw from an F distribution
 
         Args
@@ -110,9 +114,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.f(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def gamma(self, size, shape, scale=1.0):
+    def gamma(self, shape, scale=1.0, size=None):
         """Draw from a gamma distribution
 
         Args
@@ -128,9 +132,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.gamma(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def geometric(self, size, p):
+    def geometric(self, p, size=None):
         """Draw from a geomatric distribution
 
         Args
@@ -144,9 +148,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.geometric(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def gumbel(self, size, loc=0.0, scale=1.0):
+    def gumbel(self, loc=0.0, scale=1.0, size=None):
         """Draw from a Gumbel distribution
 
         Args
@@ -162,9 +166,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.gumbel(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def hypergeometric(self, size, ngood, nbad, nsample):
+    def hypergeometric(self, ngood, nbad, nsample, size=None):
         """Draw from a hypergeometric distribution
 
         Args
@@ -182,9 +186,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.hypergeometric(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def laplace(self, size, loc=0.0, scale=1.0):
+    def laplace(self, loc=0.0, scale=1.0, size=None):
         """Draw from a Laplace distribution
 
         Args
@@ -201,9 +205,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.laplace(size=self._get_slice_size(first, last),
                                                               **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def logistic(self, size, loc=0.0, scale=1.0):
+    def logistic(self, loc=0.0, scale=1.0, size=None):
         """Draw from a logistic distribution
 
         Args
@@ -220,9 +224,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.logistic(size=self._get_slice_size(first, last),
                                                                **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def lognormal(self, size, mean=0.0, sigma=1.0):
+    def lognormal(self, mean=0.0, sigma=1.0, size=None):
         """Draw from a lognormal distribution
 
         Args
@@ -240,9 +244,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.lognormal(size=self._get_slice_size(first, last),
                                                                 **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def logseries(self, size, p):
+    def logseries(self, p, size=None):
         """Draw from a logarithmic series distribution
 
         Args
@@ -256,9 +260,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.logseries(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def negative_binomial(self, size, n, p):
+    def negative_binomial(self, n, p, size=None):
         """Draw from a negative binomial distribution
 
         Args
@@ -275,9 +279,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.negative_binomial(size=self._get_slice_size(first, last),
                                                                         **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def noncentral_chisquare(self, size, df, nonc):
+    def noncentral_chisquare(self, df, nonc, size=None):
         """Draw from a noncentral chisquare distribution
 
         Args
@@ -294,9 +298,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.noncentral_chisquare(size=self._get_slice_size(first, last),
                                                                            **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def noncentral_f(self, size, dfnum, dfden, nonc):
+    def noncentral_f(self, dfnum, dfden, nonc, size=None):
         """Draw from a noncentral F distribution
 
         Args
@@ -314,9 +318,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.noncentral_f(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def normal(self, size, loc=0.0, scale=1.0):
+    def normal(self, loc=0.0, scale=1.0, size=None):
         """Draw from the normal distribution
 
         Args
@@ -332,9 +336,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.normal(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def pareto(self, size, a):
+    def pareto(self, a, size=None):
         """Draw from a Pareto II or Lomax distribution
 
         Args
@@ -348,9 +352,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.pareto(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def poisson(self, size, lam=1.0):
+    def poisson(self, lam=1.0, size=None):
         """Draw from a poisson distribution
 
         Args
@@ -364,9 +368,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.poisson(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def power(self, size, a):
+    def power(self, a, size=None):
         """Draw from a power distribution
 
         Args
@@ -380,9 +384,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.power(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def rayleigh(self, size, scale=1.0):
+    def rayleigh(self, scale=1.0, size=None):
         """Draw from a Rayleigh distribution
 
         Args
@@ -396,9 +400,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.rayleigh(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def standard_cauchy(self, size):
+    def standard_cauchy(self, size=None):
         """Draw from a standard Cauchy distribution
 
         Args
@@ -412,9 +416,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.standard_cauchy(size=self._get_slice_size(first, last),
                                                                       **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def standard_exponential(self, size, dtype=np.float64, method='zig'):
+    def standard_exponential(self, size=None, dtype=np.float64, method='zig'):
         """Draw from a standard exponential distribution
 
         Args
@@ -426,8 +430,8 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'dtype': dtype,
                    'method': method}
-        if self.values.dtype != dtype:
-            self.values = self.values.astype(dtype)
+        if self._values.dtype != dtype:
+            self._values = self._values.astype(dtype)
 
         def __fill(random_state, out, first, last, **kwargs):
             if self._shp_max == 0:
@@ -438,9 +442,9 @@ class MultithreadedRNG:
                     (slice(first, last),)] = random_state.standard_exponential(size=self._get_slice_size(first, last),
                                                                                **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def standard_gamma(self, size, shape, dtype=np.float64):
+    def standard_gamma(self, shape, size=None, dtype=np.float64):
         """Draw from a standard gamma distribution
 
         Args
@@ -451,8 +455,8 @@ class MultithreadedRNG:
         self._check_shape(size)
         kw_args = {'shape': shape,
                    'dtype': dtype}
-        if self.values.dtype != dtype:
-            self.values = self.values.astype(dtype)
+        if self._values.dtype != dtype:
+            self._values = self._values.astype(dtype)
 
         def __fill(random_state, out, first, last, **kwargs):
             if self._shp_max == 0:
@@ -463,9 +467,9 @@ class MultithreadedRNG:
                     (slice(first, last),)] = random_state.standard_gamma(size=self._get_slice_size(first, last),
                                                                          **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def standard_normal(self, size, dtype=np.float64):
+    def standard_normal(self, size=None, dtype=np.float64):
         """Draw from a standard normal distribution
 
         Args
@@ -474,8 +478,8 @@ class MultithreadedRNG:
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
-        if self.values.dtype != dtype:
-            self.values = self.values.astype(dtype)
+        if self._values.dtype != dtype:
+            self._values = self._values.astype(dtype)
 
         def __fill(random_state, out, first, last, **kwargs):
             if self._shp_max == 0:
@@ -486,9 +490,9 @@ class MultithreadedRNG:
                     (slice(first, last),)] = random_state.standard_normal(size=self._get_slice_size(first, last),
                                                                           **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def standard_t(self, size, df):
+    def standard_t(self, df, size=None):
         """Draw from a standard Student’s t distribution
 
         Args
@@ -503,9 +507,9 @@ class MultithreadedRNG:
                 (slice(first, last),)] = random_state.standard_t(size=self._get_slice_size(first, last),
                                                                  **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def triangular(self, size, left, mode, right):
+    def triangular(self, left, mode, right, size=None):
         """Draw from a triangular distribution
 
         Args
@@ -524,9 +528,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.triangular(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def uniform(self, size, low=0.0, high=1.0):
+    def uniform(self, low=0.0, high=1.0, size=None):
         """Draw from a uniform distribution
 
         Args
@@ -542,9 +546,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.uniform(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def vonmises(self, size, mu, kappa):
+    def vonmises(self, mu, kappa, size=None):
         """Draw from a von Mises distribution
 
         Args
@@ -560,9 +564,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.vonmises(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def wald(self, size, mean, scale):
+    def wald(self, mean, scale, size=None):
         """Draw from a Wald distribution
 
         Args
@@ -578,9 +582,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.wald(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def weibull(self, size, a):
+    def weibull(self, a, size=None):
         """Draw from a Weibull distribution
 
         Args
@@ -594,9 +598,9 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.weibull(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
-    def zipf(self, size, a):
+    def zipf(self, a, size=None):
         """Draw from a Zipf distribution
 
         Args
@@ -610,14 +614,14 @@ class MultithreadedRNG:
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.zipf(size=self._get_slice_size(first, last), **kwargs)
 
-        self._fill(__fill, **kw_args)
+        return self._fill(__fill, **kw_args)
 
     def _fill(self, func, **kwargs):
         """Send jobs to the threads"""
         with concurrent.futures.ThreadPoolExecutor(self._num_threads) as executor:
             futures = [executor.submit(func,
                                        self._random_generators[i],
-                                       self.values,
+                                       self._values,
                                        self._steps[i][0],
                                        self._steps[i][1],
                                        **kwargs)
@@ -625,19 +629,23 @@ class MultithreadedRNG:
             for fut in concurrent.futures.as_completed(futures):
                 fut.result()
 
+        values = self._values
+        self._values = None
+        return values
+
     def _check_shape(self, size):
         """Standard size checks to be done before execution of any distribution sampling"""
         if size != self._shape:
             if isinstance(size, (int, float, complex, np.integer, np.floating)):
                 size = size,
             self._shape = size
-            self._shp_max = argmax(self._shape)
-            self.values = np.empty(self._shape)
+            self._shp_max = argmax(self._shape) if size is not None else None
             self._steps = [(t * (self._shape[self._shp_max] // self._num_threads),
                             (t + 1) * (self._shape[self._shp_max] // self._num_threads))
                            if t < (self._num_threads - 1) else
                            (t * (self._shape[self._shp_max] // self._num_threads), self._shape[self._shp_max])
-                           for t in range(self._num_threads)]
+                           for t in range(self._num_threads)] if size is not None else None
+        self._values = np.empty(self._shape) if size is not None else None
 
     def _get_slice_size(self, fst, lst):
         """Get the shape of the slice to be filled"""

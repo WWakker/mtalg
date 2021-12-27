@@ -70,6 +70,7 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
     shape = a.shape
     shp_max = argmax(shape)
     num_threads = check_threads(num_threads or cpu_count())
+    assert num_threads > 0
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
              if t < (num_threads - 1) else
              (t * (shape[shp_max] // num_threads), shape[shp_max])

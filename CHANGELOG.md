@@ -7,12 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## \[Unreleased] - yyyy-mm-dd
  
 ### Added
-- Input arbitrary function in multithreaded algebra
-- Test speed of executor closing after each execution of RNG
  
 ### Changed
  
 ### Fixed
+
+## \[1.0.0] - 2021-12-28
+ 
+### Added
+- integer and random methods to MRNG
+- set_num_threads function
+- different generators can be chosen for MRNG
+- return of float when size=None for MRNG
+- all MRNG methods can be accessed from mtalg.random as well
+- More documentation
+
+### Changed
+- MRNG methods returns instead of haveing to access mrng.values
+- MRNG attributes made private
+
+### Fixed
+- Handling of scalars in alg functions
 
 ## \[0.1.4] - 2021-12-24
  

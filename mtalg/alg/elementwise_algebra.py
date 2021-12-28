@@ -108,8 +108,8 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
     b_scalar = isinstance(b, (int, float, complex, np.integer, np.floating))
 
     # If a and b are both scalars
-    scalar = False
     if not a_scalar and not b_scalar:
+        scalar = False
         assert a.shape == b.shape, 'Shapes of both arrays must be the same'
     else:
         scalar = True
@@ -119,7 +119,8 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
     shape = a.shape
     shp_max = argmax(shape)
     num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads or cpu_count())
-    assert num_threads > 0 and isinstance(num_threads, int)
+    assert num_threads > 0 and isinstance(num_threads, int), \
+        f'Number of threads must be an integer > 0, found: {num_threads}'
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
              if t < (num_threads - 1) else
              (t * (shape[shp_max] // num_threads), shape[shp_max])

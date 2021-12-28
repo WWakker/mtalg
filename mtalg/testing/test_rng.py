@@ -6,7 +6,7 @@ import numpy as np
 class TestMRNG:
     def test1(self):
         mrng = MultithreadedRNG(seed=1)
-        assert mrng._shape == (0,)
+        assert mrng._shape is None
 
     def test2(self):
         mrng = MultithreadedRNG(seed=1, num_threads=4)

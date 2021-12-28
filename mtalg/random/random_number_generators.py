@@ -20,11 +20,12 @@ class MultithreadedRNG:
 
     def __init__(self, seed=None, num_threads=None, bit_generator=PCG64):
         self._num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads or cpu_count())
-        assert self._num_threads > 0 and isinstance(self._num_threads, int)
+        assert self._num_threads > 0 and isinstance(self._num_threads, int), \
+            f'Number of threads must be an integer > 0, found: {self._num_threads}'
         seq = SeedSequence(seed)
         self._random_generators = [Generator(bit_generator=bit_generator(s)) for s in seq.spawn(self._num_threads)]
-        self._shape = 0,
-        self._shp_max = 0
+        self._shape = None
+        self._shp_max = None
         self._values = None
         self._steps = []
 
@@ -799,7 +800,7 @@ class MultithreadedRNG:
                             (t + 1) * (self._shape[self._shp_max] // self._num_threads))
                            if t < (self._num_threads - 1) else
                            (t * (self._shape[self._shp_max] // self._num_threads), self._shape[self._shp_max])
-                           for t in range(self._num_threads)] if size is not None else None
+                           for t in range(self._num_threads)] if size is not None else []
         self._values = np.empty(self._shape) if size is not None else None
 
     def _get_slice_size(self, fst, lst):

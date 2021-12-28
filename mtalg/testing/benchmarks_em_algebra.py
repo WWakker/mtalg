@@ -132,7 +132,7 @@ if __name__ == '__main__':
 
         fig, ax = plt.subplots()
         ax.bar([0, 1, 2, 3],
-               [df_plot[bar]._values[-1] for bar in bars],
+               [df_plot[bar].values[-1] for bar in bars],
                color=['b', 'r', 'g', 'y'],
                width=width)
         ax.set_xticks([0, 1, 2, 3])

@@ -48,15 +48,15 @@ number generators (if `num_threads` parameter is not specified)
 ```python
 mtalg.set_num_threads(4)
 ```
-Add `b` to `a` (`a` is modified inplace)
+Add `b` to `a` (`a` is modified in-place)
 ```python
 mtalg.add(a, b)
 ```
-Subtract `a` from `b` (`b` is modified inplace)
+Subtract `a` from `b` (`b` is modified in-place)
 ```python
 mtalg.sub(a, b, direction='right')
 ```
-Multiply, divide and raise to power (`a` is modified inplace)
+Multiply, divide and raise to power (`a` is modified in-place)
 ```python
 mtalg.mul(a, b)
 mtalg.div(a, b)

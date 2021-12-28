@@ -97,7 +97,7 @@ def __multithreaded_opr_direction(a, b, opr, num_threads, direction='left'):
 
 
 def __multithreaded_opr(a, b, opr, num_threads=None):
-    """Modifies a inplace; beats numpy from around 1e7 operations onwards.
+    """Modifies a in-place; beats numpy from around 1e7 operations onwards.
 
     Args:
       a (numpy.array): Left array to be summed. Modified in place.
@@ -107,14 +107,13 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
     a_scalar = isinstance(a, (int, float, complex, np.integer, np.floating))
     b_scalar = isinstance(b, (int, float, complex, np.integer, np.floating))
 
-    # If a and b are both scalars
     if not a_scalar and not b_scalar:
         scalar = False
         assert a.shape == b.shape, 'Shapes of both arrays must be the same'
     else:
         scalar = True
         if a_scalar:
-            raise ValueError('Cannot modify scalar inplace')
+            raise ValueError('Cannot modify scalar in-place')
 
     shape = a.shape
     shp_max = argmax(shape)

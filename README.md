@@ -29,7 +29,7 @@ Major benefits become apparent past `10^7` operations for both the element-wise 
 `pip install mtalg`
 
 ## How to use
-Import random number generator and algebra functions
+Import mtalg and random number generator
 ```python
 import mtalg
 from mtalg.random import MultithreadedRNG
@@ -38,27 +38,29 @@ Create an instance of the multithreaded random number generator with seed for re
 ```python
 mrng = MultithreadedRNG(seed=1, num_threads=4)
 ```
-Create two arrays (results are stored in `mrng.values`)
-
+Create two arrays
 ```python
-mrng.standard_normal(size=(10_000, 5_000))
-A = mrng._values
-mrng.uniform(size=(10_000, 5_000), low=0, high=10)
-B = mrng._values
+a = mrng.standard_normal(size=(10_000, 5_000))
+b = mrng.uniform(size=(10_000, 5_000), low=0, high=10)
 ```
-Add B to A (A is modified inplace)
+Set number of threads to be used by default for algebra functions and subsquent random
+number generators (if `num_threads` parameter is not specified)
 ```python
-mtalg.add(A, B, num_threads=4)
+mtalg.set_num_threads(4)
 ```
-Subtract A from B (B is modified inplace)
+Add `b` to `a` (`a` is modified inplace)
 ```python
-mtalg.sub(A, B, direction='right', num_threads=4)
+mtalg.add(a, b)
 ```
-Multiply, divide and raise to power (A is modified inplace)
+Subtract `a` from `b` (`b` is modified inplace)
 ```python
-mtalg.mul(A, B, num_threads=4)
-mtalg.div(A, B, num_threads=4)
-mtalg.pow(A, B, num_threads=4)
+mtalg.sub(a, b, direction='right')
+```
+Multiply, divide and raise to power (`a` is modified inplace)
+```python
+mtalg.mul(a, b)
+mtalg.div(a, b)
+mtalg.pow(a, b)
 ```
 
 ## Benchmarks *

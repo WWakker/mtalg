@@ -32,9 +32,9 @@ class MultithreadedRNG:
         """Draw from a beta distribution
 
         Args
-            size (int or tuple): Output shape
             a           (float): Alpha, positive (>0)
             b           (float): Beta, positive (>0)
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'a': a,
@@ -53,10 +53,10 @@ class MultithreadedRNG:
         """Draw from a binomial distribution
 
         Args
-            size (int or tuple): Output shape
             n           (float): Parameter of the distribution, >= 0. Floats are also accepted, but they will be
                                  truncated to integers
             p           (float): Parameter of the distribution, >= 0 and <=1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'n': n,
@@ -75,8 +75,8 @@ class MultithreadedRNG:
         """Draw from a chisquare distribution
 
         Args
-            size (int or tuple): Output shape
             df          (float): Number of degrees of freedom, must be > 0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'df': df}
@@ -94,8 +94,8 @@ class MultithreadedRNG:
         """Draw from a exponential distribution
 
         Args
-            size (int or tuple): Output shape
             scale       (float): The scale parameter, β = 1/λ Must be non-negative
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
@@ -113,9 +113,9 @@ class MultithreadedRNG:
         """Draw from an F distribution
 
         Args
-            size (int or tuple): Output shape
             dfnum       (float): Degrees of freedom in numerator, must be > 0
             dfden       (float): Degrees of freedom in denominator, must be > 0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'dfnum': dfnum,
@@ -134,9 +134,9 @@ class MultithreadedRNG:
         """Draw from a gamma distribution
 
         Args
-            size (int or tuple): Output shape
             shape       (float): The shape of the gamma distribution. Must be non-negative
             scale       (float): The scale of the gamma distribution. Must be non-negative. Default is equal to 1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'shape': shape,
@@ -155,8 +155,8 @@ class MultithreadedRNG:
         """Draw from a geomatric distribution
 
         Args
-            size (int or tuple): Output shape
             p           (float): The probability of success of an individual trial
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'p': p}
@@ -174,9 +174,9 @@ class MultithreadedRNG:
         """Draw from a Gumbel distribution
 
         Args
-            size (int or tuple): Output shape
             loc         (float): The location of the mode of the distribution. Default is 0
-            scale       (float): The scale parameter of the distribution. Default is 1. Must be non- negative
+            scale       (float): The scale parameter of the distribution. Default is 1. Must be non-negative
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -195,10 +195,10 @@ class MultithreadedRNG:
         """Draw from a hypergeometric distribution
 
         Args
-            size (int or tuple): Output shape
             ngood         (int): Number of ways to make a good selection. Must be nonnegative and less than 10**9
             nbad          (int): Number of ways to make a bad selection. Must be nonnegative and less than 10**9
             nsample       (int): Number of items sampled. Must be nonnegative and less than ngood + nbad
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'ngood': ngood,
@@ -218,9 +218,9 @@ class MultithreadedRNG:
         """Draw from a Laplace distribution
 
         Args
-            size (int or tuple): Output shape
             loc         (float): The position, μ, of the distribution peak. Default is 0
             scale       (float): λ, the exponential decay. Default is 1. Must be non- negative
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -240,9 +240,9 @@ class MultithreadedRNG:
         """Draw from a logistic distribution
 
         Args
-            size (int or tuple): Output shape
             loc         (float): Parameter of the distribution. Default is 0
             scale       (float): Parameter of the distribution. Must be non-negative. Default is 1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -262,10 +262,10 @@ class MultithreadedRNG:
         """Draw from a lognormal distribution
 
         Args
-            size (int or tuple): Output shape
             mean        (float): Mean value of the underlying normal distribution. Default is 0
             sigma       (float): Standard deviation of the underlying normal distribution. Must be non-negative.
                                  Default is 1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'mean': mean,
@@ -285,8 +285,8 @@ class MultithreadedRNG:
         """Draw from a logarithmic series distribution
 
         Args
-            size (int or tuple): Output shape
             p           (float): Shape parameter for the distribution. Must be in the range (0, 1)
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'p': p}
@@ -304,9 +304,9 @@ class MultithreadedRNG:
         """Draw from a negative binomial distribution
 
         Args
-            size (int or tuple): Output shape
             n           (float): Parameter of the distribution, > 0
             p           (float): Parameter of the distribution. Must satisfy 0 < p <= 1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'n': n,
@@ -326,9 +326,9 @@ class MultithreadedRNG:
         """Draw from a noncentral chisquare distribution
 
         Args
-            size (int or tuple): Output shape
             df          (float): Number of degrees of freedom, must be > 0
             nonc        (float): Non-centrality, must be non-negative
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'df': df,
@@ -348,10 +348,10 @@ class MultithreadedRNG:
         """Draw from a noncentral F distribution
 
         Args
-            size (int or tuple): Output shape
             dfnum       (float): Degrees of freedom in numerator, must be > 0
             dfden       (float): Degrees of freedom in denominator, must be > 0
             nonc        (float): Non-centrality parameter, the sum of the squares of the numerator means, must be >= 0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'dfnum': dfnum,
@@ -371,9 +371,9 @@ class MultithreadedRNG:
         """Draw from the normal distribution
 
         Args
-            size (int or tuple): Output shape
             loc         (float): Mean of the distriution
             scale       (float): Standard deviation of the distriution
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -392,8 +392,8 @@ class MultithreadedRNG:
         """Draw from a Pareto II or Lomax distribution
 
         Args
-            size (int or tuple): Output shape
             a           (float): Shape of the distribution. Must be positive
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -411,8 +411,8 @@ class MultithreadedRNG:
         """Draw from a poisson distribution
 
         Args
-            size (int or tuple): Output shape
             lam         (float): Expected number of events occurring in a fixed-time interval, must be >= 0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'lam': lam}
@@ -430,8 +430,8 @@ class MultithreadedRNG:
         """Draw from a power distribution
 
         Args
-            size (int or tuple): Output shape
             a           (float): Parameter of the distribution. Must be non-negative
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -449,8 +449,8 @@ class MultithreadedRNG:
         """Draw from a Rayleigh distribution
 
         Args
-            size (int or tuple): Output shape
             scale       (float): Scale, also equals the mode. Must be non-negative. Default is 1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
@@ -517,8 +517,8 @@ class MultithreadedRNG:
         """Draw from a standard gamma distribution
 
         Args
+            shape       (float): Parameter, must be non-negative
             size (int or tuple): Output shape
-            shap      e (float): Parameter, must be non-negative
             dtype       (dtype): Dtype of output array
         """
         self._check_shape(size)
@@ -573,8 +573,8 @@ class MultithreadedRNG:
         """Draw from a standard Student’s t distribution
 
         Args
-            size (int or tuple): Output shape
             df          (float): Degrees of freedom, must be > 0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'df': df}
@@ -593,11 +593,11 @@ class MultithreadedRNG:
         """Draw from a triangular distribution
 
         Args
-            size (int or tuple): Output shape
             left        (float): Lower limit
             mode        (float): The value where the peak of the distribution occurs. The value must fulfill the
                                  condition left <= mode <= right
             right       (float): Upper limit, must be larger than left
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'left': left,
@@ -617,9 +617,9 @@ class MultithreadedRNG:
         """Draw from a uniform distribution
 
         Args
-            size (int or tuple): Output shape
             low         (float): Lower bound
             high        (float): Upper bound
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'low': low,
@@ -638,9 +638,9 @@ class MultithreadedRNG:
         """Draw from a von Mises distribution
 
         Args
-            size (int or tuple): Output shape
             mu          (float): Mode (“center”) of the distribution
             kappa       (float): Dispersion of the distribution, has to be >=0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'mu': mu,
@@ -659,9 +659,9 @@ class MultithreadedRNG:
         """Draw from a Wald distribution
 
         Args
-            size (int or tuple): Output shape
             mean        (float): Distribution mean, must be > 0
             scale       (float): Scale parameter, must be > 0
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'mean': mean,
@@ -680,8 +680,8 @@ class MultithreadedRNG:
         """Draw from a Weibull distribution
 
         Args
-            size (int or tuple): Output shape
             a           (float): Shape parameter of the distribution. Must be nonnegative
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -699,8 +699,8 @@ class MultithreadedRNG:
         """Draw from a Zipf distribution
 
         Args
-            size (int or tuple): Output shape
             a           (float): Distribution parameter. Must be greater than 1
+            size (int or tuple): Output shape
         """
         self._check_shape(size)
         kw_args = {'a': a}

@@ -1,4 +1,4 @@
-Copyright (c) 2020 Wouter Wakker, Luca Mingarelli
+Copyright (c) 2021 Wouter Wakker, Luca Mingarelli
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -17,3 +17,9 @@ Copyright (c) 2020 Wouter Wakker, Luca Mingarelli
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+
+-------------------------------------------------------------------------------
+Note:
+The docstrings of the random number generator methods are based on NumPy's
+docstrings.
+The NumPy license is included in mtalg/random/random_number_generators.py

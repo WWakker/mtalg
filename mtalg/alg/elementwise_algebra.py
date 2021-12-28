@@ -38,7 +38,7 @@ def add(a, b, num_threads=None, direction='left'):
 def sub(a, b, num_threads=None, direction='left'):
     """Subtract multithreaded
 
-    Args:
+    Args
         a (np.ndarray or scalar): Numpy array or scalar
         b (np.ndarray or scalar): Numpy array or scalar
         num_threads             : Number of threads to be used, overrides threads as set by
@@ -51,7 +51,7 @@ def sub(a, b, num_threads=None, direction='left'):
 def mul(a, b, num_threads=None, direction='left'):
     """Multiply multithreaded
 
-    Args:
+    Args
         a (np.ndarray or scalar): Numpy array or scalar
         b (np.ndarray or scalar): Numpy array or scalar
         num_threads             : Number of threads to be used, overrides threads as set by
@@ -64,7 +64,7 @@ def mul(a, b, num_threads=None, direction='left'):
 def div(a, b, num_threads=None, direction='left'):
     """Divide multithreaded
 
-    Args:
+    Args
         a (np.ndarray or scalar): Numpy array or scalar
         b (np.ndarray or scalar): Numpy array or scalar
         num_threads             : Number of threads to be used, overrides threads as set by
@@ -77,7 +77,7 @@ def div(a, b, num_threads=None, direction='left'):
 def pow(a, b, num_threads=None, direction='left'):
     """Raise to power multithreaded
 
-    Args:
+    Args
         a (np.ndarray or scalar): Numpy array or scalar
         b (np.ndarray or scalar): Numpy array or scalar
         num_threads             : Number of threads to be used, overrides threads as set by
@@ -146,7 +146,7 @@ def std(a: np.ndarray):
         a: np.ndarray
 
     Returns
-        np.floating: standard deviation
+        float: standard deviation
     """
     try:
         from numba import njit

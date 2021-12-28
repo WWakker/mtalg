@@ -72,6 +72,9 @@ class MultithreadedRNG:
             a           (float): Alpha, positive (>0)
             b           (float): Beta, positive (>0)
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'a': a,
@@ -94,6 +97,9 @@ class MultithreadedRNG:
                                  truncated to integers
             p           (float): Parameter of the distribution, >= 0 and <=1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'n': n,
@@ -114,6 +120,9 @@ class MultithreadedRNG:
         Args
             df          (float): Number of degrees of freedom, must be > 0
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'df': df}
@@ -133,6 +142,9 @@ class MultithreadedRNG:
         Args
             scale       (float): The scale parameter, β = 1/λ Must be non-negative
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
@@ -153,6 +165,9 @@ class MultithreadedRNG:
             dfnum       (float): Degrees of freedom in numerator, must be > 0
             dfden       (float): Degrees of freedom in denominator, must be > 0
             size (int or tuple): Output shape
+
+        Returns
+            ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'dfnum': dfnum,
@@ -174,6 +189,9 @@ class MultithreadedRNG:
             shape       (float): The shape of the gamma distribution. Must be non-negative
             scale       (float): The scale of the gamma distribution. Must be non-negative. Default is equal to 1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'shape': shape,
@@ -194,6 +212,9 @@ class MultithreadedRNG:
         Args
             p           (float): The probability of success of an individual trial
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'p': p}
@@ -236,6 +257,9 @@ class MultithreadedRNG:
             nbad          (int): Number of ways to make a bad selection. Must be nonnegative and less than 10**9
             nsample       (int): Number of items sampled. Must be nonnegative and less than ngood + nbad
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'ngood': ngood,
@@ -264,6 +288,9 @@ class MultithreadedRNG:
             dtype       (dtype): Dtype of output array
             endpoint           : If true, sample from the interval [low, high] instead of the default [low, high)
                                  Defaults to False
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'low': low,
@@ -290,6 +317,9 @@ class MultithreadedRNG:
             loc         (float): The position, μ, of the distribution peak. Default is 0
             scale       (float): λ, the exponential decay. Default is 1. Must be non- negative
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -312,6 +342,9 @@ class MultithreadedRNG:
             loc         (float): Parameter of the distribution. Default is 0
             scale       (float): Parameter of the distribution. Must be non-negative. Default is 1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -335,6 +368,9 @@ class MultithreadedRNG:
             sigma       (float): Standard deviation of the underlying normal distribution. Must be non-negative.
                                  Default is 1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'mean': mean,
@@ -376,6 +412,9 @@ class MultithreadedRNG:
             n           (float): Parameter of the distribution, > 0
             p           (float): Parameter of the distribution. Must satisfy 0 < p <= 1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'n': n,
@@ -398,6 +437,9 @@ class MultithreadedRNG:
             df          (float): Number of degrees of freedom, must be > 0
             nonc        (float): Non-centrality, must be non-negative
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'df': df,
@@ -421,6 +463,9 @@ class MultithreadedRNG:
             dfden       (float): Degrees of freedom in denominator, must be > 0
             nonc        (float): Non-centrality parameter, the sum of the squares of the numerator means, must be >= 0
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'dfnum': dfnum,
@@ -443,6 +488,9 @@ class MultithreadedRNG:
             loc         (float): Mean of the distriution
             scale       (float): Standard deviation of the distriution
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -463,6 +511,9 @@ class MultithreadedRNG:
         Args
             a           (float): Shape of the distribution. Must be positive
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -482,6 +533,9 @@ class MultithreadedRNG:
         Args
             lam         (float): Expected number of events occurring in a fixed-time interval, must be >= 0
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'lam': lam}
@@ -501,6 +555,9 @@ class MultithreadedRNG:
         Args
             a           (float): Parameter of the distribution. Must be non-negative
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -520,6 +577,9 @@ class MultithreadedRNG:
         Args
             size (int or tuple): Output shape
             dtype       (dtype): Dtype of output array
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
@@ -545,6 +605,9 @@ class MultithreadedRNG:
         Args
             scale       (float): Scale, also equals the mode. Must be non-negative. Default is 1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
@@ -563,6 +626,9 @@ class MultithreadedRNG:
 
         Args
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {}
@@ -585,6 +651,9 @@ class MultithreadedRNG:
             dtype       (dtype): Dtype of output array
             method        (str): Either ‘inv’ or ‘zig’. ‘inv’ uses the inverse CDF method. ‘zig’ uses the much
                                  faster Ziggurat method of Marsaglia and Tsang
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype,
@@ -614,6 +683,9 @@ class MultithreadedRNG:
             shape       (float): Parameter, must be non-negative
             size (int or tuple): Output shape
             dtype       (dtype): Dtype of output array
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'shape': shape,
@@ -642,6 +714,9 @@ class MultithreadedRNG:
         Args
             size (int or tuple): Output shape
             dtype       (dtype): Dtype of output array
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
@@ -669,6 +744,9 @@ class MultithreadedRNG:
         Args
             df          (float): Degrees of freedom, must be > 0
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'df': df}
@@ -692,6 +770,9 @@ class MultithreadedRNG:
                                  condition left <= mode <= right
             right       (float): Upper limit, must be larger than left
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'left': left,
@@ -714,6 +795,9 @@ class MultithreadedRNG:
             low         (float): Lower bound
             high        (float): Upper bound
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'low': low,
@@ -735,6 +819,9 @@ class MultithreadedRNG:
             mu          (float): Mode (“center”) of the distribution
             kappa       (float): Dispersion of the distribution, has to be >=0
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'mu': mu,
@@ -756,6 +843,9 @@ class MultithreadedRNG:
             mean        (float): Distribution mean, must be > 0
             scale       (float): Scale parameter, must be > 0
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'mean': mean,
@@ -776,6 +866,9 @@ class MultithreadedRNG:
         Args
             a           (float): Shape parameter of the distribution. Must be nonnegative
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -795,6 +888,9 @@ class MultithreadedRNG:
         Args
             a           (float): Distribution parameter. Must be greater than 1
             size (int or tuple): Output shape
+
+        Returns
+            numpy.ndarray or scalar
         """
         self._check_shape(size)
         kw_args = {'a': a}

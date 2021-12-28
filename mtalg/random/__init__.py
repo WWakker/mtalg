@@ -138,37 +138,8 @@ def zipf(*args, **kwargs):
     return _RNG.zipf(*args, **kwargs)
 
 
-beta.__doc__ = _RNG.beta.__doc__
-binomial.__doc__ = _RNG.binomial.__doc__
-chisquare.__doc__ = _RNG.chisquare.__doc__
-exponential.__doc__ = _RNG.exponential.__doc__
-f.__doc__ = _RNG.f.__doc__
-gamma.__doc__ = _RNG.gamma.__doc__
-geometric.__doc__ = _RNG.geometric.__doc__
-gumbel.__doc__ = _RNG.gumbel.__doc__
-hypergeometric.__doc__ = _RNG.hypergeometric.__doc__
-integers.__doc__ = _RNG.integers.__doc__
-laplace.__doc__ = _RNG.laplace.__doc__
-logistic.__doc__ = _RNG.logistic.__doc__
-lognormal.__doc__ = _RNG.lognormal.__doc__
-logseries.__doc__ = _RNG.logseries.__doc__
-negative_binomial.__doc__ = _RNG.negative_binomial.__doc__
-noncentral_chisquare.__doc__ = _RNG.noncentral_chisquare.__doc__
-noncentral_f.__doc__ = _RNG.noncentral_f.__doc__
-normal.__doc__ = _RNG.normal.__doc__
-pareto.__doc__ = _RNG.pareto.__doc__
-poisson.__doc__ = _RNG.poisson.__doc__
-power.__doc__ = _RNG.power.__doc__
-random.__doc__ = _RNG.random.__doc__
-rayleigh.__doc__ = _RNG.rayleigh.__doc__
-standard_cauchy.__doc__ = _RNG.standard_cauchy.__doc__
-standard_exponential.__doc__ = _RNG.standard_exponential.__doc__
-standard_gamma.__doc__ = _RNG.standard_gamma.__doc__
-standard_normal.__doc__ = _RNG.standard_normal.__doc__
-standard_t.__doc__ = _RNG.standard_t.__doc__
-triangular.__doc__ = _RNG.triangular.__doc__
-uniform.__doc__ = _RNG.uniform.__doc__
-vonmises.__doc__ = _RNG.vonmises.__doc__
-wald.__doc__ = _RNG.wald.__doc__
-weibull.__doc__ = _RNG.weibull.__doc__
-zipf.__doc__ = _RNG.zipf.__doc__
+for func in [beta, binomial, chisquare, exponential, f, gamma, geometric, gumbel, hypergeometric, integers, laplace,
+             logistic, lognormal, logseries, negative_binomial, noncentral_chisquare, noncentral_f, normal, pareto,
+             poisson, power, random, rayleigh, standard_cauchy, standard_exponential, standard_gamma, standard_normal,
+             standard_t, triangular, uniform, vonmises, wald, weibull, zipf]:
+    func.__doc__ = getattr(_RNG, func.__name__).__doc__

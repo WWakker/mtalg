@@ -1,3 +1,4 @@
+import mtalg
 from mtalg.random import MultithreadedRNG
 import numpy as np
 
@@ -138,3 +139,10 @@ class TestMRNG:
             mrng.wald(size=size, mean=1, scale=1)
             mrng.weibull(size=size, a=2)
             mrng.zipf(size=size, a=2)
+
+    def test13(self):
+        mrng = MultithreadedRNG(num_threads=4)
+        mtalg.set_num_threads(2)
+        mrng2 = MultithreadedRNG()
+        mrng3 = MultithreadedRNG(num_threads=3)
+        assert mrng._num_threads == 4 and mrng2._num_threads == 2 and mrng3._num_threads == 3

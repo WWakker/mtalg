@@ -61,3 +61,18 @@ class TestEmAlgebra:
     def test3(self):
         a = np.arange(100)
         assert np.isclose(np.std(a), mtalg.std(a))
+
+    def test4(self):
+        a_arr = np.arange(10000).reshape((100, 100))
+        a_scal = 2
+        b_arr = np.arange(10000).reshape((100, 100))
+        b_scal = 2
+        mtalg.add(a_arr, b_arr, direction='left', num_threads=2)
+        mtalg.add(a_arr, b_arr, direction='right', num_threads=2)
+        mtalg.add(a_arr, b_scal, direction='left', num_threads=2)
+        with pytest.raises(ValueError):
+            mtalg.add(a_arr, b_scal, direction='right', num_threads=2)
+        with pytest.raises(ValueError):
+            mtalg.add(a_scal, b_scal, direction='left')
+        with pytest.raises(ValueError):
+            mtalg.add(a_scal, b_scal, direction='right')

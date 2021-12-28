@@ -2,10 +2,7 @@ import concurrent.futures
 from mtalg.tools.__check_threads import check_threads
 import numpy as np
 from multiprocessing import cpu_count
-
-# TODO: doc string to be updated for all of them (ad hoc for each + one inherited from the function below?)
-# TODO: check why nans in pow
-
+import mtalg.core.threads
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 
@@ -26,22 +23,67 @@ def _pow_inplace(x, y): x **= y
 
 
 def add(a, b, num_threads=None, direction='left'):
+    """Add multithreaded
+
+    Args:
+        a (np.ndarray or scalar): Numpy array or scalar
+        b (np.ndarray or scalar): Numpy array or scalar
+        num_threads             : Number of threads to be used, overrides threads as set by
+                                  mtalg.set_num_threads()
+        direction               : 'left' or 'right' to decide if a or b is modified
+    """
     __multithreaded_opr_direction(a, b, _add_inplace, num_threads, direction=direction)
 
 
 def sub(a, b, num_threads=None, direction='left'):
+    """Subtract multithreaded
+
+    Args:
+        a (np.ndarray or scalar): Numpy array or scalar
+        b (np.ndarray or scalar): Numpy array or scalar
+        num_threads             : Number of threads to be used, overrides threads as set by
+                                  mtalg.set_num_threads()
+        direction               : 'left' or 'right' to decide if a or b is modified
+    """
     __multithreaded_opr_direction(a, b, _sub_inplace, num_threads, direction=direction)
 
 
 def mul(a, b, num_threads=None, direction='left'):
+    """Multiply multithreaded
+
+    Args:
+        a (np.ndarray or scalar): Numpy array or scalar
+        b (np.ndarray or scalar): Numpy array or scalar
+        num_threads             : Number of threads to be used, overrides threads as set by
+                                  mtalg.set_num_threads()
+        direction               : 'left' or 'right' to decide if a or b is modified
+    """
     __multithreaded_opr_direction(a, b, _mul_inplace, num_threads, direction=direction)
 
 
 def div(a, b, num_threads=None, direction='left'):
+    """Divide multithreaded
+
+    Args:
+        a (np.ndarray or scalar): Numpy array or scalar
+        b (np.ndarray or scalar): Numpy array or scalar
+        num_threads             : Number of threads to be used, overrides threads as set by
+                                  mtalg.set_num_threads()
+        direction               : 'left' or 'right' to decide if a or b is modified
+    """
     __multithreaded_opr_direction(a, b, _div_inplace, num_threads, direction=direction)
 
 
 def pow(a, b, num_threads=None, direction='left'):
+    """Raise to power multithreaded
+
+    Args:
+        a (np.ndarray or scalar): Numpy array or scalar
+        b (np.ndarray or scalar): Numpy array or scalar
+        num_threads             : Number of threads to be used, overrides threads as set by
+                                  mtalg.set_num_threads()
+        direction               : 'left' or 'right' to decide if a or b is modified
+    """
     __multithreaded_opr_direction(a, b, _pow_inplace, num_threads, direction=direction)
 
 
@@ -62,15 +104,22 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
       b (numpy.array): Right array to be summed.
       num_threads (int or None): Number of num_threads.
     """
-    scalar = (True if isinstance(b, (int, float, complex, np.integer, np.floating)) and not isinstance(b, bool)
-              else False)
-    if not scalar:
-        assert a.shape == b.shape
+    a_scalar = isinstance(a, (int, float, complex, np.integer, np.floating))
+    b_scalar = isinstance(b, (int, float, complex, np.integer, np.floating))
+
+    # If a and b are both scalars
+    scalar = False
+    if not a_scalar and not b_scalar:
+        assert a.shape == b.shape, 'Shapes of both arrays must be the same'
+    else:
+        scalar = True
+        if a_scalar:
+            raise ValueError('Cannot modify scalar inplace')
 
     shape = a.shape
     shp_max = argmax(shape)
-    num_threads = check_threads(num_threads or cpu_count())
-    assert num_threads > 0
+    num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads or cpu_count())
+    assert num_threads > 0 and isinstance(num_threads, int)
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
              if t < (num_threads - 1) else
              (t * (shape[shp_max] // num_threads), shape[shp_max])
@@ -109,7 +158,3 @@ def std(a: np.ndarray):
         return np.std(x)
 
     return std_numba(a)
-
-
-# if __name__ == '__main__':
-#     pass

@@ -3,6 +3,7 @@ import concurrent.futures
 import numpy as np
 from multiprocessing import cpu_count
 from mtalg.tools.__check_threads import check_threads
+import mtalg.core.threads
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 
@@ -12,13 +13,14 @@ class MultithreadedRNG:
 
     Args
         seed                             (int): Random seed
-        num_threads                      (int): Number of threads to be used
+        num_threads                      (int): Number of threads to be used, overrides threads as set by
+                                                mtalg.set_num_threads()
         bit_generator (np.random.BitGenerator): Bit generator, defaults to PCG64
     """
 
     def __init__(self, seed=None, num_threads=None, bit_generator=PCG64):
-        self._num_threads = check_threads(num_threads or cpu_count())
-        assert self._num_threads > 0, "Number of threads must be > 0"
+        self._num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads or cpu_count())
+        assert self._num_threads > 0 and isinstance(self._num_threads, int)
         seq = SeedSequence(seed)
         self._random_generators = [Generator(bit_generator=bit_generator(s)) for s in seq.spawn(self._num_threads)]
         self._shape = 0,

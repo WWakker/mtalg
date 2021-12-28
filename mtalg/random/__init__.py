@@ -38,6 +38,10 @@ def hypergeometric(*args, **kwargs):
     return _RNG.hypergeometric(*args, **kwargs)
 
 
+def integers(*args, **kwargs):
+    return _RNG.integers(*args, **kwargs)
+
+
 def laplace(*args, **kwargs):
     return _RNG.laplace(*args, **kwargs)
 
@@ -80,6 +84,10 @@ def poisson(*args, **kwargs):
 
 def power(*args, **kwargs):
     return _RNG.power(*args, **kwargs)
+
+
+def random(*args, **kwargs):
+    return _RNG.random(*args, **kwargs)
 
 
 def rayleigh(*args, **kwargs):
@@ -139,6 +147,7 @@ gamma.__doc__ = _RNG.gamma.__doc__
 geometric.__doc__ = _RNG.geometric.__doc__
 gumbel.__doc__ = _RNG.gumbel.__doc__
 hypergeometric.__doc__ = _RNG.hypergeometric.__doc__
+integers.__doc__ = _RNG.integers.__doc__
 laplace.__doc__ = _RNG.laplace.__doc__
 logistic.__doc__ = _RNG.logistic.__doc__
 lognormal.__doc__ = _RNG.lognormal.__doc__
@@ -150,6 +159,7 @@ normal.__doc__ = _RNG.normal.__doc__
 pareto.__doc__ = _RNG.pareto.__doc__
 poisson.__doc__ = _RNG.poisson.__doc__
 power.__doc__ = _RNG.power.__doc__
+random.__doc__ = _RNG.random.__doc__
 rayleigh.__doc__ = _RNG.rayleigh.__doc__
 standard_cauchy.__doc__ = _RNG.standard_cauchy.__doc__
 standard_exponential.__doc__ = _RNG.standard_exponential.__doc__

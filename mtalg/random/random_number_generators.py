@@ -214,6 +214,38 @@ class MultithreadedRNG:
 
         return self._fill(__fill, **kw_args)
 
+    def integers(self, low, high=None, size=None, dtype=np.int64, endpoint=False):
+        """Return random integers from low (inclusive) to high (exclusive), or if endpoint=True,
+           low (inclusive) to high (inclusive)
+
+        Args
+            low           (int): Lowest (signed) integers to be drawn from the distribution (unless high=None, in which
+                                 case this parameter is 0 and this value is used for high)
+            high          (int): If provided, one above the largest (signed) integer to be drawn from the distribution
+                                 (see above for behavior if high=None)
+            size (int or tuple): Output shape
+            dtype       (dtype): Dtype of output array
+            endpoint           : If true, sample from the interval [low, high] instead of the default [low, high)
+                                 Defaults to False
+        """
+        self._check_shape(size)
+        kw_args = {'low': low,
+                   'high': high,
+                   'dtype': dtype,
+                   'endpoint': endpoint}
+
+        if size is None:
+            return self._random_generators[0].integers(**kw_args)
+
+        if self._values.dtype != dtype:
+            self._values = self._values.astype(dtype)
+
+        def __fill(random_state, out, first, last, **kwargs):
+            out[(slice(None),) * self._shp_max +
+                (slice(first, last),)] = random_state.integers(size=self._get_slice_size(first, last), **kwargs)
+
+        return self._fill(__fill, **kw_args)
+
     def laplace(self, loc=0.0, scale=1.0, size=None):
         """Draw from a Laplace distribution
 
@@ -442,6 +474,31 @@ class MultithreadedRNG:
         def __fill(random_state, out, first, last, **kwargs):
             out[(slice(None),) * self._shp_max +
                 (slice(first, last),)] = random_state.power(size=self._get_slice_size(first, last), **kwargs)
+
+        return self._fill(__fill, **kw_args)
+
+    def random(self, size=None, dtype=np.float64):
+        """Return random floats in the half-open interval [0.0, 1.0)
+
+        Args
+            size (int or tuple): Output shape
+            dtype       (dtype): Dtype of output array
+        """
+        self._check_shape(size)
+        kw_args = {'dtype': dtype}
+
+        if size is None:
+            return self._random_generators[0].random(**kw_args)
+
+        if self._values.dtype != dtype:
+            self._values = self._values.astype(dtype)
+
+        def __fill(random_state, out, first, last, **kwargs):
+            if self._shp_max == 0:
+                random_state.random(out=out[(slice(None),) * self._shp_max + (slice(first, last),)], **kwargs)
+            else:
+                out[(slice(None),) * self._shp_max +
+                    (slice(first, last),)] = random_state.random(size=self._get_slice_size(first, last), **kwargs)
 
         return self._fill(__fill, **kw_args)
 

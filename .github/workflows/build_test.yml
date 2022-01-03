@@ -79,7 +79,7 @@ jobs:
           pytest mtalg/testing/ 
           
   test-python-versions:
-    name: Test on ${{ matrix.vrsns }}
+    name: Test on Python${{ matrix.vrsns }}
     strategy:
       matrix:
         vrsns: ['3.6', '3.7', '3.8', '3.9']

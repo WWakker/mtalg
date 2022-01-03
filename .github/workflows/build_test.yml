@@ -46,7 +46,7 @@ jobs:
     name: ubuntu, mac, and windows OS
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
         containers: [1]
     runs-on: ${{ matrix.os }}
     steps:

@@ -52,14 +52,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-        
-      # because of "record" and "parallel" parameters these containers will load balance all found tests among themselves
-      - name: Set up
-        uses: actions/checkout@v1
-        with:
-          record: true
-          parallel: true
-          group: Parallel 2x on ${{ matrix.os }}
 
       - name: Set up Python 3.6
         uses: actions/setup-python@v2
@@ -88,13 +80,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-        
-      - name: Set up
-        uses: actions/checkout@v1
-        with:
-          record: true
-          parallel: true
-          group: Parallel 2x on ${{ matrix.vrsns }}
 
       - name: Set up Python ${{ matrix.vrsns }}
         uses: actions/setup-python@v2

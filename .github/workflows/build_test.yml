@@ -74,7 +74,8 @@ jobs:
 
       - name: Run tests
         run: |
-          python -c "import sys; print(sys.platform)"
+          python -c "import sys; print('OS: {sys.platform})"
+          python -c "import sys; print('Python version: {sys.version}')"
           pytest mtalg/testing/ 
           
   test-python-versions:
@@ -108,7 +109,8 @@ jobs:
 
       - name: Run tests
         run: |
-          python -c "import sys; print(sys.platform)"
+          python -c "import sys; print('OS: {sys.platform})"
+          python -c "import sys; print('Python version: {sys.version}')"
           pytest mtalg/testing/ 
           
   sonarcloud:

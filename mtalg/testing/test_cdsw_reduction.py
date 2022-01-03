@@ -4,7 +4,9 @@ from mtalg.random import MultithreadedRNG
 
 def cdsw(func):
     if os.name != 'posix':
-        return func
+        def empty_wrapper:
+            print("Not on posix")
+        return empty_wrapper
     
     def wrapper(self):
         os.environ['CDSW_NODE_NAME'] = 'CDSW_NODE_NAME'

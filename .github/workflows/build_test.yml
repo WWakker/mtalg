@@ -47,14 +47,14 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
-        containers: [1, 2]
+        containers: [1]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v1
         
       # because of "record" and "parallel" parameters these containers will load balance all found tests among themselves
-      - name: run tests
+      - name: Set up
         uses: actions/checkout@v1
         with:
           record: true
@@ -71,8 +71,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest pytest-cov numba
           pip install -r mtalg/requirements.txt
-      - name: run test
-        run: pytest mtalg/testing/ 
+
+      - name: Run tests
+        run: |
+          python -c "import os; print(os.name)"
+          pytest mtalg/testing/ 
           
   sonarcloud:
     name: SonarCloud

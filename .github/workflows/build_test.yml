@@ -94,8 +94,8 @@ jobs:
 
       - name: Run tests
         run: |
-          python -c "import sys; print('OS: {sys.platform}')"
-          python -c "import sys; print('Python version: {sys.version}')"
+          python -c "import sys; print(f'OS: {sys.platform}')"
+          python -c "import sys; print(f'Python version: {sys.version}')"
           pytest mtalg/testing/ 
           
   sonarcloud:

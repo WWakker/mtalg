@@ -79,7 +79,7 @@ jobs:
           
   sonarcloud:
     name: SonarCloud
-    needs: build-and-test
+    needs: [build-and-test, test-on-ubuntu-mac-and-windows]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

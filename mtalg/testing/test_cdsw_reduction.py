@@ -3,8 +3,9 @@ from mtalg.random import MultithreadedRNG
 
 
 def cdsw(func):
+
     if os.name != 'posix':
-        def empty_wrapper:
+        def empty_wrapper(self):
             print("Not on posix")
         return empty_wrapper
     

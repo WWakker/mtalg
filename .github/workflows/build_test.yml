@@ -43,7 +43,7 @@ jobs:
           unit.xml
           
   test-on-ubuntu-mac-and-windows:
-    name: ubuntu, mac, and windows OS
+    name: Testing on ${{ matrix.os }}
     strategy:
       matrix:
         os: ['ubuntu-latest', 'macos-latest', 'windows-latest']

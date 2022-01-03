@@ -5,7 +5,7 @@
 [![build_test](https://github.com/WWakker/mtalg/actions/workflows/build_test.yml/badge.svg)](https://github.com/WWakker/mtalg/actions?query=workflow%3A%22build+and+test%22++)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=alert_status)](https://sonarcloud.io/summary/overall?id=WWakker_mtalg)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=coverage)](https://sonarcloud.io/summary/overall?id=WWakker_mtalg)
-[![Security](https://snyk-widget.herokuapp.com/badge/pip/mtalg/badge.svg)]()
+[![Security](https://snyk-widget.herokuapp.com/badge/pip/mtalg/badge.svg)](https://snyk.io/vuln/pip:mtalg)
 [![License](https://img.shields.io/pypi/l/mtalg.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
 

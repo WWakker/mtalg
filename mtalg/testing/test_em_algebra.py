@@ -42,7 +42,7 @@ class TestEmAlgebra:
         
     def test_numba_wrapped_functions(self):
         import mtalg
-        os.environ['NUMBA_DISABLE_JIT'] = 1
+        os.environ['NUMBA_DISABLE_JIT'] = '1'
         a = np.arange(100)
         mtalg.std(a)
         

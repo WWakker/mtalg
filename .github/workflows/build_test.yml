@@ -42,7 +42,7 @@ jobs:
           cov.xml
           unit.xml
           
-  test-on-ubuntu-mac-and-windows:
+  test-multiple-os:
     name: Testing on ${{ matrix.os }}
     strategy:
       matrix:
@@ -65,6 +65,40 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.6"      
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest pytest-cov numba
+          pip install -r mtalg/requirements.txt
+
+      - name: Run tests
+        run: |
+          python -c "import sys; print(sys.platform)"
+          pytest mtalg/testing/ 
+          
+  test-python-versions:
+    name: Testing on ${{ matrix.vrsns }}
+    strategy:
+      matrix:
+        vrsns: ['3.6', '3.7', '3.8', '3.9']
+        containers: [1]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Set up
+        uses: actions/checkout@v1
+        with:
+          record: true
+          parallel: true
+          group: Parallel 2x on ${{ matrix.vrsns }}
+
+      - name: Set up Python ${{ matrix.vrsns }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: "${{ matrix.vrsns }}"      
           
       - name: Install dependencies
         run: |

@@ -74,7 +74,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python -c "import os; print(os.name)"
+          python -c "import sys; print(sys.platform)"
           pytest mtalg/testing/ 
           
   sonarcloud:

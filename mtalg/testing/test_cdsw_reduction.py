@@ -3,6 +3,9 @@ from mtalg.random import MultithreadedRNG
 
 
 def cdsw(func):
+    if os.name != 'posix':
+        return func
+    
     def wrapper(self):
         os.environ['CDSW_NODE_NAME'] = 'CDSW_NODE_NAME'
         os.environ['DISC_KRB_REALM'] = 'MIT01.ECB.DE'
@@ -10,6 +13,7 @@ def cdsw(func):
         func(self)
         for env in ['CDSW_NODE_NAME', 'DISC_KRB_REALM', 'CDSW_CPU_MILLICORES']:
             del os.environ[env]
+    
     return wrapper
 
 

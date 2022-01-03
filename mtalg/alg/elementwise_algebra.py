@@ -151,7 +151,7 @@ def std(a: np.ndarray):
     try:
         from numba import njit
     except ModuleNotFoundError:
-        raise ImportError("""Optional dependency missing: 'numba'.\nInstall via pip as `pip install numba` or via conda as `conda install numba`.""")
+        raise ModuleNotFoundError("""Optional dependency missing: 'numba'.\nInstall via pip as `pip install numba` or via conda as `conda install numba`.""")
 
     @njit(parallel=True)
     def std_numba(x):

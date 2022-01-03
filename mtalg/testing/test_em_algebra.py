@@ -1,8 +1,6 @@
-import pytest
-import mtalg
+import pytest, os, numpy as np
 from numpy.random import default_rng
 from itertools import chain, combinations
-import numpy as np
 
 
 def _add(x, y): return x + y
@@ -20,6 +18,8 @@ SHAPE = (int(4e4), 10, 5)
 
 
 def get_a_b(size, no_negative=False):
+    import mtalg
+
     rng = default_rng(1)
     aa = rng.standard_normal(size)
     bb = rng.standard_normal(size)
@@ -31,6 +31,7 @@ def get_a_b(size, no_negative=False):
 
 class TestEmAlgebra:
     def test_all(self):
+        import mtalg
         failed = {}
         for op, opMT in zip((_add, _sub, _mul, _div, _pow),
                             (mtalg.add, mtalg.sub, mtalg.mul, mtalg.div, mtalg.pow)):
@@ -48,28 +49,33 @@ class TestEmAlgebra:
         assert not failed
 
     def test1(self):
+        import mtalg
         a = np.arange(100)
         b = np.arange(100)
         mtalg.add(a, b, direction='right')
 
     def test2(self):
+        import mtalg
         a = np.arange(100)
         b = np.arange(100)
         with pytest.raises(ValueError):
             mtalg.add(a, b, direction='middle')
 
     def test3(self):
+        import mtalg
         a = np.arange(100)
         assert np.isclose(np.std(a), mtalg.std(a))
 
     def test4(self):
-        a = np.arange(100)
-        import os
         os.system("pip uninstall --yes numba")
+        
+        import mtalg
+        a = np.arange(100)
         with pytest.raises(ModuleNotFoundError):
             mtalg.std(a)
 
     def test5(self):
+        import mtalg
         a_arr = np.arange(10000).reshape((100, 100))
         a_scal = 2
         b_arr = np.arange(10000).reshape((100, 100))

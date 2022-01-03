@@ -8,6 +8,8 @@
 [![Security](https://snyk-widget.herokuapp.com/badge/pip/mtalg/badge.svg)](https://snyk.io/vuln/pip:mtalg)
 [![License](https://img.shields.io/pypi/l/mtalg.svg)](https://github.com/WWakker/mtalg/blob/master/LICENSE.txt)
 [![Downloads](https://pepy.tech/badge/mtalg)](https://pepy.tech/project/mtalg)
+[![Run on Repl.it](https://repl.it/badge/github/wwakker/mtalg)](https://replit.com/@lucamingarelli/Try-mtalg#main.py)
+
 
 ## About
 

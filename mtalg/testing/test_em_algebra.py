@@ -66,7 +66,7 @@ class TestEmAlgebra:
         a = np.arange(100)
         import os
         os.system("pip uninstall --yes numba")
-        with pytest.raises(ImportError):
+        with pytest.raises(ModuleNotFoundError):
             mtalg.std(a)
 
     def test5(self):

@@ -61,7 +61,8 @@ jobs:
           record: true
           parallel: true
           group: Parallel 2x on ${{ matrix.os }}
-          run: pytest mtalg/testing/ 
+      - name: run test
+        run: pytest mtalg/testing/ 
           
   sonarcloud:
     name: SonarCloud

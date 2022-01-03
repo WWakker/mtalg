@@ -74,7 +74,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python -c "import sys; print('OS: {sys.platform})"
+          python -c "import sys; print('OS: {sys.platform}')"
           python -c "import sys; print('Python version: {sys.version}')"
           pytest mtalg/testing/ 
           
@@ -109,7 +109,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python -c "import sys; print('OS: {sys.platform})"
+          python -c "import sys; print('OS: {sys.platform}')"
           python -c "import sys; print('Python version: {sys.version}')"
           pytest mtalg/testing/ 
           

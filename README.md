@@ -32,19 +32,29 @@ Major benefits become apparent past `10^7` operations for both the element-wise 
 `pip install mtalg`
 
 ## How to use
-Import mtalg and random number generator
+Import mtalg and generate (pseudo-) random numbers as
+
 ```python
 import mtalg
+
+a = mtalg.random.standard_normal(size=(10_000, 5_000))
+b = mtalg.random.uniform(size=(10_000, 5_000), low=0, high=10)
+# etc.
+```
+
+Alternatively, one can also
+```python
 from mtalg.random import MultithreadedRNG
 ```
-Create an instance of the multithreaded random number generator with seed for reproducability and number of threads to be used
+and create an instance of the multithreaded random number generator with seed for reproducibility and set the number of threads to be used
 ```python
 mrng = MultithreadedRNG(seed=1, num_threads=4)
 ```
-Create two arrays
+One can then create random arrays as
 ```python
 a = mrng.standard_normal(size=(10_000, 5_000))
 b = mrng.uniform(size=(10_000, 5_000), low=0, high=10)
+# etc.
 ```
 Set number of threads to be used by default for algebra functions and subsquent random
 number generators (if `num_threads` parameter is not specified)

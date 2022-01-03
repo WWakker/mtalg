@@ -63,6 +63,13 @@ class TestEmAlgebra:
         assert np.isclose(np.std(a), mtalg.std(a))
 
     def test4(self):
+        a = np.arange(100)
+        import os
+        os.system("pip uninstall --yes numba")
+        with pytest.raises(ImportError):
+            mtalg.std(a)
+
+    def test5(self):
         a_arr = np.arange(10000).reshape((100, 100))
         a_scal = 2
         b_arr = np.arange(10000).reshape((100, 100))

@@ -2,6 +2,7 @@ import mtalg
 import pytest
 
 import mtalg.core.threads
+from multiprocessing import cpu_count
 
 
 class TestCore:
@@ -14,6 +15,6 @@ class TestCore:
             mtalg.set_num_threads(1.5)
 
     def test3(self):
-        assert mtalg.core.threads._global_num_threads is None
+        assert mtalg.core.threads._global_num_threads == cpu_count()
         mtalg.set_num_threads(4)
         assert mtalg.core.threads._global_num_threads == 4

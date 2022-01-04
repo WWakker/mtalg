@@ -1,7 +1,6 @@
 import concurrent.futures
 from mtalg.tools.__check_threads import check_threads
 import numpy as np
-from multiprocessing import cpu_count
 import mtalg.core.threads
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
@@ -117,7 +116,7 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
 
     shape = a.shape
     shp_max = argmax(shape)
-    num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads or cpu_count())
+    num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads)
     assert num_threads > 0 and isinstance(num_threads, int), \
         f'Number of threads must be an integer > 0, found: {num_threads}'
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))
@@ -151,7 +150,8 @@ def std(a: np.ndarray):
     try:
         from numba import njit
     except ModuleNotFoundError:
-        raise ModuleNotFoundError("""Optional dependency missing: 'numba'.\nInstall via pip as `pip install numba` or via conda as `conda install numba`.""")
+        raise ModuleNotFoundError("Optional dependency missing: 'numba'.\n"
+                                  "Install via pip as `pip install numba` or via conda as `conda install numba`.")
 
     @njit(parallel=True)
     def std_numba(x):

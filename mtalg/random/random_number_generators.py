@@ -37,7 +37,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from numpy.random import SeedSequence, PCG64, Generator
 import concurrent.futures
 import numpy as np
-from multiprocessing import cpu_count
 from mtalg.tools.__check_threads import check_threads
 import mtalg.core.threads
 
@@ -55,7 +54,7 @@ class MultithreadedRNG:
     """
 
     def __init__(self, seed=None, num_threads=None, bit_generator=PCG64):
-        self._num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads or cpu_count())
+        self._num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads)
         assert self._num_threads > 0 and isinstance(self._num_threads, int), \
             f'Number of threads must be an integer > 0, found: {self._num_threads}'
         seq = SeedSequence(seed)

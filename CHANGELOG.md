@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  
 ### Changed
+- cpu_count() as default for _global_num_threads
  
 ### Fixed
 

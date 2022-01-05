@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 ## \[1.0.0] - 2021-12-28
+
+## \[1.1.0] - 2022-01-05
+ 
+### Added
+ 
+- Added `get_num_threads`
+
+### Fixed
+
+- Improved documentation
+
+## \[1.0.0] - 2021-12-28
  
 ### Added
 - integer and random methods to MRNG

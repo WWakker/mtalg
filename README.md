@@ -1,6 +1,6 @@
 # ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
-[![version](https://img.shields.io/badge/version-1.0.0-success.svg)](https://github.com/WWakker/mtalg)
+[![version](https://img.shields.io/badge/version-1.1.0-success.svg)](https://github.com/WWakker/mtalg)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
 [![build_test](https://github.com/WWakker/mtalg/actions/workflows/build_test.yml/badge.svg)](https://github.com/WWakker/mtalg/actions?query=workflow%3A%22build+and+test%22++)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=alert_status)](https://sonarcloud.io/summary/overall?id=WWakker_mtalg)
@@ -29,6 +29,7 @@ and non-GPU-based random number generation. For more info on benchmarks you can 
 Major benefits become apparent past `10^7` operations for both the element-wise algebra and the random number generator modules.
 
 ## Installation
+The library can be install via pip as:
 
 `pip install mtalg`
 

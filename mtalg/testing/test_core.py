@@ -17,4 +17,5 @@ class TestCore:
     def test3(self):
         assert mtalg.core.threads._global_num_threads == cpu_count()
         mtalg.set_num_threads(4)
+        mtalg.get_num_threads()
         assert mtalg.core.threads._global_num_threads == 4

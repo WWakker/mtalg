@@ -26,7 +26,7 @@ Similarly can be said for the generation of random variates.
 ***mtalg*** is the fastest library known to us for large scale element-wise algebraic operations 
 and non-GPU-based random number generation. For more info on benchmarks you can see the dedicated section below. 
 
-Major benefits become apparent past `10^7` operations for both the element-wise algebra and the random number generator modules.
+Major benefits become apparent past 10⁷ operations for both the element-wise algebra and the random number generator modules.
 
 ## Installation
 The library can be install via pip as:

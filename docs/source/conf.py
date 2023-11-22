@@ -24,7 +24,8 @@ language = "en"
 extensions = ['sphinx.ext.autosummary',
               'sphinx.ext.napoleon',
               'sphinx.ext.intersphinx',
-              'sphinx.ext.viewcode']
+              'sphinx.ext.viewcode',
+              'myst_nb']
 
 templates_path = ['_templates']
 exclude_patterns = ["**.ipynb_checkpoints"]
@@ -57,3 +58,4 @@ intersphinx_disabled_reftypes = ["*"]
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+html_show_sourcelink = False

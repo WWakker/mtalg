@@ -23,6 +23,7 @@ def set_num_threads(num_threads: int):
 
         >>> mtalg.set_num_threads(6)
         >>> mtalg.get_num_threads()
+        6
     """
     if not isinstance(num_threads, int):
         raise ValueError(f'Number of threads must be an integer, found: {num_threads}')

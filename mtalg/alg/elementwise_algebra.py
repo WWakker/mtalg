@@ -2,6 +2,8 @@ import concurrent.futures
 from mtalg.tools.__check_threads import check_threads
 import numpy as np
 import mtalg.core.threads
+from typing import Optional, Union
+from numbers import Number
 
 argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 
@@ -21,67 +23,72 @@ def _div_inplace(x, y): x /= y
 def _pow_inplace(x, y): x **= y
 
 
-def add(a, b, num_threads=None, direction='left'):
-    """Add multithreaded
+def add(a: Union[np.ndarray, Number], b: Union[np.ndarray, Number], num_threads: Optional[int] = None, direction: str = 'left'):
+    """Add multithreaded.
+
+    Modifies a or b in-place depending on the direction.
 
     Args:
-        a (np.ndarray or scalar): Numpy array or scalar
-        b (np.ndarray or scalar): Numpy array or scalar
-        num_threads             : Number of threads to be used, overrides threads as set by
-                                  mtalg.set_num_threads()
-        direction               : 'left' or 'right' to decide if a or b is modified
+        a: Numpy array or scalar
+        b: Numpy array or scalar
+        num_threads: Number of threads to be used, overrides threads as set by mtalg.set_num_threads()
+        direction: 'left' or 'right' to decide if a or b is modified
     """
     __multithreaded_opr_direction(a, b, _add_inplace, num_threads, direction=direction)
 
 
-def sub(a, b, num_threads=None, direction='left'):
-    """Subtract multithreaded
+def sub(a: Union[np.ndarray, Number], b: Union[np.ndarray, Number], num_threads: Optional[int] = None, direction: str = 'left'):
+    """Subtract multithreaded.
 
-    Args
-        a (np.ndarray or scalar): Numpy array or scalar
-        b (np.ndarray or scalar): Numpy array or scalar
-        num_threads             : Number of threads to be used, overrides threads as set by
-                                  mtalg.set_num_threads()
-        direction               : 'left' or 'right' to decide if a or b is modified
+    Modifies a or b in-place depending on the direction.
+
+    Args:
+        a: Numpy array or scalar
+        b: Numpy array or scalar
+        num_threads: Number of threads to be used, overrides threads as set by mtalg.set_num_threads()
+        direction: 'left' or 'right' to decide if a or b is modified
     """
     __multithreaded_opr_direction(a, b, _sub_inplace, num_threads, direction=direction)
 
 
-def mul(a, b, num_threads=None, direction='left'):
-    """Multiply multithreaded
+def mul(a: Union[np.ndarray, Number], b: Union[np.ndarray, Number], num_threads: Optional[int] = None, direction: str = 'left'):
+    """Multiply multithreaded.
 
-    Args
-        a (np.ndarray or scalar): Numpy array or scalar
-        b (np.ndarray or scalar): Numpy array or scalar
-        num_threads             : Number of threads to be used, overrides threads as set by
-                                  mtalg.set_num_threads()
-        direction               : 'left' or 'right' to decide if a or b is modified
+    Modifies a or b in-place depending on the direction.
+
+    Args:
+        a: Numpy array or scalar
+        b: Numpy array or scalar
+        num_threads: Number of threads to be used, overrides threads as set by mtalg.set_num_threads()
+        direction: 'left' or 'right' to decide if a or b is modified
     """
     __multithreaded_opr_direction(a, b, _mul_inplace, num_threads, direction=direction)
 
 
-def div(a, b, num_threads=None, direction='left'):
-    """Divide multithreaded
+def div(a: Union[np.ndarray, Number], b: Union[np.ndarray, Number], num_threads: Optional[int] = None, direction: str = 'left'):
+    """Divide multithreaded.
 
-    Args
-        a (np.ndarray or scalar): Numpy array or scalar
-        b (np.ndarray or scalar): Numpy array or scalar
-        num_threads             : Number of threads to be used, overrides threads as set by
-                                  mtalg.set_num_threads()
-        direction               : 'left' or 'right' to decide if a or b is modified
+    Modifies a or b in-place depending on the direction.
+
+    Args:
+        a: Numpy array or scalar
+        b: Numpy array or scalar
+        num_threads: Number of threads to be used, overrides threads as set by mtalg.set_num_threads()
+        direction: 'left' or 'right' to decide if a or b is modified
     """
     __multithreaded_opr_direction(a, b, _div_inplace, num_threads, direction=direction)
 
 
-def pow(a, b, num_threads=None, direction='left'):
-    """Raise to power multithreaded
+def pow(a: Union[np.ndarray, Number], b: Union[np.ndarray, Number], num_threads: Optional[int] = None, direction: str = 'left'):
+    """Raise to power multithreaded.
 
-    Args
-        a (np.ndarray or scalar): Numpy array or scalar
-        b (np.ndarray or scalar): Numpy array or scalar
-        num_threads             : Number of threads to be used, overrides threads as set by
-                                  mtalg.set_num_threads()
-        direction               : 'left' or 'right' to decide if a or b is modified
+    Modifies a or b in-place depending on the direction.
+
+    Args:
+        a: Numpy array or scalar
+        b: Numpy array or scalar
+        num_threads: Number of threads to be used, overrides threads as set by mtalg.set_num_threads()
+        direction: 'left' or 'right' to decide if a or b is modified
     """
     __multithreaded_opr_direction(a, b, _pow_inplace, num_threads, direction=direction)
 
@@ -95,8 +102,10 @@ def __multithreaded_opr_direction(a, b, opr, num_threads, direction='left'):
         raise ValueError(f"Invalid direction {direction}. Must take value either 'left' or 'right'. ")
 
 
-def __multithreaded_opr(a, b, opr, num_threads=None):
-    """Modifies a in-place; beats numpy from around 1e7 operations onwards.
+def __multithreaded_opr(a, b, opr, num_threads: int = None):
+    """Modifies a in-place.
+
+    Beats numpy from around 1e7 operations onwards.
 
     Args:
       a (numpy.array): Left array to be summed. Modified in place.
@@ -138,14 +147,14 @@ def __multithreaded_opr(a, b, opr, num_threads=None):
             fut.result()
 
 
-def std(a: np.ndarray):
-    """Numba version of np.std
+def std(a: np.ndarray) -> Number:
+    """Numba version of np.std.
 
-    Args
+    Args:
         a: np.ndarray
 
-    Returns
-        float: standard deviation
+    Returns:
+        standard deviation
     """
     try:
         from numba import njit

@@ -2,9 +2,9 @@ import mtalg
 
 
 def set_num_threads(num_threads: int):
-    """Set number of threads for subsequent MRNGs and algebra functions
+    """Set number of threads for subsequent multithreaded RNGs and algebra functions
 
-    Args:
+    Args
         num_threads: Number of threads
     """
     if not isinstance(num_threads, int):

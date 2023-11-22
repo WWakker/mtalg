@@ -46,12 +46,28 @@ argmax = lambda iterable: max(enumerate(iterable), key=lambda x: x[1])[0]
 
 
 class MultithreadedRNG:
-    """Multithreaded random number generator
+    """Multithreaded random number generator.
 
     Args:
-        seed (int): Random seed
-        num_threads (int): Number of threads to be used, overrides threads as set by mtalg.set_num_threads()
-        bit_generator (np.random.BitGenerator): Bit generator, defaults to PCG64
+        seed (int): Random seed.
+        num_threads (int): Number of threads to be used, overrides threads as set by :func:`~mtalg.set_num_threads`.
+        bit_generator (np.random.BitGenerator): Bit generator, defaults to PCG64.
+
+    Examples:
+
+        Instantiate a multithreaded random number generator which uses 4 threads, setting a seed to derive the
+        initial BitGenerator state.
+
+        >>> from mtalg.random import MultithreadedRNG
+        >>> mrng = MultithreadedRNG(seed=1, num_threads=4)
+
+        Create a 10000 x 5000 matrix with numbers, drawing from the standard normal distribution.
+
+        >>> a = mrng.standard_normal(size=(10_000, 5_000))
+
+        Create a 10000 x 5000 matrix with numbers, drawing from the uniform distribution.
+
+        >>> b = mrng.uniform(size=(10_000, 5_000), low=0, high=10)
     """
 
     def __init__(self, seed: Optional[int] = None, num_threads: Optional[int] = None, bit_generator: BitGenerator = PCG64):
@@ -66,15 +82,15 @@ class MultithreadedRNG:
         self._steps = []
 
     def beta(self, a: Number, b: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a beta distribution
+        """Draw from a beta distribution.
 
         Args:
-            a: Alpha, positive (>0)
-            b: Beta, positive (>0)
-            size (int or tuple): Output shape
+            a: Alpha, positive (>0).
+            b: Beta, positive (>0).
+            size: Output shape.
 
         Returns
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'a': a,
@@ -90,15 +106,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def binomial(self, n: Number, p: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a binomial distribution
+        """Draw from a binomial distribution.
 
         Args:
-            n: Parameter of the distribution, >= 0. Floats are also accepted, but they will be truncated to integers
-            p: Parameter of the distribution, >= 0 and <=1
-            size: Output shape
+            n: Parameter of the distribution, >= 0. Floats are also accepted, but they will be truncated to integers.
+            p: Parameter of the distribution, >= 0 and <=1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'n': n,
@@ -114,14 +130,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def chisquare(self, df: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a chisquare distribution
+        """Draw from a chisquare distribution.
 
         Args:
-            df: Number of degrees of freedom, must be > 0
-            size: Output shape
+            df: Number of degrees of freedom, must be > 0.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'df': df}
@@ -136,14 +152,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def exponential(self, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from an exponential distribution
+        """Draw from an exponential distribution.
 
         Args:
-            scale: The scale parameter, β = 1/λ Must be non-negative
-            size: Output shape
+            scale: The scale parameter, β = 1/λ Must be non-negative.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
@@ -158,15 +174,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def f(self, dfnum: Number, dfden: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from an F distribution
+        """Draw from an F distribution.
 
         Args:
-            dfnum: Degrees of freedom in numerator, must be > 0
-            dfden: Degrees of freedom in denominator, must be > 0
-            size: Output shape
+            dfnum: Degrees of freedom in numerator, must be > 0.
+            dfden: Degrees of freedom in denominator, must be > 0.
+            size: Output shape.
 
         Returns:
-            ndarray or scalar
+            ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'dfnum': dfnum,
@@ -182,15 +198,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def gamma(self, shape: Number, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a gamma distribution
+        """Draw from a gamma distribution.
 
         Args:
-            shape: The shape of the gamma distribution. Must be non-negative
-            scale: The scale of the gamma distribution. Must be non-negative. Default is equal to 1
-            size: Output shape
+            shape: The shape of the gamma distribution. Must be non-negative.
+            scale: The scale of the gamma distribution. Must be non-negative. Default is equal to 1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'shape': shape,
@@ -206,14 +222,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def geometric(self, p: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a geometric distribution
+        """Draw from a geometric distribution.
 
         Args:
-            p: The probability of success of an individual trial
-            size: Output shape
+            p: The probability of success of an individual trial.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'p': p}
@@ -228,15 +244,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def gumbel(self, loc: Number = 0.0, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a Gumbel distribution
+        """Draw from a Gumbel distribution.
 
         Args:
-            loc: The location of the mode of the distribution. Default is 0
-            scale: The scale parameter of the distribution. Default is 1. Must be non-negative
-            size: Output shape
+            loc: The location of the mode of the distribution. Default is 0.
+            scale: The scale parameter of the distribution. Default is 1. Must be non-negative.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -252,16 +268,16 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def hypergeometric(self, ngood: int, nbad: int, nsample: int, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a hypergeometric distribution
+        """Draw from a hypergeometric distribution.
 
         Args:
-            ngood: Number of ways to make a good selection. Must be nonnegative and less than 10**9
-            nbad: Number of ways to make a bad selection. Must be nonnegative and less than 10**9
-            nsample: Number of items sampled. Must be nonnegative and less than ngood + nbad
-            size: Output shape
+            ngood: Number of ways to make a good selection. Must be nonnegative and less than 10**9.
+            nbad: Number of ways to make a bad selection. Must be nonnegative and less than 10**9.
+            nsample: Number of items sampled. Must be nonnegative and less than ngood + nbad.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'ngood': ngood,
@@ -278,17 +294,21 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def integers(self, low: int, high: int = None, size: Union[int, tuple, None] = None, dtype=np.int64, endpoint: bool = False) -> Union[np.ndarray, Number]:
-        """Draw random integers from low (inclusive) to high (exclusive), or if endpoint=True, low (inclusive) to high (inclusive)
+        """Draw random integers from low (inclusive) to high (exclusive), or if endpoint=True, low (inclusive) to high
+        (inclusive).
 
         Args:
-            low: Lowest (signed) integers to be drawn from the distribution (unless high=None, in which case this parameter is 0 and this value is used for high)
-            high: If provided, one above the largest (signed) integer to be drawn from the distribution (see above for behavior if high=None)
-            size: Output shape
-            dtype: Dtype of output array
-            endpoint: If true, sample from the interval [low, high] instead of the default [low, high); defaults to False
+            low: Lowest (signed) integers to be drawn from the distribution (unless high=None, in which case this
+                parameter is 0 and this value is used for high).
+            high: If provided, one above the largest (signed) integer to be drawn from the distribution (see above for
+                behavior if high=None).
+            size: Output shape.
+            dtype: Dtype of output array.
+            endpoint: If true, sample from the interval [low, high] instead of the default [low, high);
+                defaults to False.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'low': low,
@@ -309,15 +329,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def laplace(self, loc: Number = 0.0, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a Laplace distribution
+        """Draw from a Laplace distribution.
 
         Args:
-            loc: The position, μ, of the distribution peak. Default is 0
-            scale: λ, the exponential decay. Default is 1. Must be non- negative
-            size: Output shape
+            loc: The position, μ, of the distribution peak. Default is 0.
+            scale: λ, the exponential decay. Default is 1. Must be non- negative.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -334,15 +354,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def logistic(self, loc: Number = 0.0, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a logistic distribution
+        """Draw from a logistic distribution.
 
         Args:
-            loc: Parameter of the distribution. Default is 0
-            scale: Parameter of the distribution. Must be non-negative. Default is 1
-            size: Output shape
+            loc: Parameter of the distribution. Default is 0.
+            scale: Parameter of the distribution. Must be non-negative. Default is 1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -359,15 +379,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def lognormal(self, mean: Number = 0.0, sigma: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a lognormal distribution
+        """Draw from a lognormal distribution.
 
         Args:
-            mean: Mean value of the underlying normal distribution. Default is 0
-            sigma: Standard deviation of the underlying normal distribution. Must be non-negative. Default is 1
-            size: Output shape
+            mean: Mean value of the underlying normal distribution. Default is 0.
+            sigma: Standard deviation of the underlying normal distribution. Must be non-negative. Default is 1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'mean': mean,
@@ -384,11 +404,11 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def logseries(self, p: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a logarithmic series distribution
+        """Draw from a logarithmic series distribution.
 
         Args:
-            p: Shape parameter for the distribution. Must be in the range (0, 1)
-            size: Output shape
+            p: Shape parameter for the distribution. Must be in the range (0, 1).
+            size: Output shape.
         """
         self._check_shape(size)
         kw_args = {'p': p}
@@ -403,15 +423,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def negative_binomial(self, n: Number, p: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a negative binomial distribution
+        """Draw from a negative binomial distribution.
 
         Args:
-            n: Parameter of the distribution, > 0
-            p: Parameter of the distribution. Must satisfy 0 < p <= 1
-            size: Output shape
+            n: Parameter of the distribution, > 0.
+            p: Parameter of the distribution. Must satisfy 0 < p <= 1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'n': n,
@@ -428,15 +448,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def noncentral_chisquare(self, df: Number, nonc: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a noncentral chisquare distribution
+        """Draw from a noncentral chisquare distribution.
 
         Args:
-            df: Number of degrees of freedom, must be > 0
-            nonc: Non-centrality, must be non-negative
-            size: Output shape
+            df: Number of degrees of freedom, must be > 0.
+            nonc: Non-centrality, must be non-negative.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'df': df,
@@ -453,16 +473,16 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def noncentral_f(self, dfnum: Number, dfden: Number, nonc: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a noncentral F distribution
+        """Draw from a noncentral F distribution.
 
         Args:
-            dfnum: Degrees of freedom in numerator, must be > 0
-            dfden: Degrees of freedom in denominator, must be > 0
-            nonc: Non-centrality parameter, the sum of the squares of the numerator means, must be >= 0
-            size: Output shape
+            dfnum: Degrees of freedom in numerator, must be > 0.
+            dfden: Degrees of freedom in denominator, must be > 0.
+            nonc: Non-centrality parameter, the sum of the squares of the numerator means, must be >= 0.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'dfnum': dfnum,
@@ -479,15 +499,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def normal(self, loc: Number = 0.0, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from the normal distribution
+        """Draw from the normal distribution.
 
         Args:
-            loc: Mean of the distriution
-            scale: Standard deviation of the distriution
-            size: Output shape
+            loc: Mean of the distribution.
+            scale: Standard deviation of the distribution.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'loc': loc,
@@ -503,14 +523,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def pareto(self, a: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a Pareto II or Lomax distribution
+        """Draw from a Pareto II or Lomax distribution.
 
         Args:
-            a: Shape of the distribution. Must be positive
-            size: Output shape
+            a: Shape of the distribution. Must be positive.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -525,14 +545,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def poisson(self, lam: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a poisson distribution
+        """Draw from a poisson distribution.
 
         Args:
-            lam: Expected number of events occurring in a fixed-time interval, must be >= 0
-            size: Output shape
+            lam: Expected number of events occurring in a fixed-time interval, must be >= 0.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'lam': lam}
@@ -547,14 +567,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def power(self, a: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a power distribution
+        """Draw from a power distribution.
 
         Args:
-            a: Parameter of the distribution. Must be non-negative
-            size: Output shape
+            a: Parameter of the distribution. Must be non-negative.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -569,14 +589,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def random(self, size: Union[int, tuple, None] = None, dtype=np.float64) -> Union[np.ndarray, Number]:
-        """Return random floats in the half-open interval [0.0, 1.0)
+        """Return random floats in the half-open interval [0.0, 1.0).
 
         Args:
-            size: Output shape
-            dtype: Dtype of output array
+            size: Output shape.
+            dtype: Dtype of output array.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
@@ -597,14 +617,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def rayleigh(self, scale: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a Rayleigh distribution
+        """Draw from a Rayleigh distribution.
 
         Args:
-            scale: Scale, also equals the mode. Must be non-negative. Default is 1
-            size: Output shape
+            scale: Scale, also equals the mode. Must be non-negative. Default is 1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'scale': scale}
@@ -619,13 +639,13 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def standard_cauchy(self, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a standard Cauchy distribution
+        """Draw from a standard Cauchy distribution.
 
         Args:
-            size (int or tuple): Output shape
+            size (int or tuple): Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {}
@@ -641,15 +661,16 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def standard_exponential(self, size: Union[int, tuple, None] = None, dtype=np.float64, method: str = 'zig') -> Union[np.ndarray, Number]:
-        """Draw from a standard exponential distribution
+        """Draw from a standard exponential distribution.
 
         Args:
-            size: Output shape
-            dtype: Dtype of output array
-            method: Either ‘inv’ or ‘zig’. ‘inv’ uses the inverse CDF method. ‘zig’ uses the much faster Ziggurat method of Marsaglia and Tsang
+            size: Output shape.
+            dtype: Dtype of output array.
+            method: Either ‘inv’ or ‘zig’. ‘inv’ uses the inverse CDF method. ‘zig’ uses the much faster Ziggurat
+                method of Marsaglia and Tsang.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype,
@@ -673,15 +694,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def standard_gamma(self, shape: Number, size: Union[int, tuple, None] = None, dtype=np.float64) -> Union[np.ndarray, Number]:
-        """Draw from a standard gamma distribution
+        """Draw from a standard gamma distribution.
 
         Args:
-            shape: Parameter, must be non-negative
-            size: Output shape
-            dtype: Dtype of output array
+            shape: Parameter, must be non-negative.
+            size: Output shape.
+            dtype: Dtype of output array.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'shape': shape,
@@ -705,14 +726,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def standard_normal(self, size: Union[int, tuple, None] = None, dtype=np.float64) -> Union[np.ndarray, Number]:
-        """Draw from a standard normal distribution
+        """Draw from a standard normal distribution.
 
         Args:
-            size: Output shape
-            dtype: Dtype of output array
+            size: Output shape.
+            dtype: Dtype of output array.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'dtype': dtype}
@@ -735,14 +756,14 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def standard_t(self, df: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a standard Student’s t distribution
+        """Draw from a standard Student’s t distribution.
 
         Args:
-            df: Degrees of freedom, must be > 0
-            size: Output shape
+            df: Degrees of freedom, must be > 0.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'df': df}
@@ -758,16 +779,17 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def triangular(self, left: Number, mode: Number, right: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a triangular distribution
+        """Draw from a triangular distribution.
 
         Args:
-            left: Lower limit
-            mode: The value where the peak of the distribution occurs. The value must fulfill the condition left <= mode <= right
-            right: Upper limit, must be larger than left
-            size: Output shape
+            left: Lower limit.
+            mode: The value where the peak of the distribution occurs. The value must fulfill the condition
+                left <= mode <= right.
+            right: Upper limit, must be larger than left.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'left': left,
@@ -784,15 +806,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def uniform(self, low: Number = 0.0, high: Number = 1.0, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a uniform distribution
+        """Draw from a uniform distribution.
 
         Args:
-            low: Lower bound
-            high: Upper bound
-            size: Output shape
+            low: Lower bound.
+            high: Upper bound.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'low': low,
@@ -808,15 +830,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def vonmises(self, mu: Number, kappa: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a von Mises distribution
+        """Draw from a von Mises distribution.
 
         Args:
-            mu: Mode (“center”) of the distribution
-            kappa: Dispersion of the distribution, has to be >=0
-            size: Output shape
+            mu: Mode (“center”) of the distribution.
+            kappa: Dispersion of the distribution, has to be >=0.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'mu': mu,
@@ -832,15 +854,15 @@ class MultithreadedRNG:
         return self._fill(__fill, **kw_args)
 
     def wald(self, mean: Number, scale: Number, size: Union[int, tuple, None] = None) -> Union[np.ndarray, Number]:
-        """Draw from a Wald distribution
+        """Draw from a Wald distribution.
 
         Args:
-            mean: Distribution mean, must be > 0
-            scale: Scale parameter, must be > 0
-            size: Output shape
+            mean: Distribution mean, must be > 0.
+            scale: Scale parameter, must be > 0.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'mean': mean,
@@ -859,11 +881,11 @@ class MultithreadedRNG:
         """Draw from a Weibull distribution.
 
         Args:
-            a: Shape parameter of the distribution. Must be nonnegative
-            size: Output shape
+            a: Shape parameter of the distribution. Must be nonnegative.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'a': a}
@@ -881,11 +903,11 @@ class MultithreadedRNG:
         """Draw from a Zipf distribution.
 
         Args:
-            a: Distribution parameter. Must be greater than 1
-            size: Output shape
+            a: Distribution parameter. Must be greater than 1.
+            size: Output shape.
 
         Returns:
-            numpy.ndarray or scalar
+            numpy.ndarray or scalar.
         """
         self._check_shape(size)
         kw_args = {'a': a}

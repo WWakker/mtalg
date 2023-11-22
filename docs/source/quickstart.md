@@ -32,34 +32,46 @@ b = mtalg.random.uniform(size=(10_000, 5_000), low=0, high=10)
 # etc.
 ```
 
-Alternatively, one can also
+Alternatively, one can also do
 ```python
 from mtalg.random import MultithreadedRNG
 ```
-and create an instance of the multithreaded random number generator with seed for reproducibility and set the number of threads to be used
+
+and create an instance of the multithreaded random number generator with seed for reproducibility and set the number of threads to be used.
+
 ```python
 mrng = MultithreadedRNG(seed=1, num_threads=4)
 ```
+
 One can then create random arrays as
+
 ```python
 a = mrng.standard_normal(size=(10_000, 5_000))
 b = mrng.uniform(size=(10_000, 5_000), low=0, high=10)
 # etc.
 ```
+
 Set number of threads to be used by default for algebra functions and subsquent random
-number generators (if `num_threads` parameter is not specified)
+number generators (if `num_threads` parameter is not specified).
+
 ```python
 mtalg.set_num_threads(4)
 ```
-Add `b` to `a` (`a` is modified in-place)
+
+Add `b` to `a` (`a` is modified in-place).
+
 ```python
 mtalg.add(a, b)
 ```
-Subtract `a` from `b` (`b` is modified in-place)
+
+Subtract `a` from `b` (`b` is modified in-place).
+
 ```python
 mtalg.sub(a, b, direction='right')
 ```
-Multiply, divide and raise to power (`a` is modified in-place)
+
+Multiply, divide and raise to power (`a` is modified in-place).
+
 ```python
 mtalg.mul(a, b)
 mtalg.div(a, b)
@@ -79,4 +91,4 @@ mtalg.pow(a, b)
 
 ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_rng.svg)
 
-\* Benchmarks are carrried out using an Intel(R) Xeon(R) Gold 6142M CPU @ 2.60GHz and 24 threads
+\* Benchmarks are carrried out using an Intel(R) Xeon(R) Gold 6142M CPU @ 2.60GHz and 24 threads.

@@ -1,5 +1,4 @@
 import concurrent.futures
-from mtalg.tools.__check_threads import check_threads
 import numpy as np
 import mtalg.core.threads
 from typing import Optional, Union
@@ -200,7 +199,7 @@ def __multithreaded_opr(a, b, opr, num_threads: int = None):
 
     shape = a.shape
     shp_max = argmax(shape)
-    num_threads = check_threads(num_threads or mtalg.core.threads._global_num_threads)
+    num_threads = num_threads or mtalg.core.threads._global_num_threads
     assert num_threads > 0 and isinstance(num_threads, int), \
         f'Number of threads must be an integer > 0, found: {num_threads}'
     steps = [(t * (shape[shp_max] // num_threads), (t + 1) * (shape[shp_max] // num_threads))

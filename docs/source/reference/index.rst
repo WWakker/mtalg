@@ -41,6 +41,10 @@ The functions below are the same as the methods of the :doc:`MultithreadedRNG <a
 defined above, as it comes from an instance of this class, instantiated with default arguments and seed as set by
 :std:doc:`numpy:reference/random/generated/numpy.random.seed`.
 
+.. note::
+   For more information on distributions, see
+   `Random generator distributions <https://numpy.org/doc/stable/reference/random/generator.html#distributions>`_.
+
 .. autosummary::
    :toctree: api/
 

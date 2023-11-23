@@ -1,7 +1,7 @@
 mtalg documentation
 ===================
 
-Multithreaded algebra and random number generation
+Multithreaded algebra and random number generation.
 
 .. image:: ../../mtalg/__res/_MTA.png
 

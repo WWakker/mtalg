@@ -81,14 +81,14 @@ mtalg.pow(a, b)
 ## Benchmarks
 
 ### Elementwise algebra
-![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_add_BARS.svg)
+![](../../mtalg/__res/benchmark/benchmark_add_BARS.svg)
 
-![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_add.svg)
+![](../../mtalg/__res/benchmark/benchmark_add.svg)
 
 ### Random number generation
 
-![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_rng_BAR.svg)
+![](../../mtalg/__res/benchmark/benchmark_rng_BAR.svg)
 
-![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/benchmark/benchmark_rng.svg)
+![](../../mtalg/__res/benchmark/benchmark_rng.svg)
 
 \* Benchmarks are carrried out using an Intel(R) Xeon(R) Gold 6142M CPU @ 2.60GHz and 24 threads.

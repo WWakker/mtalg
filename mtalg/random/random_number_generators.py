@@ -68,6 +68,10 @@ class MultithreadedRNG:
         Create a 10000 x 5000 matrix with numbers, drawing from the uniform distribution.
 
         >>> b = mrng.uniform(size=(10_000, 5_000), low=0, high=10)
+
+    Note:
+        For more information on distributions, see
+        `Random generator distributions <https://numpy.org/doc/stable/reference/random/generator.html#distributions>`_.
     """
 
     def __init__(self, seed: Optional[int] = None, num_threads: Optional[int] = None, bit_generator: BitGenerator = PCG64):

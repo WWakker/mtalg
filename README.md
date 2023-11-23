@@ -1,6 +1,6 @@
 # ![](https://github.com/WWakker/mtalg/raw/master/mtalg/__res/_MTA.png) *mtalg* — Multithreaded Algebra 
 
-[![version](https://img.shields.io/badge/version-1.1.1-success.svg)](https://github.com/WWakker/mtalg)
+[![version](https://img.shields.io/badge/version-1.1.2-success.svg)](https://github.com/WWakker/mtalg)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/mtalg.svg)](https://pypi.org/project/mtalg/)
 [![build_test](https://github.com/WWakker/mtalg/actions/workflows/build_test.yml/badge.svg)](https://github.com/WWakker/mtalg/actions?query=workflow%3A%22build+and+test%22++)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WWakker_mtalg&metric=alert_status)](https://sonarcloud.io/summary/overall?id=WWakker_mtalg)
@@ -23,7 +23,7 @@ The library can be install via pip as:
 
 ## Documentation
 
-- https://mtalg.readthedocs.io/en/latest/
+- https://mtalg.readthedocs.io
 
 ## Authors
 [Wouter Wakker](https://github.com/WWakker) 

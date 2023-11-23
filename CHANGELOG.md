@@ -5,8 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## \[Unreleased] - yyyy-mm-dd
- 
+
 ### Added
+
+## \[1.1.2] - 2023-11-23
+
+### Added
+- Project links
 
 ## \[1.1.1] - 2023-11-23
  

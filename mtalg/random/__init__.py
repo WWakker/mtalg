@@ -1,4 +1,5 @@
 from mtalg.random.random_number_generators import MultithreadedRNG
+from inspect import signature
 _RNG = MultithreadedRNG()
 
 
@@ -143,3 +144,4 @@ for func in [beta, binomial, chisquare, exponential, f, gamma, geometric, gumbel
              poisson, power, random, rayleigh, standard_cauchy, standard_exponential, standard_gamma, standard_normal,
              standard_t, triangular, uniform, vonmises, wald, weibull, zipf]:
     func.__doc__ = getattr(_RNG, func.__name__).__doc__
+    func.__signature__ = signature(getattr(_RNG, func.__name__))

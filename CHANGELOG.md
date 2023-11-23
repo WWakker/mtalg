@@ -7,16 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## \[Unreleased] - yyyy-mm-dd
  
 ### Added
- 
-### Changed
-- cpu_count() as default for _global_num_threads
- 
-### Fixed
 
-## \[1.0.0] - 2021-12-28
+## \[1.1.1] - 2023-11-23
+ 
+### Added
+- Sphinx docs
+
+### Changed
+- Removed CDSW threads check
 
 ## \[1.1.0] - 2022-01-05
  
+### Changed
+- cpu_count() as default for _global_num_threads
+  
 ### Added
  
 - Added `get_num_threads`
